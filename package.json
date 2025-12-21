@@ -1,0 +1,20 @@
+{
+  "name": "js-transformations",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --experimental-strip-types tasks.ts",
+    "start-ar": "node --experimental-strip-types arrays.ts",
+    "start-as": "node --experimental-strip-types async.ts",
+    "start-clos": "node --experimental-strip-types closures.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
