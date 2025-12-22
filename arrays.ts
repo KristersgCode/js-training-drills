@@ -607,17 +607,17 @@
 
 // console.log(result)
 
-const data = {
-  a: [1, 2],
-  b: [3],
-  c: [4, 5, 6]
-};
+// const data = {
+//   a: [1, 2],
+//   b: [3],
+//   c: [4, 5, 6]
+// };
 
-// ➜ 21
+// // ➜ 21
 
-// const result = Object.values(data).flat().reduce((acc, num) => acc + num)
-const result = Object.values(data).reduce((acc, nums) => {
-        return acc + nums.reduce((numberSum, number) => numberSum + number, 0)
-}, 0)
+// // const result = Object.values(data).flat().reduce((acc, num) => acc + num)
+// const result = Object.values(data).reduce((acc, nums) => {
+//         return acc + nums.reduce((numberSum, number) => numberSum + number, 0)
+// }, 0)
 
-console.log(result)
+// console.log(result)

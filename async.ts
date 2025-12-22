@@ -349,17 +349,43 @@ function fetchSettings() {
 //     }
 //   });
 
-Promise.all([fetchUsers(), fetchTeams()]).then((users) => {
-   return {users: users[0], teams: users[1]}
-}).then(({users, teams}) => {
-            users.forEach((user) => {
-                 const team = teams.find(t => t.id === user.teamId);
-                 const teamName = team?.name ?? "unknown"
-                 const userName = user.name
-                 console.log(userName, teamName)
-            })
-})
+// Promise.all([fetchUsers(), fetchTeams()]).then((users) => {
+//    return {users: users[0], teams: users[1]}
+// }).then(({users, teams}) => {
+//             users.forEach((user) => {
+//                  const team = teams.find(t => t.id === user.teamId);
+//                  const teamName = team?.name ?? "unknown"
+//                  const userName = user.name
+//                  console.log(userName, teamName)
+//             })
+// })
 
+// Promise.resolve(5)
+//   .then(x => {
+//     if (x > 0) throw("bad");   
+//     return x;
+//   })
+//   .catch(err => console.log("caught:", err));
 
+  // Make a function:
 
-// “For each user, find their team, decide the team name (or unknown), log it.”
+// function validateName(name) {
+//   return new Promise((resolve, reject) => {
+//     if (name.length >= 3) {
+//       resolve("ok");
+//     } else {
+//       reject(new Error("too short"));
+//     }
+//   });
+// }
+// validateName("Anna").then(console.log);   // ok
+// validateName("A").catch(err => console.error(err.message));
+
+// Write a chain that:
+	// 1	Starts with Promise.resolve(10)
+	// 2	In the 2nd .then, rejects with "err"
+	// 3	.catch receives "err"
+	// 4	Next .then prints "recovered"
+
+  // Promise.resolve(10).then(() => Promise.reject(new Error("err"))).catch((err) => console.log(err.message)).then(()=> console.log("recovered"))
+  
