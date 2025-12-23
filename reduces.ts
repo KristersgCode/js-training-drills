@@ -77,20 +77,119 @@
 //     console.log(result)
 
 
-const words = ["Apple", "banana", "APPLE", "pear", "Banana"];
+// const words = ["Apple", "banana", "APPLE", "pear", "Banana"];
 
-// {
-//   apple: 2,
-//   banana: 2
+// // {
+// //   apple: 2,
+// //   banana: 2
+// // }
+
+// const result = words.reduce((acc, word) => {
+//     let normalize = word.toLowerCase()
+//     if(normalize.length >= 5)
+//         acc[normalize] = (acc[normalize] ?? 0) +1
+//         return acc
+// }, {})
+
+// console.log(result)
+
+
+// const logs = [
+//   { day: "mon", level: "error" },
+//   { day: "mon", level: "info" },
+//   { day: "mon", level: "error" },
+//   { day: "tue", level: "info" },
+//   { day: "tue", level: "warn" }
+// ];
+	// •	Group by day
+	// •	Count per level
+	// •	Add { total } per day
+
+//     {
+//   mon: {
+//     error: 2,
+//     info: 1,
+//     total: 3
+//   },
+//   tue: {
+//     info: 1,
+//     warn: 1,
+//     total: 2
+//   }
 // }
 
-const result = words.reduce((acc, word) => {
-    let normalize = word.toLowerCase()
-    if(normalize.length >= 5)
-        acc[normalize] = (acc[normalize] ?? 0) +1
+// const result = logs.reduce((acc, log) => {
+//   // 1. ensure day bucket exists
+//   if (!acc[log.day]) {
+//     acc[log.day] = { total: 0 };
+//   }
+
+//   // 2. ensure level bucket exists inside the day
+//   acc[log.day][log.level] = (acc[log.day][log.level] ?? 0) + 1;
+
+//   // 3. update total
+//   acc[log.day].total += 1;
+
+//   return acc;
+// }, {});
+
+
+//     console.log(result)
+
+// const people = [
+//   { name: "Anna", age: 22 },
+//   { name: "Bob", age: 16 },
+//   { name: "Cara", age: 30 },
+//   { name: "Dan", age: 15 }
+// ];
+
+// // {
+// //   adults: ["ANNA", "CARA"],
+// //   minors: ["bob", "dan"]
+// // }
+
+// const result = people.reduce((acc, person) => {
+//     if(person.age > 18){
+//         acc.adults.push(person.name.toUpperCase())
+//     }
+//     else {
+//         acc.minors.push(person.name.toLowerCase())
+//     }
+//     return acc
+// },{adults: [], minors: []})
+
+// console.log(result)
+
+const actions = [
+  { type: "LOGIN" },
+  { type: "ADD_ITEM", item: "book" },
+  { type: "ADD_ITEM", item: "pen" },
+  { type: "LOGOUT" },
+  { type: "ADD_ITEM", item: "pencil" }
+];
+// Items added while logged out must be ignored
+// {
+//   isLoggedIn: false,
+//   items: ["book", "pen"]
+// }
+
+const result = actions.reduce((acc, action) => {
+        if(action.type === "LOGIN"){
+            acc.isLoggedIn = true
+        }
+        
+        if(action.type === "LOGOUT")
+            {
+                acc.isLoggedIn = false
+        }
+
+        if(action.type === "ADD_ITEM" && acc.isLoggedIn)
+        {
+            acc.items.push(action.item)
+        }
+        
         return acc
-}, {})
+},{isLoggedIn: false, items: []})
 
 console.log(result)
-
 
