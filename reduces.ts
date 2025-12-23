@@ -160,36 +160,36 @@
 
 // console.log(result)
 
-const actions = [
-  { type: "LOGIN" },
-  { type: "ADD_ITEM", item: "book" },
-  { type: "ADD_ITEM", item: "pen" },
-  { type: "LOGOUT" },
-  { type: "ADD_ITEM", item: "pencil" }
-];
+// const actions = [
+//   { type: "LOGIN" },
+//   { type: "ADD_ITEM", item: "book" },
+//   { type: "ADD_ITEM", item: "pen" },
+//   { type: "LOGOUT" },
+//   { type: "ADD_ITEM", item: "pencil" }
+// ];
 // Items added while logged out must be ignored
 // {
 //   isLoggedIn: false,
 //   items: ["book", "pen"]
 // }
 
-const result = actions.reduce((acc, action) => {
-        if(action.type === "LOGIN"){
-            acc.isLoggedIn = true
-        }
+// const result = actions.reduce((acc, action) => {
+//         if(action.type === "LOGIN"){
+//             acc.isLoggedIn = true
+//         }
         
-        if(action.type === "LOGOUT")
-            {
-                acc.isLoggedIn = false
-        }
+//         if(action.type === "LOGOUT")
+//             {
+//                 acc.isLoggedIn = false
+//         }
 
-        if(action.type === "ADD_ITEM" && acc.isLoggedIn)
-        {
-            acc.items.push(action.item)
-        }
+//         if(action.type === "ADD_ITEM" && acc.isLoggedIn)
+//         {
+//             acc.items.push(action.item)
+//         }
         
-        return acc
-},{isLoggedIn: false, items: []})
+//         return acc
+// },{isLoggedIn: false, items: []})
 
-console.log(result)
+// console.log(result)
 
