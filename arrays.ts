@@ -621,3 +621,197 @@
 // }, 0)
 
 // console.log(result)
+
+// const arr = [
+//   { id: 1, title: "Post A", body: "text...", author: "John" },
+//   { id: 2, title: "Post B", body: "text...", author: "Jane" }
+// ]
+
+// // [
+// //   { id: 1, title: "Post A", author: "John" },
+// //   { id: 2, title: "Post B", author: "Jane" }
+// // ]
+
+// const result = arr.map((e) => ({
+//     id: e.id,
+//     title: e.title,
+//     author: e.author
+// }))
+
+// console.log(result)
+
+// const arr = [
+//   { name: "John", active: true },
+//   { name: "Jane", active: false },
+//   { name: "Mark", active: true }
+// ]
+
+// // [
+// //   { name: "John", active: true },
+// //   { name: "Mark", active: true }
+// // ]
+
+// const result = arr.filter((user) => user.active)
+
+// console.log(result)
+
+// const arr = ["  React ", " NODE", "js  "]
+
+// const newarr = []
+//     for(const e of arr) {
+//         newarr.push(e.trim().toLowerCase())
+//     }
+
+//     console.log(newarr)
+
+// const arr = [
+//   { id: 1, private: false },
+//   { id: 2, private: true },
+//   { id: 3, private: false }
+// ]
+
+// // [
+// //   { id: 1, private: false },
+// //   { id: 3, private: false }
+// // ]
+
+// const result = arr.filter((user) => !user.private)
+
+// console.log(result)
+
+// const arr = [
+//   { id: 1, name: "John", password: "123" },
+//   { id: 2, name: "Jane", password: "456" }
+// ]
+
+// const result = arr.map((user) => ({id: user.id, name: user.name}))
+
+// console.log(result)
+
+// Task
+// Transform users so:
+// admins keep all fields
+// non-admins lose email
+// add label = "ADMIN" or "USER"
+// Input
+// const task = [
+//   { id: 1, name: "John", email: "a@a.com", role: "user" },
+//   { id: 2, name: "Jane", email: "b@b.com", role: "admin" }
+// ]
+// // Expected Output
+// // [
+// //   { id: 1, name: "John", role: "user", label: "USER" },
+// //   { id: 2, name: "Jane", email: "b@b.com", role: "admin", label: "ADMIN" }
+// // ]
+
+
+// const users = []
+
+// for (const user of task) {
+//   if (user.role === "admin") {
+//     users.push({
+//       id: user.id,
+//       name: user.name,
+//       email: user.email,
+//       role: user.role,
+//       label: "ADMIN"
+//     })
+//   } else {
+//     users.push({
+//       id: user.id,
+//       name: user.name,
+//       role: user.role,
+//       label: "USER"
+//     })
+//   }
+// }
+// console.log(result)
+
+// •	remove out-of-stock items
+// •	show { id, displayName }
+// •	displayName = "Name ($price)"
+
+// const itemsShop = [
+//   { id: 1, name: "Book", price: 10, inStock: true },
+//   { id: 2, name: "Pen", price: 2, inStock: false },
+//   { id: 3, name: "Notebook", price: 5, inStock: true }
+// ]
+
+// [
+//   { id: 1, displayName: "Book ($10)" },
+//   { id: 3, displayName: "Notebook ($5)" }
+// ]
+
+// const itemsInStock = itemsShop.filter((user) => user.inStock)
+// const displayItems = itemsInStock.map((item) =>  {return {
+//   id: item.id,
+//   displayName: `${item.name} ($${item.price})`
+// }}
+// )
+// console.log(displayItems)
+
+// const person = [
+//   { name: "Tom", age: 16 },
+//   { name: "Anna", age: 22 }
+// ]
+// // [
+//   // { name: "Anna", isAdult: true }
+// // ]
+
+// const filtered = person.filter((p) => p.age >= 18).map((pers) => ({name: pers.name, isAdult:true}))
+
+// console.log(filtered)
+
+// Return false if:
+	// •	any item is missing id
+	// •	OR id is not a number
+
+// const ids = [
+//   { id: 1 },
+//   { id: "2" },
+//   { id: 3 }
+// ]
+
+// let isValid = false
+
+// for(const {id} of ids){
+//  if(id === undefined || !Number.isInteger(id)){
+//    isValid =false
+//    break
+//  }
+// }
+
+
+// console.log(isValid)
+
+	// •	keep original fields
+	// •	add disabled: true if locked === true
+
+// const checkboxes = [
+//   { id: 1, checked: false, locked: false },
+//   { id: 2, checked: true, locked: true }
+// ]
+
+// // [
+//   // { id: 1, checked: false, locked: false, disabled: false },
+//   // { id: 2, checked: true, locked: true, disabled: true }
+// // ]
+
+// const result = checkboxes.map(item => ({
+//   ...item,
+//   disabled: item.locked
+// }));
+
+// console.log(result)
+
+	// •	if empty → remove item entirely
+	// •	capitalize valid names
+
+const arr = ["  john  ", " ", "anna"]
+
+// ["John", "Anna"]
+
+const result = arr.map((item) => item.trim()).filter((i) => i !== "").map((name) => {
+  return  name ? name[0].toUpperCase() + name.slice(1) : name
+})
+console.log(result)
