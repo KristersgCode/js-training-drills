@@ -807,11 +807,11 @@
 	// •	if empty → remove item entirely
 	// •	capitalize valid names
 
-const arr = ["  john  ", " ", "anna"]
+// const arr = ["  john  ", " ", "anna"]
 
-// ["John", "Anna"]
+// // ["John", "Anna"]
 
-const result = arr.map((item) => item.trim()).filter((i) => i !== "").map((name) => {
-  return  name ? name[0].toUpperCase() + name.slice(1) : name
-})
-console.log(result)
+// const result = arr.map((item) => item.trim()).filter((i) => i !== "").map((name) => {
+//   return  name ? name[0].toUpperCase() + name.slice(1) : name
+// })
+// console.log(result)

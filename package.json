@@ -8,6 +8,7 @@
     "start-as": "node --experimental-strip-types async.ts",
     "start-clos": "node --experimental-strip-types closures.ts",
     "start-red": "node --experimental-strip-types reduces.ts",
+    "start-map": "node --experimental-strip-types maps.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
