@@ -329,33 +329,168 @@
 // a.then(console.log)
 // b.then(console.log)
 
-function fetchUser(id) {
-  return new Promise((resolve) => {
-    setTimeout(() => resolve(`user ${id}`), 1000)
-  })
-}
+// function fetchUser(id) {
+//   return new Promise((resolve) => {
+//     setTimeout(() => resolve(`user ${id}`), 1000)
+//   })
+// }
 
-function createUserLoader(fn) {
-  const pendingUser = new Map()
+// function createUserLoader(fn) {
+//   const pendingUser = new Map()
 
-  return function loadUser(id) {
-    if (pendingUser.has(id)) {
-      return pendingUser.get(id)
+//   return function loadUser(id) {
+//     if (pendingUser.has(id)) {
+//       return pendingUser.get(id)
+//     }
+
+//     const promise = fn(id).finally(() => {
+//       pendingUser.delete(id)
+//     })
+
+//     pendingUser.set(id, promise)
+//     return promise
+//   }
+// }
+
+
+// const loadUser = createUserLoader(fetchUser)
+
+// const a = loadUser(1)
+// const b = loadUser(1)
+
+// console.log(a === b) // true
+
+
+// function saveForm(){
+//   return new Promise((resolve) => {setTimeout(() => resolve("saved"), 1000)})
+// }
+
+// function createClickGuard(){
+//   const actions = new Map()
+
+//   return function guard(action, fn){
+//     //returns if action already exists
+//     if(actions.has(action)){
+//       return actions.get(action)
+//     }
+
+//     //finallyze the fn and delete the action
+//    const promise = fn().finally(() => {
+//       actions.delete(action)
+//     })
+
+//     actions.set(action, promise)
+//     return promise
+//   }
+// }
+
+// const guard = createClickGuard()
+
+// guard("save", saveForm)
+// guard("save", saveForm)
+
+
+// function sendEmail() {
+//   console.log("email sent")
+// }
+
+
+// function createCooldown(ms) {
+//   const cooldown = new Map()
+
+//   return function run(key, fn) {
+//     if (cooldown.has(key)) {
+//       return // blocked
+//     }
+
+//     fn()
+
+//     cooldown.set(key, true)
+
+//     setTimeout(() => {
+//       cooldown.delete(key)
+//     }, ms)
+//   }
+// }
+
+// const run = createCooldown(1000)
+
+// run("email", sendEmail)
+// run("email", sendEmail) // blocked
+
+// function uploadFn(){
+//   return new Promise((resolve) => {
+//     setTimeout(() => resolve("resolved"), 1000)
+//   })
+// }
+
+// const fileA = "file"
+
+// function createUploadManager(fn){
+  
+//   const keys = new Map()
+
+//   return function upload(file){
+//     if(keys.has(file)){
+//       return keys.get(file)
+//     }
+
+//     const promise = fn(file).finally(() => {
+//       keys.delete(file)
+//     })
+
+//     keys.set(file, promise)
+//     return promise
+//   }
+// }
+
+
+// const upload = createUploadManager(uploadFn)
+
+// console.log(upload(fileA))
+// console.log(upload(fileA))
+
+function createListenerRegistry() {
+  const events = new Map()
+
+  function subscribe(event, fn) {
+    if (!events.has(event)) {
+      events.set(event, new Set())
     }
 
-    const promise = fn(id).finally(() => {
-      pendingUser.delete(id)
-    })
+    const listeners = events.get(event)
+    listeners.add(fn)
 
-    pendingUser.set(id, promise)
-    return promise
+    // unsubscribe function
+    return function unsubscribe() {
+      listeners.delete(fn)
+
+      // cleanup to avoid memory leak
+      if (listeners.size === 0) {
+        events.delete(event)
+      }
+    }
   }
+
+  function emit(event, data) {
+    if (!events.has(event)) return
+
+    for (const fn of events.get(event)) {
+      fn(data)
+    }
+  }
+
+  return { subscribe, emit }
 }
 
+const registry = createListenerRegistry()
 
-const loadUser = createUserLoader(fetchUser)
+const unsubscribe = registry.subscribe("shoot", (data) => {
+  console.log("shot fired:", data)
+})
 
-const a = loadUser(1)
-const b = loadUser(1)
+registry.emit("shoot", { power: 10 })
 
-console.log(a === b) // true
+unsubscribe()
+
+registry.emit("shoot", { power: 20 }) // nothing happens
