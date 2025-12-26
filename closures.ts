@@ -289,3 +289,73 @@
 // console.log(analytics.report());
 // // { click: 3, scroll: 1 }
 // // { click: 3, scroll: 1 }
+
+// function fetchUser() {
+//   return new Promise((resolve) => {
+//     setTimeout(() => resolve("user data"), 1000)
+//   })
+// }
+
+// function createRequestDeduper() {
+//   const pending = new Map()
+
+//   return function request(key, fn) {
+//     // 1. If a request is already in flight → return same Promise
+//     if (pending.has(key)) {
+//       return pending.get(key)
+//     }
+
+//     // 2. Create the Promise ONCE
+//     const promise = fn()
+//       .finally(() => {
+//         // 3. Cleanup after resolve or reject
+//         pending.delete(key)
+//       })
+
+//     // 4. Store in-flight Promise
+//     pending.set(key, promise)
+
+//     return promise
+//   }
+// }
+
+// const request = createRequestDeduper()
+
+// const a = request("user:1", fetchUser)
+// const b = request("user:1", fetchUser)
+
+// console.log(a === b) // true
+
+// a.then(console.log)
+// b.then(console.log)
+
+function fetchUser(id) {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(`user ${id}`), 1000)
+  })
+}
+
+function createUserLoader(fn) {
+  const pendingUser = new Map()
+
+  return function loadUser(id) {
+    if (pendingUser.has(id)) {
+      return pendingUser.get(id)
+    }
+
+    const promise = fn(id).finally(() => {
+      pendingUser.delete(id)
+    })
+
+    pendingUser.set(id, promise)
+    return promise
+  }
+}
+
+
+const loadUser = createUserLoader(fetchUser)
+
+const a = loadUser(1)
+const b = loadUser(1)
+
+console.log(a === b) // true
