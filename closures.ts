@@ -450,47 +450,122 @@
 // console.log(upload(fileA))
 // console.log(upload(fileA))
 
-function createListenerRegistry() {
-  const events = new Map()
+// function createListenerRegistry() {
+//   const events = new Map()
 
-  function subscribe(event, fn) {
-    if (!events.has(event)) {
-      events.set(event, new Set())
-    }
+//   function subscribe(event, fn) {
+//     if (!events.has(event)) {
+//       events.set(event, new Set())
+//     }
 
-    const listeners = events.get(event)
-    listeners.add(fn)
+//     const listeners = events.get(event)
+//     listeners.add(fn)
 
-    // unsubscribe function
-    return function unsubscribe() {
-      listeners.delete(fn)
+//     // unsubscribe function
+//     return function unsubscribe() {
+//       listeners.delete(fn)
 
-      // cleanup to avoid memory leak
-      if (listeners.size === 0) {
-        events.delete(event)
-      }
-    }
-  }
+//       // cleanup to avoid memory leak
+//       if (listeners.size === 0) {
+//         events.delete(event)
+//       }
+//     }
+//   }
 
-  function emit(event, data) {
-    if (!events.has(event)) return
+//   function emit(event, data) {
+//     if (!events.has(event)) return
 
-    for (const fn of events.get(event)) {
-      fn(data)
-    }
-  }
+//     for (const fn of events.get(event)) {
+//       fn(data)
+//     }
+//   }
 
-  return { subscribe, emit }
-}
+//   return { subscribe, emit }
+// }
 
-const registry = createListenerRegistry()
+// const registry = createListenerRegistry()
 
-const unsubscribe = registry.subscribe("shoot", (data) => {
-  console.log("shot fired:", data)
-})
+// const unsubscribe = registry.subscribe("shoot", (data) => {
+//   console.log("shot fired:", data)
+// })
 
-registry.emit("shoot", { power: 10 })
+// registry.emit("shoot", { power: 10 })
 
-unsubscribe()
+// unsubscribe()
 
-registry.emit("shoot", { power: 20 }) // nothing happens
+// registry.emit("shoot", { power: 20 }) // nothing happens
+
+// function createListenerRegistry() {
+//   const events = new Map()
+
+//   function subscribe(event, fn) {
+
+//     if (!events.has(event)) {
+//       events.set(event, new Set())
+//     }
+
+//     const listeners = events.get(event)
+
+//     listeners.add(fn)
+
+//   "📦 listeners AFTER add:",
+//   [...listeners].map(fn => fn.name || "(anonymous)")
+// )
+
+//     return function unsubscribe() {
+
+//       listeners.delete(fn)
+
+//       if (listeners.size === 0) {
+//         events.delete(event)
+//       }
+
+//     }
+//   }
+
+//   function emit(event, data) {
+
+//     if (!events.has(event)) {
+//       return
+//     }
+
+//     const listeners = events.get(event)
+
+//     for (const fn of listeners) {
+//       fn(data)
+//     }
+//   }
+
+//   return { subscribe, emit }
+// }
+
+
+// function func(data) {
+//   console.log("shoot event:", data)
+// }
+
+// const registry = createListenerRegistry()
+
+// const unsub = registry.subscribe("shoot", func)
+
+// registry.emit("shoot", 1)
+// // shoot event: 1
+
+// unsub()
+
+// registry.emit("shoot", 2)
+// nothing happens
+
+// “When I subscribe, I store a function under an event name.
+// When I emit, I call all stored functions for that event.
+// When I unsubscribe, I remove that function.”
+
+const room = createChatRoom()
+
+const unsubA = room.join("alice", fnA)
+const unsubB = room.join("bob", fnB)
+
+room.message("hello")
+
+unsubA()
+room.message("bye")
