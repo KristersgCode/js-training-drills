@@ -495,49 +495,45 @@
 
 // registry.emit("shoot", { power: 20 }) // nothing happens
 
-// function createListenerRegistry() {
-//   const events = new Map()
+function createListenerRegistry() {
+  const events = new Map()
 
-//   function subscribe(event, fn) {
+  function subscribe(event, fn) {
 
-//     if (!events.has(event)) {
-//       events.set(event, new Set())
-//     }
+    if (!events.has(event)) {
+      events.set(event, new Set())
+    }
 
-//     const listeners = events.get(event)
+    const listeners = events.get(event)
 
-//     listeners.add(fn)
+    listeners.add(fn)
 
-//   "📦 listeners AFTER add:",
-//   [...listeners].map(fn => fn.name || "(anonymous)")
-// )
+    return function unsubscribe() {
 
-//     return function unsubscribe() {
+      listeners.delete(fn)
 
-//       listeners.delete(fn)
+      if (listeners.size === 0) {
+        events.delete(event)
+      }
 
-//       if (listeners.size === 0) {
-//         events.delete(event)
-//       }
+    }
+  }
 
-//     }
-//   }
+  function emit(event, data) {
 
-//   function emit(event, data) {
+    if (!events.has(event)) {
+      return
+    }
 
-//     if (!events.has(event)) {
-//       return
-//     }
+    const listeners = events.get(event)
 
-//     const listeners = events.get(event)
+    for (const fn of listeners) {
+      fn(data)
+    }
+  }
 
-//     for (const fn of listeners) {
-//       fn(data)
-//     }
-//   }
-
-//   return { subscribe, emit }
-// }
+  return { subscribe, emit }
+}
 
 
 // function func(data) {
@@ -560,12 +556,198 @@
 // When I emit, I call all stored functions for that event.
 // When I unsubscribe, I remove that function.”
 
-const room = createChatRoom()
+// function createChatRoom(){
+//     const chat = new Map()
+    
+//     function join(user, fn){
+//         if(!chat.has(user)){
+//             chat.set(user, new Set())
+//         }
 
-const unsubA = room.join("alice", fnA)
-const unsubB = room.join("bob", fnB)
+//         let listeners = chat.get(user)
+//         listeners.add(fn)
 
-room.message("hello")
+//         function unsubscribe(){
+//             listeners.delete(fn)
 
-unsubA()
-room.message("bye")
+//             if(listeners.size === 0){
+//                 chat.delete(user)
+//             }
+//         }
+//         return unsubscribe
+
+        
+//     }
+//     function message(msg){
+//         // console.log(chat)
+      
+
+//         for(const [_, value] of chat)
+//         {
+//            for(const v of value){
+//             v(msg)
+//            }
+//         }
+
+//     }
+//     return {join, message}
+// }
+
+// const room = createChatRoom()
+
+// function fnA(message){
+//     console.log("alice: " + message)
+// }
+
+// function fnB(message){
+//     console.log("bob: " + message)
+// }
+
+// const unsubA = room.join("alice", fnA)
+// const unsubB = room.join("bob", fnB)
+
+// room.message("hello")
+
+// unsubA()
+// room.message("bye")
+
+function createInputSystem(){
+    const inputs = new Map()
+    
+    function on(event, fnc){
+        if(!inputs.has(event)){
+            inputs.set(event, new Set())
+        }
+
+        let listeners = inputs.get(event)
+        listeners.add(fnc)
+        
+        function unsubscribe(){
+            listeners.delete(fnc)
+            
+            if(listeners.size === 0)
+                {
+                    inputs.delete(event)
+                }
+
+        }
+        return unsubscribe
+    }
+
+    function trigger(event){
+         if (!inputs.has(event)) {
+            return
+            } 
+        const listeners = inputs.get(event)
+        for(const fn of listeners){
+           fn(event)
+    }
+}
+return { on, trigger}
+
+}
+
+// const input = createInputSystem()
+
+// function fn(input){
+//     console.log("input triggered: ", input)
+// }
+
+// const off = input.on("jump", fn)
+// const off2 = input.on("run", fn)
+// input.trigger("jump")
+// off()
+// input.trigger("run")
+// off2()
+
+function createPriceWatcher(){
+    const stocks = new Map()
+
+    function subscribe(stock, fn){
+        if(!stocks.has(stock)){
+            stocks.set(stock, new Set())
+        }
+
+        const callbacks = stocks.get(stock)
+        callbacks.add(fn)
+
+        function unsubscribe(){
+            callbacks.delete(fn)
+            if(callbacks.size === 0){
+                stocks.delete(stock)
+            }
+        }
+        return unsubscribe
+    }
+            function update(stock, data){
+            if(!stocks.has(stock)) {
+                return
+            }
+            const callbacks = stocks.get(stock)
+            for(const fn of callbacks){
+                fn(data)
+            }
+
+    }
+    return {subscribe, update}
+}
+
+// const watch = createPriceWatcher()
+
+// function fn(data){
+//     console.log("price: ", data)
+// }
+
+// const stop = watch.subscribe("AAPL", fn)
+// watch.update("AAPL", 180)
+// stop()
+// watch.update("AAPL", 181)
+
+
+function createResizeObserver(){
+    const shapes = new Map()
+
+    function observe(fn){
+        if(!shapes.has("shape")){
+            shapes.set("shape", new Set())
+        }
+
+            const listeners = shapes.get("shape")
+            listeners.add(fn)
+
+    function unsubscribe(){
+        listeners.delete(fn)
+        if(listeners.size === 0){
+            shapes.delete("shape")
+        }
+    }
+    return unsubscribe
+    }
+
+    function resize(size){
+          if(!shapes.has("shape")) {
+                return
+            }
+             const listeners = shapes.get("shape")
+             console.log(listeners)
+             for(const fn of listeners){
+                fn(size)
+             }
+    }
+
+    return {observe, resize}
+
+}
+
+
+
+const resize = createResizeObserver()
+
+function fn(data){
+    console.log("size changed: ", data)
+}
+
+const off = resize.observe(fn)
+resize.resize({ w: 100, h: 100 })
+off()
+resize.resize({ w: 200, h: 200 })
