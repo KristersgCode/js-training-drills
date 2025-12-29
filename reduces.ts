@@ -193,3 +193,134 @@
 
 // console.log(result)
 
+// const numbers = [1, 2, 3, 4, 5, 6]
+
+// const result = numbers.reduce((sum, number) => {
+// 	if(number % 2 === 0 && number > 1){
+// 		return sum + number
+// 	}
+// 	return sum
+// }, 0)
+
+// console.log(result)
+
+// const words = ["apple", "banana", "apple", "orange", "banana", "apple"]
+// // { apple: 3, banana: 2, orange: 1 }
+
+// const result = words.reduce((acc, sum)=> {
+// 	 acc[sum] = (acc[sum] ?? 0) + 1
+// 	return acc
+// },{})
+
+// console.log(result)
+
+// const nested = [[1, 2], [3, 4], [5]]
+
+// // [1, 2, 3, 4, 5]
+
+// const result = nested.reduce((acc, array) => {
+// 	return acc.concat(array)
+// }, [])
+
+// console.log(result)
+
+// const users = [
+//   { name: "Anna", role: "admin" },
+//   { name: "Bob", role: "user" },
+//   { name: "Chris", role: "admin" }
+// ]
+
+// {
+//   admin: [
+//     { name: "Anna", role: "admin" },
+//     { name: "Chris", role: "admin" }
+//   ],
+//   user: [
+//     { name: "Bob", role: "user" }
+//   ]
+// }
+
+// const result = users.reduce((acc, user) => {
+// 	acc[user.role] = acc[user.role] ?? []
+// 	acc[user.role].push(user)
+// 	return acc
+// },{})
+
+
+// Description:Find the maximum number.
+
+// const scores = [42, 87, 55, 99, 64]
+
+// const result = scores.reduce((acc, number) => {
+// 	if(number > acc){
+// 		return number
+// 	}
+// 	return acc
+// },0)
+
+// const values = [1, 2, 2, 3, 4, 4, 5]
+
+// // [1, 2, 3, 4, 5]
+
+
+// const result = values.reduce((acc, number)=>{
+// 	if(!acc.includes(number)){
+// 		acc.push(number)
+// 	}
+// 	return acc
+// }, [])
+
+// console.log(result)
+
+
+// Create an object where keys are id and values are the objects.
+
+// const items = [
+//   { id: "a1", value: 10 },
+//   { id: "b2", value: 20 }
+// ]
+
+// // {
+// //   a1: { id: "a1", value: 10 },
+// //   b2: { id: "b2", value: 20 }
+// // }
+
+// const result = items.reduce((acc, item) => {
+// 	acc[item.id] = item
+// 	return acc
+// }, {})
+
+
+// Calculate total cost (price * qty).
+
+// const cart = [
+//   { price: 10, qty: 2 },
+//   { price: 5, qty: 4 }
+// ]
+
+// // 40
+
+// const result = cart.reduce((acc, item) => {
+// 	let total = 0
+// 	total = item.price * item.qty 
+// 	return acc + total
+// }, 0)
+
+
+const nums = [1, 2, 3, 4, 5, 6]
+
+// {
+//   even: [2, 4, 6],
+//   odd: [1, 3, 5]
+// }
+
+const result = nums.reduce((acc, number) => {
+	if(number % 2 === 0){
+		acc.even.push(number)
+	}else {
+		acc.odd.push(number)
+	}
+	return acc
+},{even: [], odd: []})
+
+console.log(result)
