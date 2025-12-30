@@ -815,3 +815,173 @@
 //   return  name ? name[0].toUpperCase() + name.slice(1) : name
 // })
 // console.log(result)
+
+// const users = [
+//   { id: 1, name: "Anna", active: true },
+//   { id: 2, name: "John", active: false },
+//   { id: 3, name: "Maria", active: true }
+// ]
+
+// const activeUsers = users.filter((u) => u.active).map((user) => {
+// 		return user.name
+// })
+
+// console.log(activeUsers)
+
+// const products = [
+//   { name: "Book", price: 10 },
+//   { name: "Pen", price: 2 },
+//   { name: "Notebook", price: 5 }
+// ]
+
+// // [
+// //   { name: "Book", price: 12 },
+// //   { name: "Pen", price: 2.4 },
+// //   { name: "Notebook", price: 6 }
+// // ]
+
+// 	let result = []
+// 	for (const product of products){
+// 	result.push({name: product.name, price: (product.price * 0.2) + product.price})
+// 	}
+
+// 	console.log(result)
+
+// const emails = [
+//   "test@gmail.com",
+//   "invalid-email",
+//   "hello@company.io",
+//   "no-at-symbol.com"
+// ]
+// // TaskReturn only strings that contain @.
+// // Output
+
+// // ["test@gmail.com", "hello@company.io"]
+
+
+// const res = emails.filter((email) => email.includes("@"))
+
+// console.log(res)
+
+// const orders = [
+//   { id: 1, total: 15 },
+//   { id: 2, total: 120 },
+//   { id: 3, total: 60 }
+// ]
+// // Task
+// // Return order IDs where total is greater than 50.
+// // Output
+
+// // [2, 3]
+
+// let result = []
+
+// for(const {total, id} of orders){
+// 	if(total > 50){
+// 		result.push(id)
+// 	}
+// }
+
+// console.log(result.sort((a,b) => a-b))
+
+// const names = ["  john", "ANNA ", " mAria "]
+// // Task
+// // Trim spaces and convert names to capitalized format(John, Anna, Maria).
+// // Output
+
+// // ["John", "Anna", "Maria"]
+
+// const result = names.map((name) => {
+// 	return name.trim().toLowerCase()
+// })
+
+// let r = []
+
+// for(const res of result){
+// 	r.push(res[0].toUpperCase() + res.slice(1))
+// }
+
+// console.log(r)
+
+const inventory = [
+  { item: "Laptop", stock: 3 },
+  { item: "Mouse", stock: 0 },
+  { item: "Keyboard", stock: 5 }
+]
+// TaskReturn items that are in stock (stock > 0).
+// Output
+
+// [
+//   { item: "Laptop", stock: 3 },
+//   { item: "Keyboard", stock: 5 }
+// ]
+
+// const result = inventory.filter((i) => i.stock)
+
+// const apiUsers = [
+//   { id: 1, email: "a@test.com", password: "123" },
+//   { id: 2, email: "b@test.com", password: "456" }
+// ]
+// // TaskRemove the password field from each object.
+// // Output
+
+// // [
+// //   { id: 1, email: "a@test.com" },
+// //   { id: 2, email: "b@test.com" }
+// // ]
+
+// const result = apiUsers.map((user) => ({
+// 	id: user.id, email: user.email
+// }))
+
+// console.log(result)
+
+// const numbers = ["37129123456", "37120111222"]
+// // TaskFormat numbers as +371 29 123 456.
+// // Output
+
+// // ["+371 29 123 456", "+371 20 111 222"]
+
+// let res = []
+// for (const number of numbers) {
+//   const formatted =
+//     "+" +
+//     number.slice(0, 3) + " " +
+//     number.slice(3, 5) + " " +
+//     number.slice(5, 8) + " " +
+//     number.slice(8)
+
+//   res.push(formatted)
+// }
+
+// console.log(res)
+
+// const todos = [
+//   { title: "Code", done: true },
+//   { title: "Gym", done: false },
+//   { title: "Read", done: true }
+// ]
+// // Task
+// // Return number of completed tasks.
+// // Output
+
+// // 2
+
+// const result = todos.filter((todo) => todo.done).length
+
+// console.log(result)
+
+const flags = {
+  darkMode: true,
+  betaUser: false,
+  newCheckout: true
+}
+// Task Return array of enabled feature names.
+// Output
+
+// ["darkMode", "newCheckout"]
+const result = Object.entries(flags).filter(([_, value]) => 
+		value
+).map(([key, _]) => key)
+
+console.log(result)
