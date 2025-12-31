@@ -986,3 +986,22 @@ const inventory = [
 
 // console.log(result)
 
+// const items = ["apple", "banana", "orange", "banana"]
+// const remove = "banana"
+
+// const index = items.indexOf(remove)
+
+// if(index !== -1){
+// 	items.splice(index,1)
+// }
+const items = ["home", "about", "contact"]
+const insertAfter = "about"
+const value = "blog"
+
+const index = items.indexOf(insertAfter)
+
+if(index !== -1){
+	items.splice(index +1,0, value)
+}
+
+console.log(items)
