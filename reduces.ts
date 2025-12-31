@@ -324,3 +324,213 @@
 // },{even: [], odd: []})
 
 // console.log(result)
+// const flags = { darkMode: false, betaUser: false }
+
+// const updates = [
+//   { key: "darkMode", value: true },
+//   { key: "betaUser", value: true },
+//   { key: "betaUser", value: false }
+// ]
+
+// const result = updates.reduce((acc, update) => {
+//   acc[update.key] = update.value
+//   return acc
+// }, { ...flags })
+
+// { darkMode: true, betaUser: true }
+
+// const todos = [
+//   { title: "Code", done: true },
+//   { title: "Gym", done: false },
+//   { title: "Read", done: true }
+// ]
+
+// // 2
+
+// const stateMachine = todos.reduce((acc, todo) => {
+//   console.log(acc)
+//   if(todo.done === true)
+//   {
+//     acc++
+//   }
+//   return acc
+// },0)
+
+// const cart = [
+//   { price: 10, qty: 2 },
+//   { price: 5, qty: 1 }
+// ]
+
+// const totalPrice = cart.reduce((acc, item)=> {
+//   return acc + item.price * item.qty
+// },0)
+// // 25
+
+// const users = [
+//   { name: "Anna", role: "admin" },
+//   { name: "John", role: "user" },
+//   { name: "Maria", role: "admin" }
+// ]
+// // TaskGroup users by role.
+// // Output
+
+// // {
+// //   admin: ["Anna", "Maria"],
+// //   user: ["John"]
+// // }
+
+// const groupedUsers = users.reduce((acc, user) => {
+//     acc[user.role] = acc[user.role] ?? []
+//     acc[user.role].push(user.name)
+//     return acc
+// },{})
+
+// console.log(groupedUsers)
+
+// const products = [
+//   { id: 1, name: "Book" },
+//   { id: 2, name: "Pen" }
+// ]
+// // TaskConvert array into object keyed by id.
+// // Output
+
+// // {
+// //   1: { id: 1, name: "Book" },
+// //   2: { id: 2, name: "Pen" }
+// // }
+
+// const result = products.reduce((acc, object) => {
+//   acc[object.id] = object
+//   return acc
+// },{})
+
+// const events = [
+//   "LOGIN",
+//   "LOGOUT",
+//   "LOGIN",
+//   "LOGIN"
+// ]
+
+// const authStatus = events.reduce((acc, event) => {
+//   if(event === "LOGIN"){
+//     return "loggedIn"
+//   }
+//   if(event === "LOGOUT"){
+//     return "loggedOut"
+//   }
+//   return acc
+
+// }, 'loggedOut')
+
+// console.log(authStatus)
+
+// // Rules
+// // 	•	Initial state: "loggedOut"
+// // 	•	"LOGIN" → "loggedIn"
+// // 	•	"LOGOUT" → "loggedOut"
+// // TaskReturn final auth state.
+// // Output
+
+// "loggedIn"
+
+
+// const actions = [
+//   { type: "ADD", item: "apple" },
+//   { type: "ADD", item: "banana" },
+//   { type: "REMOVE", item: "apple" }
+// ]
+// Initial State
+// []
+
+// Rules
+// 	•	"ADD" → add item
+// 	•	"REMOVE" → remove one instance
+// Output
+
+// ["banana"]
+
+// const shoppingCart = actions.reduce((acc, action) => {
+//   if(action.type === "ADD"){
+//     return acc.concat(action.item)
+//   }
+
+//   if(action.type === "REMOVE"){
+//     const index = acc.indexOf(action.item)
+//     if (index === -1) return acc
+//     return [
+//       ...acc.slice(0, index),
+//       ...acc.slice(index + 1)
+//     ]
+//   }
+//   return acc
+// },[])
+
+// console.log(shoppingCart)
+
+// const logs = [
+//   { level: "error", msg: "Failed" },
+//   { level: "info", msg: "Started" },
+//   { level: "error", msg: "Timeout" }
+// ]
+// // Task Collect only error messages.
+// // Output
+
+// // ["Failed", "Timeout"]
+
+// const errorMessages = logs.reduce((acc, log) => {
+//    if(log.level === "error")
+//    {
+//     return acc.push(log.msg)
+//    }
+//    return acc
+// },[])
+
+// console.log(errorMessages)
+
+// const fields = [
+//   { name: "email", valid: true },
+//   { name: "password", valid: false },
+//   { name: "age", valid: true }
+// ]
+// TaskReturn:
+
+// {
+//   isValid: false,
+//   invalidFields: ["password"]
+// }
+
+// const invalidFields = fields.reduce((acc, field) => {
+//   if(!field.valid){
+//     acc.isValid = false
+//     acc.invalidFields.push(field.name)
+//   }
+//   return acc
+
+// },{isValid: true, invalidFields: []})
+
+// console.log(invalidFields)
+
+// const actions = [
+//   { type: "INCREMENT" },
+//   { type: "INCREMENT" },
+//   { type: "DECREMENT" }
+// ]
+
+// const result = actions.reduce((acc, action) => {
+//   console.log(acc)
+//     if(action.type === "INCREMENT"){
+//         acc++
+//     }
+//     if(action.type === "DECREMENT"){
+//       acc--
+//     }
+//     return acc
+// },0)
+
+// console.log(result)
+
+// Initial State
+// 0
+// Output
+// 1
+

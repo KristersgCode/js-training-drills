@@ -971,17 +971,18 @@ const inventory = [
 
 // console.log(result)
 
-const flags = {
-  darkMode: true,
-  betaUser: false,
-  newCheckout: true
-}
-// Task Return array of enabled feature names.
-// Output
+// const flags = {
+//   darkMode: true,
+//   betaUser: false,
+//   newCheckout: true
+// }
+// // Task Return array of enabled feature names.
+// // Output
 
-// ["darkMode", "newCheckout"]
-const result = Object.entries(flags).filter(([_, value]) => 
-		value
-).map(([key, _]) => key)
+// // ["darkMode", "newCheckout"]
+// const result = Object.entries(flags).filter(([_, value]) => 
+// 		value
+// ).map(([key, _]) => key)
 
-console.log(result)
+// console.log(result)
+
