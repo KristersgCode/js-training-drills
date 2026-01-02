@@ -994,14 +994,63 @@ const inventory = [
 // if(index !== -1){
 // 	items.splice(index,1)
 // }
-const items = ["home", "about", "contact"]
-const insertAfter = "about"
-const value = "blog"
+// const items = ["home", "about", "contact"]
+// const insertAfter = "about"
+// const value = "blog"
 
-const index = items.indexOf(insertAfter)
+// const index = items.indexOf(insertAfter)
 
-if(index !== -1){
-	items.splice(index +1,0, value)
-}
+// if(index !== -1){
+// 	items.splice(index +1,0, value)
+// }
 
-console.log(items)
+// console.log(items)
+
+
+// const items = ["low", "medium", "high"]
+// const index = 1
+// const newValue = "normal"
+
+// // ["low", "normal", "high"]
+
+// const result = items.splice(index,1, newValue)
+
+// console.log(items)
+
+// Remove Last N Items
+// Input
+
+// const items = [1, 2, 3, 4, 5]
+// const n = 2
+
+// // [1, 2, 3]
+
+// const mutate = items.splice(items.length -n)
+
+// console.log(items)
+
+// items = ["a", "b", "c", "d"]
+// fromIndex = 1
+// toIndex = 3
+// Output
+
+// ["a", "c", "d", "b"]
+
+//  Move Item From One Index to Another
+
+// const items = ["a", "b", "c", "d"]
+// const fromIndex = 1
+// const toIndex = 3
+
+// const [removed] = items.splice(fromIndex, 1)
+
+// const targetIndex = fromIndex < toIndex ? toIndex - 1 : toIndex
+
+// items.splice(targetIndex, 0, removed)
+
+// console.log(items)
+
+
+
+// ["a", "c", "d", "b"]
+

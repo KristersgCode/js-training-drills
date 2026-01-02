@@ -704,50 +704,297 @@ function createPriceWatcher(){
 // watch.update("AAPL", 181)
 
 
-function createResizeObserver(){
-    const shapes = new Map()
+// function createResizeObserver(){
+//     const shapes = new Map()
 
-    function observe(fn){
-        if(!shapes.has("shape")){
-            shapes.set("shape", new Set())
-        }
+//     function observe(fn){
+//         if(!shapes.has("shape")){
+//             shapes.set("shape", new Set())
+//         }
 
-            const listeners = shapes.get("shape")
-            listeners.add(fn)
+//             const listeners = shapes.get("shape")
+//             listeners.add(fn)
 
-    function unsubscribe(){
-        listeners.delete(fn)
-        if(listeners.size === 0){
-            shapes.delete("shape")
-        }
-    }
-    return unsubscribe
-    }
+//     function unsubscribe(){
+//         listeners.delete(fn)
+//         if(listeners.size === 0){
+//             shapes.delete("shape")
+//         }
+//     }
+//     return unsubscribe
+//     }
 
-    function resize(size){
-          if(!shapes.has("shape")) {
-                return
-            }
-             const listeners = shapes.get("shape")
-             console.log(listeners)
-             for(const fn of listeners){
-                fn(size)
-             }
-    }
+//     function resize(size){
+//           if(!shapes.has("shape")) {
+//                 return
+//             }
+//              const listeners = shapes.get("shape")
+//              console.log(listeners)
+//              for(const fn of listeners){
+//                 fn(size)
+//              }
+//     }
 
-    return {observe, resize}
+//     return {observe, resize}
 
-}
+// }
 
 
 
-const resize = createResizeObserver()
+// const resize = createResizeObserver()
 
-function fn(data){
-    console.log("size changed: ", data)
-}
+// function fn(data){
+//     console.log("size changed: ", data)
+// }
 
-const off = resize.observe(fn)
-resize.resize({ w: 100, h: 100 })
-off()
-resize.resize({ w: 200, h: 200 })
+// const off = resize.observe(fn)
+// resize.resize({ w: 100, h: 100 })
+// off()
+// resize.resize({ w: 200, h: 200 })
+
+// function createCounter(initialValue){
+    
+//     let count = initialValue
+
+//     function inc(){
+//        return count++        
+//     }
+
+//     function dec(){
+//        return count--
+//     }
+
+//     function get(){
+//         console.log(count)
+//         return count
+//     }
+
+//     return {inc, dec, get}
+// }
+
+
+// const initialValue = 3
+
+// createCounter(initialValue)
+
+// const a = createCounter(0)
+// a.inc()
+// a.inc()
+// a.get() // 2
+
+// const b = createCounter(10)
+// b.dec()
+// b.get() // 9
+
+// Goal: Closures for configuration binding.
+// Task:Create createLogger(prefix) that returns a log(message) function.
+// Rules:
+	// •	prefix is captured via closure
+	// •	Logger must work even if called later or passed around
+// Example:
+
+// function createLogger(prefix){
+//     return function authLog(msg){
+//         console.log(prefix, msg)
+//         return `${prefix} ${msg}`
+//     }
+// }
+
+// const authLog = createLogger("[AUTH]")
+// authLog("login success")
+// // [AUTH] login success
+//--------------------------------------------------------------------------
+
+// Goal: Prevent repeated execution (very common in production).
+// Task:Create once(fn) that:
+// 	•	Runs fn only once
+// 	•	Subsequent calls return the first result
+// 	•	Uses closure to track state
+// Example:
+
+// const init = once(() => {
+//   console.log("init")
+//   return 42
+// })
+
+// function once(fn) {
+//   let called = false
+//   let result
+
+//   return function () {
+//     if (!called) {
+//       result = fn()
+//       called = true
+//     }
+//     return result
+//   }
+// }
+
+// init() // logs "init", returns 42
+// init() // returns 42, no log
+// ---------------------------------------------------------------------------
+
+// 🟡 Drill 4 — Event Listener with Unsubscribe
+// Goal: Closure + resource cleanup.
+// Task:Create createEmitter() with:
+// 	•	subscribe(fn) → returns unsubscribe
+// 	•	emit(value)
+// Rules:
+// 	•	unsubscribe must remove only its own listener
+// 	•	No global variables
+// Example:
+
+// function createEmitter(){
+//     const listeners = new Set()
+
+//   function subscribe(fn) {
+//     listeners.add(fn)
+//     console.log(listeners)
+
+//     return function unsubscribe() {
+//       listeners.delete(fn)
+//     }
+//   }
+
+//     function emit(value) {
+//         for (const listener of listeners) {
+//         listener(value)
+//   }
+// }
+//     return {subscribe, emit}
+
+// }
+
+// const emitter = createEmitter()
+
+// const unsub = emitter.subscribe(v => console.log(v))
+// emitter.emit(1) // logs 1
+
+// unsub()
+// emitter.emit(2) // nothing
+
+// 🟡 Drill 5 — Memoized Expensive Function
+// Goal: Cache results using closure.
+// Task:Create memoize(fn) that:
+// 	•	Caches results by argument
+// 	•	Returns cached value on repeat calls
+// 	•	Cache must be private
+// Example:
+
+// const slowSquare = memoize(n => {
+//   console.log("computing")
+//   return n * n
+// })
+
+
+// function memoize(fn) {
+//   const cache = new Map()
+
+//   return function (arg) {
+//     if (cache.has(arg)) {
+//       return cache.get(arg)
+//     }
+
+//     const result = fn(arg)
+//     cache.set(arg, result)
+//     return result
+//   }
+// }
+
+
+// slowSquare(4) // computing → 16
+// slowSquare(4) // 16 (no log)
+
+// Goal: Cache by single primitive argument.
+// Task:Implement memoize(fn) so that:
+// 	•	Same number → computed once
+// 	•	Different numbers → cached separately
+// Input / Output:
+
+// const square = memoize(n => n * n)
+
+// function memoize(fn){
+//     let cache = new Map()
+//     return function (arg){
+//         if(cache.has(arg)){
+//             return cache.get(arg)
+//         }
+
+//         const result = fn(arg)
+//         cache.set(arg, result)
+//         console.log(cache)
+//         return result
+//     }
+// }
+
+// square(2) // computes
+// square(2) // cached
+// square(3) // computes
+
+// Goal: Cache expensive string processing.
+// Task:Memoize a function that:
+// 	•	Takes a string
+// 	•	Returns number of vowels
+// Input / Output:
+
+// const countVowels = memoize(string => {
+//     const vowels = ["a", "e", "i", "o", "u"]
+
+//     let count = 0
+//     for(const str of string){
+//             if(vowels.includes(str)){
+//                 count++
+//         }
+//     }
+//         return count
+// })
+
+// function memoize(fn){
+//     let cache = new Map()
+
+//     return function (str){
+//         if(cache.has(str)){
+//             return cache.get(str)
+//         }
+
+//         const result = fn(str)
+//         cache.set(str, result)
+//         console.log(result)
+//         return result
+//     }
+
+// }
+
+// countVowels("hello") // computes
+// countVowels("hello") // cached
+// countVowels("world") // computes
+
+// Goal: Ensure correct caching of falsy values.
+// Task:Memoize a function that returns true or false.
+// ⚠️ Must correctly cache false.
+// Input / Output:
+
+
+// const isEven = memoize(n => {
+//     return n % 2 === 0
+// })
+
+// function memoize(fn){
+//     let cache = new Map()
+//     return function (arg){
+//         if(cache.has(arg)){
+//             return cache.get(arg)
+//         }
+
+//          const result = fn(arg)
+//          cache.set(arg, result)
+//          console.log(result)
+//          console.log(cache)
+//          return result
+//     }
+// }
+
+
+// isEven(3) // computes → false
+// isEven(3) // cached → false
+
