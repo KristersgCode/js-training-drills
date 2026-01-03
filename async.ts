@@ -389,3 +389,81 @@ function fetchSettings() {
 
   // Promise.resolve(10).then(() => Promise.reject(new Error("err"))).catch((err) => console.log(err.message)).then(()=> console.log("recovered"))
   
+//   Create a function that resolves after N milliseconds with a given value.
+// Input
+
+// function delay(time, value){
+//   return new Promise((resolve) => {
+//     setTimeout(() => {
+//       console.log(value)
+//       resolve(value)
+//     }, time)
+//   })
+// }
+
+// delay(500, "ok")
+
+// Drill:Execute async functions one after another using a loop (not recursion).
+// Input
+
+// function delay(time, value){
+//   return new Promise((resolve) => {
+//     setTimeout(() => {
+//       resolve(value)
+//     }, time)
+//   })
+// }
+
+// const tasks = [
+//   () => delay(300, 1),
+//   () => delay(200, 2),
+//   () => delay(100, 3),
+// ]
+
+
+
+// async function run(){
+//   const results = []
+
+//   for(const task of tasks){
+//     results.push(await task())
+//   }
+//   return results
+// }
+
+// run().then(console.log)
+
+
+// // [1, 2, 3]
+
+// Drill:Run async functions at the same time and collect results.
+// Input
+
+// function delay(time, value){
+//   return new Promise((resolve) => {
+//     setTimeout(() => {
+//       resolve(value)
+//     }, time)
+//   })
+// }
+
+// const tasks = [
+//   delay(300, "a"),
+//   delay(100, "b"),
+//   delay(200, "c"),
+// ]
+
+// const results = Promise.all(tasks).then((values) => {console.log(values)})
+
+// ["a", "b", "c"]
+
+// Drill:Implement your own asyncMap.
+// Input
+
+function asyncMap(arr, asyncFn) {
+  return Promise.all(arr.map((item) => asyncFn(item)))
+}
+
+asyncMap([1, 2, 3], async (n) => n * 2).then(console.log)
+
+// [2, 4, 6]
