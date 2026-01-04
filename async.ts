@@ -460,10 +460,42 @@ function fetchSettings() {
 // Drill:Implement your own asyncMap.
 // Input
 
-function asyncMap(arr, asyncFn) {
-  return Promise.all(arr.map((item) => asyncFn(item)))
-}
+// function asyncMap(arr, asyncFn) {
+//   return Promise.all(arr.map((item) => asyncFn(item)))
+// }
 
-asyncMap([1, 2, 3], async (n) => n * 2).then(console.log)
+// asyncMap([1, 2, 3], async (n) => n * 2).then(console.log)
 
 // [2, 4, 6]
+
+
+// Drill:Filter values using an async predicate.
+// Input
+
+// async function asyncFilter(arr, asyncFn){
+//   const checks = await Promise.all(arr.map(asyncFn))
+//   console.log(checks)
+//    return arr.filter((_, index) => checks[index])
+// }
+
+// asyncFilter([1, 2, 3, 4], async (n) => n % 2 === 0).then(console.log)
+
+// [2, 4]
+
+// Drill:Implement reduce where reducer returns a Promise.
+// Input
+
+// async function asyncReduce(arr, asyncFn, initialValue) {
+//   let acc = initialValue
+
+//   for (const item of arr) {
+//     acc = await asyncFn(acc, item)
+//   }
+
+//   return acc
+// }
+
+// asyncReduce([1, 2, 3], async (sum, n) => sum + n, 0)
+// Expected
+
+// 6
