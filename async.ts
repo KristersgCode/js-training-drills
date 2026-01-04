@@ -499,3 +499,51 @@ function fetchSettings() {
 // Expected
 
 // 6
+
+// async function asyncForEach(arr, asyncFn){
+
+//   for(const element of arr){
+//       await asyncFn(element)
+//   }
+
+// }
+
+// async function delay(time){
+//   return new Promise((resolve) => {
+//   setTimeout(() => {resolve()}, time)
+// })}
+
+// asyncForEach([1, 2, 3], async (n) => {
+//   await delay(100)
+//   console.log(n)
+// })
+
+// Return the first element that matches an async predicate.
+
+// async function asyncFind(arr, asyncFn) {
+//   for (const element of arr) {
+//     if (await asyncFn(element)) {
+//       return element
+//     }
+//   }
+//   return undefined
+// }
+
+// asyncFind([1, 2, 3, 4], async (n) => n > 2).then(console.log)
+// // Expected
+
+
+// Drill:Return true if any async predicate resolves to true.
+
+async function asyncSome(arr, asyncFn) {
+  for (const element of arr) {
+    if (await asyncFn(element)) {
+      return true
+    }
+  }
+  return false
+}
+
+asyncSome([1, 2, 3], async (n) => n === 2).then(console.log)
+
+// true
