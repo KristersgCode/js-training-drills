@@ -535,15 +535,15 @@ function fetchSettings() {
 
 // Drill:Return true if any async predicate resolves to true.
 
-async function asyncSome(arr, asyncFn) {
-  for (const element of arr) {
-    if (await asyncFn(element)) {
-      return true
-    }
-  }
-  return false
-}
+// async function asyncSome(arr, asyncFn) {
+//   for (const element of arr) {
+//     if (await asyncFn(element)) {
+//       return true
+//     }
+//   }
+//   return false
+// }
 
-asyncSome([1, 2, 3], async (n) => n === 2).then(console.log)
+// asyncSome([1, 2, 3], async (n) => n === 2).then(console.log)
 
 // true

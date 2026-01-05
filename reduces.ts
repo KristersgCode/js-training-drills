@@ -534,3 +534,209 @@
 // Output
 // 1
 
+// const users = [
+//   { id: 1, role: "admin", team: "A" },
+//   { id: 2, role: "user", team: "A" },
+//   { id: 3, role: "admin", team: "B" }
+// ]
+
+// // {
+// //   "admin:A": [1],
+// //   "user:A": [2],
+// //   "admin:B": [3]
+// // }
+
+// const result = users.reduce((acc, user) => {
+// 	const key = `${user.role}:${user.team}`
+// 	acc[key] = acc[key] ? [...acc[key], user.id] : [user.id]
+// 	return acc
+// },{})
+
+// const updates = [
+//   { a: 1, b: 2 },
+//   { b: 3, c: 4 },
+//   { a: 1, c: 5 }
+// ]
+
+// const result = updates.reduce((acc, obj) => {
+//   Object.keys(obj).forEach(key => {
+//     const prev = acc.data[key]
+//     const next = obj[key]
+
+//     if (prev !== undefined && prev !== next) {
+//       acc.conflicts.push(key)
+//     }
+
+//     acc.data[key] = next
+//   })
+
+//   return acc
+// }, { data: {}, conflicts: [] })
+
+
+// {
+//   data: { a: 1, b: 3, c: 5 },
+//   conflicts: ["b", "c"]
+// }
+// Rules:
+	// •	conflict = key seen before with different value
+	// •	reduce must return { data, conflicts }
+
+// 	const users = [
+//   { role: "admin", active: true },
+//   { role: "admin", active: false },
+//   { role: "user", active: true }
+// ]
+
+// {
+//   admin: { total: 2, active: 1 },
+//   user: { total: 1, active: 1 }
+// }
+
+// const result = users.reduce((acc, user) => {
+//   acc[user.role].total += 1
+
+//   if (user.active) {
+//     acc[user.role].active += 1
+//   }
+
+//   return acc
+// }, {
+//   admin: { total: 0, active: 0 },
+//   user: { total: 0, active: 0 }
+// })
+
+// const items = ["a", "b", "a", "c", "b"]
+
+// // ["a", "b", "c"]
+
+// const result = items.reduce((acc, letter)=>{
+// 	if(!acc.includes(letter)){
+// 		acc.push(letter)
+// 	}
+// 	return acc
+// },[])
+
+// console.log(result)
+
+// const updates = [
+//   { id: 1, value: "A" },
+//   { id: 1, value: "B" },
+//   { id: 2, value: "X" }
+// ]
+
+// {
+//   1: ["A", "B"],
+//   2: ["X"]
+// }
+// •	grouping + preserving order
+
+// const result = updates.reduce((acc, update) => {
+// 	acc[update.id] = acc[update.id] ? [...acc[update.id], update.value] : [update.value]
+// 	return acc
+// }, {})
+
+// const nums = [1, 2, 3, 4, 5, 6]
+
+// const result = nums.reduce((acc, number) => {
+// 	if(number % 2 === 0){
+// 		acc.even.push(number)
+// 	}
+// 	else {
+// 		acc.odd.push(number)
+// 	}
+// 	return acc
+// }, {even: [], odd: []})
+
+// const scores = [10, 20, 30]
+
+// {
+//   sum: 60,
+//   avg: 20,
+//   count: 3
+// }
+// Focus:
+	// •	accumulator with multiple fields
+
+// const result = scores.reduce((acc, number) => {
+// 	acc.sum += number
+// 	acc.count += 1
+// 	acc.avg = acc.sum / acc.count
+// 	return acc
+
+// }, {sum: 0, avg: 0, count: 0})
+
+// const input = ["a", "a", "b", "b", "b", "a"]
+
+// const result = input.reduce((acc, letter)=> {
+// 	const previousValue = acc[acc.length -1]
+// 	if(previousValue !== letter){
+// 		acc.push(letter)
+// 	}
+// return acc
+// }, [])
+
+// ["a", "b", "a"]
+
+// const nums = [3, 8, 12, 1, 5]
+// // Output
+
+// const result = nums.reduce((acc, number) => {
+// 	if(number < 6){
+// 		acc.small.push(number)
+// 	}
+// 	if(number >= 6){
+// 		acc.large.push(number)
+// 	}
+// 	return acc
+// }, {small: [], large: []})
+
+// console.log(result)
+
+// const input = [1, 1, 2, 2, 2, 3, 3]
+// // [1, 2, 3]
+
+// const result = input.reduce((acc, number) => {
+// 	const prevValue = acc[acc.length -1]
+// 	if(prevValue !== number){
+// 		acc.push(number)
+// 	}
+// 	return acc
+// }, [])
+
+// const input = ["a", "a", "b", "b", "a", "a"]
+
+// // ["a", "b", "a"]
+// 	// •	adjacency, not global uniqueness
+
+// 	const result = input.reduce((acc, letter) => {
+// 		const prevLetter = acc[acc.length -1]
+// 		if(prevLetter !== letter){
+// 			acc.push(letter)
+// 		}
+// 		return acc
+// 	},[])
+
+// const input = [1, 1, 1, 2, 2, 3]
+
+// const result = input.reduce((acc, number) => {
+//   if (acc.lastValue === null) {
+//     acc.currentCount = 1
+//   } else if (number === acc.lastValue) {
+//     acc.currentCount += 1
+//   } else {
+//     acc.counts.push(acc.currentCount)
+//     acc.currentCount = 1
+//   }
+
+//   acc.lastValue = number
+//   return acc
+// }, { counts: [], lastValue: null, currentCount: 0 })
+
+// result.counts.push(result.currentCount)
+
+// console.log(result.counts)
+
+// // [3, 2, 1]
+// 	// •	lengths of consecutive runs
+// 	// •	detect when a run ends
