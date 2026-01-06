@@ -903,11 +903,11 @@
 
 // console.log(r)
 
-const inventory = [
-  { item: "Laptop", stock: 3 },
-  { item: "Mouse", stock: 0 },
-  { item: "Keyboard", stock: 5 }
-]
+// const inventory = [
+//   { item: "Laptop", stock: 3 },
+//   { item: "Mouse", stock: 0 },
+//   { item: "Keyboard", stock: 5 }
+// ]
 // TaskReturn items that are in stock (stock > 0).
 // Output
 
@@ -1206,16 +1206,214 @@ const inventory = [
 
 // Transform an array of { key, value } into an object.
 
-const items = [
-  { key: "a", value: 1 },
-  { key: "b", value: 2 }
-]
+// const items = [
+//   { key: "a", value: 1 },
+//   { key: "b", value: 2 }
+// ]
 
 
-const result = Object.fromEntries(
-  items.map(item => [item.key, item.value])
-)
+// const result = Object.fromEntries(
+//   items.map(item => [item.key, item.value])
+// )
+
+// // expected result:
+// // { a: 1, b: 2 }
+// console.log(result)
+
+// Return a new object containing only entries with value ≥ 80.
+
+// const scores = {
+//   Anna: 90,
+//   Bob: 70,
+//   Cara: 85
+// }
+
+// // expected result:
+// // {
+// //   Anna: 90,
+// //   Cara: 85
+// // }
+
+// const result = Object.fromEntries(Object.entries(scores).filter(([_,value]) => value >= 80))
+
+// console.log(result)
+
+// Create a new object where keys and values are swapped.
+
+// const roles = {
+//   admin: "A",
+//   user: "U",
+//   guest: "G"
+// }
+
+// // const result = Object.fromEntries(
+// // 		Object.entries(roles).map(([key, value]) => ({
+// // 			value
+// // 		})))
+
+// const result = Object.fromEntries(
+// 		Object.entries(roles).map(([key, value]) => [value, key]))
+
+
+// console.log(result)
 
 // expected result:
-// { a: 1, b: 2 }
-console.log(result)
+// {
+//   A: "admin",
+//   U: "user",
+//   G: "guest"
+// }
+
+// Return a new object where all values are doubled.
+
+// const prices = {
+//   apple: 2,
+//   banana: 1,
+//   orange: 3
+// }
+
+// const result = Object.fromEntries(Object.entries(prices).map(([key,value]) => [key, value * 2]))
+
+// console.log(result)
+
+// expected result:
+// {
+//   apple: 4,
+//   banana: 2,
+//   orange: 6
+// }
+
+
+// Convert object into an array of { name, score }, sorted descending by score.
+
+// const scores = {
+//   Anna: 90,
+//   Bob: 70,
+//   Cara: 85
+// }
+
+// const result = Object.entries(scores).map(([key,value]) => ({name: key, score: value})).sort((a, b) => b.score-a.score)
+
+// console.log(result)
+
+// // expected result:
+// // [
+// //   { name: "Anna", score: 90 },
+// //   { name: "Cara", score: 85 },
+// //   { name: "Bob", score: 70 }
+// // ]
+
+// Return how many true and false values exist in the object.
+
+// const flags = {
+//   a: true,
+//   b: false,
+//   c: true,
+//   d: true
+// }
+
+// const values = Object.values(flags)
+
+// const output = {
+//   true: values.filter(Boolean).length,
+//   false: values.filter(v => !v).length
+// }
+
+// console.log(output)
+
+// Return a new object without keys listed in blocked.
+
+// const data = {
+//   id: 1,
+//   password: "secret",
+//   email: "a@mail.com"
+// }
+
+// const blocked = ["password"]
+
+// const arr = Object.entries(data)
+
+// const filtered = Object.fromEntries(arr.filter(([key]) => !blocked.includes(key)))
+
+// console.log(filtered)
+
+
+// expected result:
+// {
+//   id: 1,
+//   email: "a@mail.com"
+// }
+
+// Convert object into a lookup where values become keys and value is true.
+
+// const permissions = {
+//   read: true,
+//   write: true,
+//   execute: false
+// }
+
+// const entries = Object.entries(permissions)
+
+// let trues = []
+// let falses = []
+
+// for(const [key, value] of entries){
+// 		if(value){
+// 			trues.push(key)
+// 		}
+// 		else {
+// 			falses.push(key)
+// 		}
+// }
+// console.log({true: trues, false:falses})
+// expected result:
+// {
+//   true: ["read", "write"],
+//   false: ["execute"]
+// }
+
+// Return true if any value in the object is greater than 100.
+
+// const inventory = {
+//   apples: 30,
+//   bananas: 120,
+//   oranges: 50
+// }
+
+// const entries = Object.values(inventory)
+
+// const checkIfTrue = entries.some((e => e > 100))
+
+// console.log(checkIfTrue)
+
+// Prefix all keys with "user_".
+
+// const user = {
+//   id: 1,
+//   name: "Anna"
+// }
+
+// const entries = Object.fromEntries(Object.entries(user).map(([key,value]) => ["user_" + key,value]))
+
+// Return entries that exist in objA but not in objB.
+
+// const objA = {
+//   a: 1,
+//   b: 2,
+//   c: 3
+// }
+
+// const objB = {
+//   b: 2
+// }
+
+// const keyB = Object.keys(objB)
+
+// const entries = Object.fromEntries(Object.entries(objA).filter(([key, value]) => !keyB.includes(key)))
+// console.log(entries)
+
+// expected result:
+// {
+//   a: 1,
+//   c: 3
+// }
