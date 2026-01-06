@@ -1054,3 +1054,168 @@ const inventory = [
 
 // ["a", "c", "d", "b"]
 
+// const nums = [1, 2, 2, 3, 4, 4, 5]
+
+// // [1, 2, 3, 4, 5]
+
+// const result = new Set(nums)
+
+// console.log(Array.from(result))
+
+// const users = [
+//   { id: 1, name: "Anna" },
+//   { id: 2, name: "Bob" },
+//   { id: 1, name: "Anna" }
+// ]
+
+// // expected result:
+// // [
+// //   { id: 1, name: "Anna" },
+// //   { id: 2, name: "Bob" }
+// // ]
+
+// let result = new Map()
+
+// for (const user of users){
+// 	if(!result.has(user.id)){
+// 		result.set(user.id,user)
+// 	}
+
+// }
+
+// console.log([...result.values()])
+
+// Return only the names of products with price ≥ 100.
+
+// const products = [
+//   { name: "Book", price: 10 },
+//   { name: "Laptop", price: 900 },
+//   { name: "Pen", price: 2 }
+// ]
+
+// const prods = products.filter((prod) => prod.price >= 100)
+
+// const result = prods.map((prod) => prod.name)
+
+
+// console.log(result)
+
+// expected result:
+// ["Laptop"]
+
+
+// Return true if any duplicate value exists, otherwise false.
+
+// const emails = ["a@mail.com", "b@mail.com", "a@mail.com"]
+
+// const dict = new Map()
+
+// let found = false
+
+// for(const element of emails){
+// 	if(!dict.has(element)){
+// 		dict.set(element,true)
+// 	}
+// 	else {
+// 		found = true
+// 		break
+// 	}
+// }
+
+// console.log(found)
+
+// expected result:
+// true
+
+// Flatten a nested array and multiply each number by 2.
+
+// const matrix = [[1, 2], [3, 4], [5]]
+
+// const list = matrix.flat()
+
+// let result = []
+
+// for(let value of list){
+// 		result.push(value * 2)
+// }
+
+// console.log(result)
+
+// expected result:
+// [2, 4, 6, 8, 10]
+
+// Convert an object into an array of { name, score } objects.
+
+// const scores = {
+//   Anna: 90,
+//   Bob: 70,
+//   Cara: 85
+// }
+
+// const result = Object.entries(scores).map(([key,value]) => ({
+// 	name: key, score: value
+// }))
+
+// console.log(result)
+// expected result:
+// [
+//   { name: "Anna", score: 90 },
+//   { name: "Bob", score: 70 },
+//   { name: "Cara", score: 85 }
+// ]
+
+// Group true and false values into separate arrays.
+
+// const flags = [true, false, true, false, true]
+
+// let trues = []
+// let falses = []
+
+// for(const flag of flags){
+	
+// 	if(flag){
+// 		trues.push(flag)
+// 	}
+// 	else {
+// 		falses.push(flag)
+// 	}
+// }
+
+// const result = {true: trues, false: falses}
+
+// console.log(result)
+
+// expected result:
+// {
+//   true: [true, true, true],
+//   false: [false, false]
+// }
+
+// const tasks = [
+//   { done: true },
+//   { done: true },
+//   { done: false }
+// ]
+
+// // expected result:
+// // false
+
+// const result = tasks.every(task => task.done)
+
+// console.log(result)
+
+// Transform an array of { key, value } into an object.
+
+const items = [
+  { key: "a", value: 1 },
+  { key: "b", value: 2 }
+]
+
+
+const result = Object.fromEntries(
+  items.map(item => [item.key, item.value])
+)
+
+// expected result:
+// { a: 1, b: 2 }
+console.log(result)
