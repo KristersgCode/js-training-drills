@@ -740,3 +740,245 @@
 // // [3, 2, 1]
 // 	// •	lengths of consecutive runs
 // 	// •	detect when a run ends
+
+// const actions = [
+//   { type: "TOGGLE" },
+//   { type: "TOGGLE" },
+//   { type: "TOGGLE" }
+// ]
+
+// const result = actions.reduce((acc, action) => {
+// 	if(action.type === "TOGGLE"){
+// 		acc.isOn = true,
+// 		acc.toggles += 1
+// 	}
+// 	return acc
+// },{
+//   isOn: false,
+//   toggles: 0
+// })
+
+
+
+// const actions = [
+//   { type: "ADD", permission: "write" },
+//   { type: "ADD", permission: "read" },
+//   { type: "REMOVE", permission: "read" },
+//   { type: "RESET" },
+// ]
+// 	// •	No duplicates
+// 	// •	RESET clears everything
+
+// 	const result = actions.reduce((acc, action) => {
+// 		if(action.type === "ADD" && !acc.permissions.includes(action.permission)){
+// 				acc.permissions.push(action.permission)
+// 		}
+// 		if(action.type === "REMOVE"){
+// 			const index = acc.permissions.indexOf(action.permission)
+// 			  if (index !== -1) {
+//     acc.permissions.splice(index, 1)
+//   }
+// 		}
+// 		if(action.type === "RESET"){
+// 			acc.permissions = []
+// 		}
+// 		return acc
+// 	},
+// 		{
+// 	 	 permissions: ["read"]
+// 		})
+
+
+// {
+//   value: 10
+// }
+
+// const actions = {
+//   type: "BATCH",
+//   actions: [
+//     { type: "INCREMENT", by: 5 },
+//     { type: "DECREMENT", by: 2 },
+//     { type: "INCREMENT", by: 1 }
+//   ]
+// }
+
+// const result = actions.reduce((acc, action) => {
+//   if (action.type === "BATCH") {
+//     acc = action.actions.reduce((innerAcc, innerAction) => {
+//       if(innerAction.type === "INCREMENT"){
+// 		innerAcc.value+= innerAction.by
+// 	  }
+// 	  if(innerAction.type === "DECREMENT"){
+// 		innerAcc.value -= innerAction.by
+// 	  }
+// 	  return innerAcc
+
+//     }, acc)
+//   }
+
+//   return acc
+// }, { value: 10 })
+
+// (This drill forces reducer-inside-reducer thinking)
+//----------------------------------------------------------------------
+// Initial state
+
+// {
+//   value: 0,
+//   history: []
+// }
+// Actions
+
+// const actions = [
+//   { type: "SET", value: 5 },
+//   { type: "SET", value: 10 },
+//   { type: "UNDO" }
+// ]
+
+// const result = actions.reduce((acc, action) => {
+
+// 	if(action.type === "UNDO") {
+// 		if(!acc.history.length){
+// 			acc.value = 0
+// 		}
+// 		else {
+// 		acc.value = acc.history[acc.history.length - 1]
+// 		acc.history.pop()
+// 		}
+// 	}
+// 	if(action.type === "SET"){
+// 		acc.history.push(acc.value)
+// 		acc.value = action.value
+// 	}	
+// 	return acc
+// }, {value:0, history: []})
+
+// console.log(result)
+	// •	Each SET pushes previous value to history
+	// •	UNDO restores last value
+// Expected final state
+
+// {
+//   value: 5,
+//   history: [0]
+// }
+
+// -----------------------------------------------------------------------------
+
+// idle → loading → success
+        //    ↘ error
+// Initial state
+
+// const events = [
+//   { type: "FETCH" },
+//   { type: "SUCCESS" },
+//   { type: "ERROR" },
+// ]
+
+// const result = events.reduce((acc, event) => {
+//   // idle → loading
+//   if (acc.status === "idle" && event.type === "FETCH") {
+//     return { ...acc, status: "loading" }
+//   }
+
+//   // loading → success
+//   if (acc.status === "loading" && event.type === "SUCCESS") {
+//     return { ...acc, status: "success" }
+//   }
+
+//   // loading → error
+//   if (acc.status === "loading" && event.type === "ERROR") {
+//     return { ...acc, status: "error" }
+//   }
+
+//   // invalid transition → do nothing
+//   return acc
+// }, { status: "idle" })
+
+// 	// •	FETCH only valid from idle
+// 	// •	SUCCESS / ERROR only valid from loading
+// 	// •	Invalid transitions do nothing
+
+// loggedOut → loggingIn → loggedIn
+
+// {
+//   status: "loggedOut"
+// }
+
+// const events = [
+//   { type: "LOGIN" },
+//   { type: "LOGIN_SUCCESS" },
+//   { type: "LOGOUT" }
+// ]
+
+// const result = events.reduce((acc, event) => {
+
+// if(event.type === "LOGIN" && acc.status === "loggedOut"){
+// 	return {...acc, status: "loggingIn" }
+// }
+
+// if(event.type === "LOGIN_SUCCESS" && acc.status === "loggingIn"){
+// 	return {...acc, status: "loggedIn" }
+// }
+
+// if(event.type === "LOGOUT" && acc.status === "loggedIn"){
+// 	return {...acc, status: "loggedOut" }
+// }
+
+
+// return acc
+// }, {status: "loggedOut"})
+
+const actions = [
+  { type: "SUBMIT" },
+  { type: "INVALID", errors: ["email"] },
+  { type: "FIX_FIELD", field: "email" },
+  { type: "VALID" }
+]
+
+const result = actions.reduce((acc, action) => {
+  // idle → validating
+  if (action.type === "SUBMIT" && acc.status === "idle") {
+    return { ...acc, status: "validating" }
+  }
+
+  // validating → invalid
+  if (action.type === "INVALID" && acc.status === "validating") {
+    return { ...acc, status: "invalid", errors: action.errors }
+  }
+
+  // remove one error
+  if (action.type === "FIX_FIELD" && acc.status === "invalid") {
+    return {
+      ...acc,
+      errors: acc.errors.filter(e => e !== action.field)
+    }
+  }
+
+  // invalid → valid (only if no errors)
+  if (
+    action.type === "VALID" &&
+    acc.status === "invalid" &&
+    acc.errors.length === 0
+  ) {
+    return { ...acc, status: "valid" }
+  }
+
+  // invalid transition → do nothing
+  return acc
+}, {
+  status: "idle",
+  errors: []
+})
+
+console.log(result)
+
+	// •	SUBMIT → validating
+	// •	INVALID → invalid
+	// •	FIX_FIELD removes error
+	// •	VALID only works if no errors
+
+	// {
+//   status: "valid",
+//   errors: []
+// }
