@@ -929,56 +929,45 @@
 // return acc
 // }, {status: "loggedOut"})
 
-const actions = [
-  { type: "SUBMIT" },
-  { type: "INVALID", errors: ["email"] },
-  { type: "FIX_FIELD", field: "email" },
-  { type: "VALID" }
-]
+// const actions = [
+//   { type: "SUBMIT" },
+//   { type: "INVALID", errors: ["email"] },
+//   { type: "FIX_FIELD", field: "email" },
+//   { type: "VALID" }
+// ]
 
-const result = actions.reduce((acc, action) => {
-  // idle → validating
-  if (action.type === "SUBMIT" && acc.status === "idle") {
-    return { ...acc, status: "validating" }
-  }
+// const result = actions.reduce((acc, action) => {
+//   // idle → validating
+//   if (action.type === "SUBMIT" && acc.status === "idle") {
+//     return { ...acc, status: "validating" }
+//   }
 
-  // validating → invalid
-  if (action.type === "INVALID" && acc.status === "validating") {
-    return { ...acc, status: "invalid", errors: action.errors }
-  }
+//   // validating → invalid
+//   if (action.type === "INVALID" && acc.status === "validating") {
+//     return { ...acc, status: "invalid", errors: action.errors }
+//   }
 
-  // remove one error
-  if (action.type === "FIX_FIELD" && acc.status === "invalid") {
-    return {
-      ...acc,
-      errors: acc.errors.filter(e => e !== action.field)
-    }
-  }
+//   // remove one error
+//   if (action.type === "FIX_FIELD" && acc.status === "invalid") {
+//     return {
+//       ...acc,
+//       errors: acc.errors.filter(e => e !== action.field)
+//     }
+//   }
 
-  // invalid → valid (only if no errors)
-  if (
-    action.type === "VALID" &&
-    acc.status === "invalid" &&
-    acc.errors.length === 0
-  ) {
-    return { ...acc, status: "valid" }
-  }
+//   // invalid → valid (only if no errors)
+//   if (
+//     action.type === "VALID" &&
+//     acc.status === "invalid" &&
+//     acc.errors.length === 0
+//   ) {
+//     return { ...acc, status: "valid" }
+//   }
 
-  // invalid transition → do nothing
-  return acc
-}, {
-  status: "idle",
-  errors: []
-})
-
-console.log(result)
-
-	// •	SUBMIT → validating
-	// •	INVALID → invalid
-	// •	FIX_FIELD removes error
-	// •	VALID only works if no errors
-
-	// {
-//   status: "valid",
+//   // invalid transition → do nothing
+//   return acc
+// }, {
+//   status: "idle",
 //   errors: []
-// }
+// })
+

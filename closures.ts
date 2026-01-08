@@ -998,3 +998,60 @@ function createPriceWatcher(){
 // isEven(3) // computes → false
 // isEven(3) // cached → false
 
+// function createCounter(){
+//   let count = 0
+
+//   function inc(){
+//     count++
+//     return count
+//   }
+  
+//   function dec(){
+//     count--
+//     return count
+//   }
+  
+//   function peek(){
+//     console.log(count)
+//     return count
+//   }
+  
+//   function reset(){
+//     count = 0
+//     return count
+//   }
+
+//   return {inc, dec, peek, reset}
+
+  
+
+// }
+
+// const counter = createCounter()
+
+// counter.inc()
+// counter.inc()
+// counter.dec()
+
+// counter.peek() // 1
+
+// counter.reset()
+// counter.peek() // 0
+
+
+// Wrap a function so it can only run once.
+// Requirements:
+	// •	First call → runs original function
+	// •	Subsequent calls → return cached result
+	// •	Original function must never run again
+
+  
+
+const init = once(() => {
+  console.log("initialized")
+  return 42
+})
+
+init() // logs "initialized", returns 42
+init() // returns 42
+init() // returns 42
