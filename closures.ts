@@ -1045,13 +1045,174 @@ function createPriceWatcher(){
 	// •	Subsequent calls → return cached result
 	// •	Original function must never run again
 
+// function once(fn) {
+//   let didItRun = false
+//   let result
+
+//   return function () {
+//     if (!didItRun) {
+//       result = fn()
+//       didItRun = true
+//     }
+
+//     return result
+//   }
+// }
+
+
+// const init = once(() => {
+//   console.log("initialized")
+//   return 42
+// })
+
+// init() // logs "initialized", returns 42
+// init() // returns 42
+// init() // returns 42
+
+// Goal:Create a tiny in-memory store with access control via closure.
+
+// function createStore(){
+
+//   let store = new Map()
+
+//   function set(key, value){
+//     store.set(key, value)
+//   }
+
+//   function get(key){
+//     return store.get(key)
+//   }
+
+//   function has(key){
+//       return store.has(key)
+//   }
+
+//   return {set,get,has}
+// }
+
+// const store = createStore()
+
+// store.set("token", "abc123")
+// store.get("token") // "abc123"
+// store.has("token") // true
+// store.get("missing") // undefined
+
+// Goal:Limit how many times a function can be called.
+
+// function limit(fn, number){
+//   let limitCount = 0
+//   let result 
+//   return function(){
+//     if(limitCount < number){
+//       result = fn()
+//       limitCount++
+//     }
+
+//     else {
+//       console.log("LIMIT_REACHED")
+//       return "LIMIT_REACHED"
+//     }
+//     return result
+//   }
+// }
+
+// const limited = limit(() => console.log("ok"), 2)
+
+// limited() // "ok"
+// limited() // "ok"
+// limited() // "LIMIT_REACHED"
+// limited() // "LIMIT_REACHED"
+
+// Model a simple multi-step process.
+// Requirements:
+	// •	Steps: "idle" → "loading" → "success"
+	// •	Expose:
+	// ◦	next()
+	// ◦	status()
+	// •	Calling next() at "success" keeps it "success"
+
+//   function createFlow(){
+//     let state = "idle"
+
+//     function status(){
+//       return state
+//     }
+
+//     function next(){
+//       if(state === "idle"){
+//         state = "loading"
+//       }
+//       else if(state === "loading"){
+//         state = "success"
+//       }
+//       return state
+//     }
+
+//     return { status, next}
+    
+//   }
+
+// const flow = createFlow()
+
+// flow.status() // "idle"
+// flow.next()
+// flow.status() // "loading"
+// flow.next()
+// flow.status() // "success"
+// flow.next()
+// flow.status() // "success"
+
+// -----------------------------------------------------------
+// Goal:Generate unique incremental IDs.
+// Requirements:
+	// •	IDs start at 1
+	// •	Each call increments
+	// •	No global counter
+// Expected behavior:
+
+// function createIdGenerator(){
+//   let id = 0
+//   return function (){
+//       id++
+//       return id
+//   }
+// }
+
+// const gen = createIdGenerator()
+
+// console.log(gen()) // 1
+// console.log(gen()) // 2
+// console.log(gen()) // 3
+
+
+// Goal:Track inputs and outputs of a function.
+	// •	Wrap a function
+	// •	Store { input, output } history
+	// •	Expose:
+	// ◦	wrapped function
+	// ◦	getHistory()
+
+// function withHistory(fnc) {
+//   let history = []
   
+//   function fn(input) {
+//     let output 
+//     output = fnc(input)
+//     history.push({input, output})
+//     return output
+//   }
 
-const init = once(() => {
-  console.log("initialized")
-  return 42
-})
+//   function getHistory() {
+//     return [...history]
+//   }
 
-init() // logs "initialized", returns 42
-init() // returns 42
-init() // returns 42
+//   return { fn, getHistory }
+// }
+
+// const { fn, getHistory } = withHistory(n => n * 2)
+
+// console.log(fn(2))
+// console.log(fn(4))
+
+// console.log(getHistory())
+
