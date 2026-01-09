@@ -495,45 +495,45 @@
 
 // registry.emit("shoot", { power: 20 }) // nothing happens
 
-function createListenerRegistry() {
-  const events = new Map()
+// function createListenerRegistry() {
+//   const events = new Map()
 
-  function subscribe(event, fn) {
+//   function subscribe(event, fn) {
 
-    if (!events.has(event)) {
-      events.set(event, new Set())
-    }
+//     if (!events.has(event)) {
+//       events.set(event, new Set())
+//     }
 
-    const listeners = events.get(event)
+//     const listeners = events.get(event)
 
-    listeners.add(fn)
+//     listeners.add(fn)
 
-    return function unsubscribe() {
+//     return function unsubscribe() {
 
-      listeners.delete(fn)
+//       listeners.delete(fn)
 
-      if (listeners.size === 0) {
-        events.delete(event)
-      }
+//       if (listeners.size === 0) {
+//         events.delete(event)
+//       }
 
-    }
-  }
+//     }
+//   }
 
-  function emit(event, data) {
+//   function emit(event, data) {
 
-    if (!events.has(event)) {
-      return
-    }
+//     if (!events.has(event)) {
+//       return
+//     }
 
-    const listeners = events.get(event)
+//     const listeners = events.get(event)
 
-    for (const fn of listeners) {
-      fn(data)
-    }
-  }
+//     for (const fn of listeners) {
+//       fn(data)
+//     }
+//   }
 
-  return { subscribe, emit }
-}
+//   return { subscribe, emit }
+// }
 
 
 // function func(data) {
@@ -611,41 +611,41 @@ function createListenerRegistry() {
 // unsubA()
 // room.message("bye")
 
-function createInputSystem(){
-    const inputs = new Map()
+// function createInputSystem(){
+//     const inputs = new Map()
     
-    function on(event, fnc){
-        if(!inputs.has(event)){
-            inputs.set(event, new Set())
-        }
+//     function on(event, fnc){
+//         if(!inputs.has(event)){
+//             inputs.set(event, new Set())
+//         }
 
-        let listeners = inputs.get(event)
-        listeners.add(fnc)
+//         let listeners = inputs.get(event)
+//         listeners.add(fnc)
         
-        function unsubscribe(){
-            listeners.delete(fnc)
+//         function unsubscribe(){
+//             listeners.delete(fnc)
             
-            if(listeners.size === 0)
-                {
-                    inputs.delete(event)
-                }
+//             if(listeners.size === 0)
+//                 {
+//                     inputs.delete(event)
+//                 }
 
-        }
-        return unsubscribe
-    }
+//         }
+//         return unsubscribe
+//     }
 
-    function trigger(event){
-         if (!inputs.has(event)) {
-            return
-            } 
-        const listeners = inputs.get(event)
-        for(const fn of listeners){
-           fn(event)
-    }
-}
-return { on, trigger}
+//     function trigger(event){
+//          if (!inputs.has(event)) {
+//             return
+//             } 
+//         const listeners = inputs.get(event)
+//         for(const fn of listeners){
+//            fn(event)
+//     }
+// }
+// return { on, trigger}
 
-}
+// }
 
 // const input = createInputSystem()
 
@@ -660,37 +660,37 @@ return { on, trigger}
 // input.trigger("run")
 // off2()
 
-function createPriceWatcher(){
-    const stocks = new Map()
+// function createPriceWatcher(){
+//     const stocks = new Map()
 
-    function subscribe(stock, fn){
-        if(!stocks.has(stock)){
-            stocks.set(stock, new Set())
-        }
+//     function subscribe(stock, fn){
+//         if(!stocks.has(stock)){
+//             stocks.set(stock, new Set())
+//         }
 
-        const callbacks = stocks.get(stock)
-        callbacks.add(fn)
+//         const callbacks = stocks.get(stock)
+//         callbacks.add(fn)
 
-        function unsubscribe(){
-            callbacks.delete(fn)
-            if(callbacks.size === 0){
-                stocks.delete(stock)
-            }
-        }
-        return unsubscribe
-    }
-            function update(stock, data){
-            if(!stocks.has(stock)) {
-                return
-            }
-            const callbacks = stocks.get(stock)
-            for(const fn of callbacks){
-                fn(data)
-            }
+//         function unsubscribe(){
+//             callbacks.delete(fn)
+//             if(callbacks.size === 0){
+//                 stocks.delete(stock)
+//             }
+//         }
+//         return unsubscribe
+//     }
+//             function update(stock, data){
+//             if(!stocks.has(stock)) {
+//                 return
+//             }
+//             const callbacks = stocks.get(stock)
+//             for(const fn of callbacks){
+//                 fn(data)
+//             }
 
-    }
-    return {subscribe, update}
-}
+//     }
+//     return {subscribe, update}
+// }
 
 // const watch = createPriceWatcher()
 
@@ -1215,4 +1215,91 @@ function createPriceWatcher(){
 // console.log(fn(4))
 
 // console.log(getHistory())
+
+// function createToggle(bool){
+//   let initialValue = bool
+
+//   return function toggle(){
+//      return initialValue = !initialValue
+//   }
+// }
+
+// const toggle = createToggle(false)
+
+// console.log(toggle()) // true
+// console.log(toggle()) // false
+// console.log(toggle()) // true
+
+// Goal:Wrap a function and track how many times it has been called.
+	// •	Wrapped function behaves like the original
+	// •	Call count persists via closure
+	// •	Expose getCount() to read the count
+
+//   function createCallCounter(fnc) {
+//   let callCount = 0
+
+//   function wrapped(number) {
+//     callCount++
+//     return fnc(number)
+//   }
+
+//   wrapped.getCount = function () {
+//     return callCount
+//   }
+
+//   return wrapped
+// }
+
+// const wrapped = createCallCounter(x => x * 2)
+
+// console.log(wrapped(2)) // 4
+// console.log(wrapped(3)) // 6
+// console.log(wrapped.getCount()) // 2
+
+// Allow a function to run once per unique key.
+
+// function createOncePerKey(fn){
+//   let keys = new Map()
+
+//   return function runOnce(key, msg){
+//     if(!keys.has(key)){
+//       keys.set(key, true)
+//     }
+//     else {
+//       return
+//     }
+//     return fn(msg)
+//   }
+
+// }
+
+// const runOnce = createOncePerKey(msg => msg)
+
+// console.log(runOnce("a", "hello")) // "hello"
+// console.log(runOnce("a", "hello")) // undefined
+// console.log(runOnce("b", "hi"))    // "hi"
+
+// Goal:Create a function that validates whether a number is within a range.
+	// •	Inclusive range
+	// •	Return true if valid, otherwise false
+	// •	No global state
+
+// function createRangeLimiter(n1, n2){
+//   return function (number){
+//     if(number >= n1 && number <= n2)
+//         {
+//           return true
+//         }
+//         return false
+//   }
+// }
+
+// const limit = createRangeLimiter(10, 20)
+
+// console.log(limit(5))   // false
+// console.log(limit(15))  // true
+// console.log(limit(25))  // false
+
+
+
 
