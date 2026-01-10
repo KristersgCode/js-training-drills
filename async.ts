@@ -770,39 +770,39 @@
 
     // Goal: Retry with a delay between attempts.
 
-  function delay(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms))
-}
+//   function delay(ms) {
+//   return new Promise(resolve => setTimeout(resolve, ms))
+// }
 
 
-async function asyncRetryWithDelay(fn, attempts, delayMs) {
-  let lastError
+// async function asyncRetryWithDelay(fn, attempts, delayMs) {
+//   let lastError
 
-  for (let attempt = 0; attempt < attempts; attempt++) {
-    try {
-      return await fn()
-    } catch (err) {
-      lastError = err
+//   for (let attempt = 0; attempt < attempts; attempt++) {
+//     try {
+//       return await fn()
+//     } catch (err) {
+//       lastError = err
 
-      if (attempt < attempts - 1) {
-        await delay(delayMs)
-      }
-    }
-  }
+//       if (attempt < attempts - 1) {
+//         await delay(delayMs)
+//       }
+//     }
+//   }
 
-  throw lastError
-}
+//   throw lastError
+// }
 
 
 
-function fetchData(){
-  return new Promise((resolve) => resolve("done"))
-}
+// function fetchData(){
+//   return new Promise((resolve) => resolve("done"))
+// }
 
-await asyncRetryWithDelay(fetchData, 3, 500).then(console.log)
+// await asyncRetryWithDelay(fetchData, 3, 500).then(console.log)
  
-	// Retry on rejection only
-	// Wait delay ms between attempts
-	// Stop immediately on success
-	// Throw last error if all fail
+// 	// Retry on rejection only
+// 	// Wait delay ms between attempts
+// 	// Stop immediately on success
+// 	// Throw last error if all fail
 
