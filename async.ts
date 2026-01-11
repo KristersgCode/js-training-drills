@@ -894,7 +894,67 @@
 // Goal: Log error but still throw it.
 
 
-const num = 1
+// const num = 1
+
+// function fetchData(){
+//   return new Promise((resolve, reject) => {
+//     if(num > 1){
+//       resolve("resolved")
+//     }
+//     else {
+//       reject(new Error("err"))
+//     }
+//   })
+// }
+
+// async function asyncTryLog(fn){
+//     try {
+//         return await fn()
+//     }
+//     catch (e) {
+//       console.log(e)
+//       throw e
+//     }
+// }
+
+// await asyncTryLog(fetchData)
+	// •	Catch error
+	// •	console.log it
+	// •	Re-throw the same error
+
+  // Goal: Ignore errors completely.
+
+//   const num = 1
+
+// function fetchData(){
+//   return new Promise((resolve, reject) => {
+//     if(num > 1){
+//       resolve("resolved")
+//     }
+//     else {
+//       reject(new Error("err"))
+//     }
+//   })
+// }
+
+// async function asyncTrySilent(fn){
+//   try {
+//    await fn()
+//   }
+//   catch {
+
+//   }
+// }
+
+// await asyncTrySilent(fetchData)
+	// •	Try once
+	// •	Ignore rejection
+	// •	Always resolve with undefined
+
+
+  // Goal: Try at most 2 times.
+
+const num = 12
 
 function fetchData(){
   return new Promise((resolve, reject) => {
@@ -907,17 +967,18 @@ function fetchData(){
   })
 }
 
-async function asyncTryLog(fn){
+async function asyncTryTwice(fn) {
+  for (let attempt = 1; attempt <= 2; attempt++) {
     try {
-        return await fn()
-    }
-    catch (e) {
+      return await fn()
+    } catch (e) {
       console.log(e)
-      throw e
+      if (attempt === 2) throw e
     }
+  }
 }
 
-await asyncTryLog(fetchData)
-	// •	Catch error
-	// •	console.log it
-	// •	Re-throw the same error
+await asyncTryTwice(fetchData).then(console.log)
+	// •	First failure → retry once
+	// •	Second failure → throw
+	// •	Stop immediately on success
