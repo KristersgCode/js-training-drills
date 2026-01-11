@@ -806,3 +806,118 @@
 // 	// Stop immediately on success
 // 	// Throw last error if all fail
 
+// const num = 2
+
+// function fetchData(){
+//     return new Promise((resolve, reject) => {
+//       if(num > 1){
+//         resolve("resolved")
+//       }
+//       else {
+//         reject(new Error("This is an error"))
+//       }
+//     })
+// }
+
+
+// async function asyncTryOnce(fn){
+//   try {
+//     return await fn()
+//   }
+//   catch (error) {
+//     console.log("caught:", error.message)
+//     throw error // optional: rethrow if caller should know
+//   }
+// }
+
+// await asyncTryOnce(fetchData).then(console.log)
+
+//----------------------------------------------------------------------------
+
+// Goal: Return fallback value on failure.
+
+// let num = 1
+
+// function fetchData(){
+//   return new Promise((resolve,reject) => {
+//     if(num > 1){
+//       resolve("resolved")
+//     }
+//     else {
+//       reject(new Error("error thrown"))
+//     }
+//   })
+// }
+
+// async function asyncTryDefault(fn, msg){
+
+//   try{
+//    return await fn()
+//   }
+//   catch (error){
+//     console.log(error.message, msg)
+//     return msg
+//   }
+// }
+
+// await asyncTryDefault(fetchData, "fallback")
+ 
+// Goal: Convert async success/failure into boolean.
+
+// const num = 1
+
+// function fetchData(){
+//   return new Promise((resolve, reject) => {
+//     if(num > 1){
+//       resolve(true)
+//     }
+//     else {
+//       reject(false)
+//     }
+//   })
+// }
+
+// async function asyncTryBoolean(fn){
+//   try {
+//       return await fn()
+//   }
+//   catch (e){
+//     return e
+//   }
+// }
+
+// await asyncTryBoolean(fetchData).then(console.log)
+// 	// •	Resolve → true
+// 	// •	Reject → false
+// 	// •	No throwing outside
+
+// Goal: Log error but still throw it.
+
+
+const num = 1
+
+function fetchData(){
+  return new Promise((resolve, reject) => {
+    if(num > 1){
+      resolve("resolved")
+    }
+    else {
+      reject(new Error("err"))
+    }
+  })
+}
+
+async function asyncTryLog(fn){
+    try {
+        return await fn()
+    }
+    catch (e) {
+      console.log(e)
+      throw e
+    }
+}
+
+await asyncTryLog(fetchData)
+	// •	Catch error
+	// •	console.log it
+	// •	Re-throw the same error
