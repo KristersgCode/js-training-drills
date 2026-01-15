@@ -954,31 +954,31 @@
 
   // Goal: Try at most 2 times.
 
-const num = 12
+// const num = 12
 
-function fetchData(){
-  return new Promise((resolve, reject) => {
-    if(num > 1){
-      resolve("resolved")
-    }
-    else {
-      reject(new Error("err"))
-    }
-  })
-}
+// function fetchData(){
+//   return new Promise((resolve, reject) => {
+//     if(num > 1){
+//       resolve("resolved")
+//     }
+//     else {
+//       reject(new Error("err"))
+//     }
+//   })
+// }
 
-async function asyncTryTwice(fn) {
-  for (let attempt = 1; attempt <= 2; attempt++) {
-    try {
-      return await fn()
-    } catch (e) {
-      console.log(e)
-      if (attempt === 2) throw e
-    }
-  }
-}
+// async function asyncTryTwice(fn) {
+//   for (let attempt = 1; attempt <= 2; attempt++) {
+//     try {
+//       return await fn()
+//     } catch (e) {
+//       console.log(e)
+//       if (attempt === 2) throw e
+//     }
+//   }
+// }
 
-await asyncTryTwice(fetchData).then(console.log)
+// await asyncTryTwice(fetchData).then(console.log)
 	// •	First failure → retry once
 	// •	Second failure → throw
 	// •	Stop immediately on success

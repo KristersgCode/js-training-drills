@@ -971,3 +971,157 @@
 //   errors: []
 // })
 
+// const users = [
+//   { name: "Anna", age: 17 },
+//   { name: "Bob", age: 22 },
+//   { name: "Chris", age: 16 },
+//   { name: "Dana", age: 35 }
+// ]
+
+// // {
+// //   minor: ["Anna", "Chris"],
+// //   adult: ["Bob", "Dana"]
+// // }
+
+
+// const result = users.reduce((acc, user) => {
+// 	if(user.age < 18){
+// 	acc.minor.push(user.name)
+// 	}
+// 	else {
+// 	acc.adult.push(user.name)
+// 	}
+// 	return acc
+// }, {
+// 	minor: [], adult: []
+// })
+
+// const votes = ["yes", "no", "yes", "yes", "no"]
+// // Task: count each valueExpected:
+
+// // { yes: 3, no: 2 }
+
+// const result = votes.reduce((acc, vote) => {
+// 	if(vote === "yes"){
+// 		acc.yes++
+// 	}
+// 	else {
+// 		acc.no++
+// 	}
+// 	return acc
+// }, {yes: 0, no: 0})
+
+// const products = [
+//   { id: "p1", price: 10 },
+//   { id: "p2", price: 20 }
+// ]
+// // Task: key by idExpected:
+
+// // {
+// //   p1: { id: "p1", price: 10 },
+// //   p2: { id: "p2", price: 20 }
+// // }
+
+// const result = products.reduce((acc, product) => {
+// 	acc[product.id] = product
+// 	return acc
+// }, {})
+
+// console.log(result)
+
+// const numbers = [5, 12, 8, 130, 44]
+// // Task: sum only numbers > 10Expected:
+
+// // 186
+
+// const result = numbers.reduce((acc, number) => {
+// 	if(number > 10){
+// 		return acc + number
+// 	}
+// return acc
+// },0)
+
+// const orders = [
+//   { user: "A", total: 30 },
+//   { user: "B", total: 50 },
+//   { user: "A", total: 20 }
+// ]
+// // Task: sum totals per userExpected:
+
+// // { A: 50, B: 50 }
+
+// const result = orders.reduce((acc, order) => {
+// 		acc[order.user] = (acc[order.user] ?? 0) + order.total
+// 		return acc
+// },{})
+
+// const actions = [
+//   { type: "LOGIN" },
+//   { type: "LOGOUT" },
+//   { type: "LOGIN" }
+// ]
+// Rules:
+	// •	LOGIN → authenticated
+	// •	LOGOUT → guest
+// Expected final state:
+
+// { status: "authenticated" }
+
+
+// const result = actions.reduce((acc, action) => {
+// 	if(action.type === "LOGIN" && acc.status !== "authenticated"){
+// 		 acc.status = "authenticated"
+// 	}
+// 	else if(action.type === "LOGOUT" && acc.status === "authenticated"){
+// 		 acc.status = "guest"
+// 	}
+// 	return acc
+// }, {status: "guest"})
+
+// console.log(result)
+
+// const items = ["a", "b", "a", "c", "b"]
+
+// const result = items.reduce((acc, letter) => {
+// 	if(!acc.includes(letter)){
+// 		acc.push(letter)
+// 	}
+// 	return acc
+// }, [])
+
+// // ["a", "b", "c"]
+
+// const nums = [1, 2, 3, 4, 5]
+// // Task: split into even / oddExpected:
+
+// // {
+// //   even: [2, 4],
+// //   odd: [1, 3, 5]
+// // }
+
+// const result = nums.reduce((acc, number) => {
+// 			if(number % 2 === 0){
+// 				acc.even.push(number)
+// 			}
+// 			else {
+// 				acc.odd.push(number)
+// 			}
+// 			return acc
+// },{even: [], odd: []})
+
+// console.log(result)
+
+const matrix = [
+  [1, 2],
+  [3, 4],
+  [5]
+]
+// Task: flatten and sumExpected:
+
+// 15
+
+const result = matrix.reduce((sum, inner) => {
+  return sum + inner.reduce((innerSum, n) => innerSum + n, 0)
+}, 0)
+
+console.log(result) // 15
