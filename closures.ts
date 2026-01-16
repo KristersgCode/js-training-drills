@@ -1569,3 +1569,79 @@
 // console.log(doubled(4)) // 8
 
 // console.log(doubled.history()) // [4, 6, 8]
+
+
+// Task:Create debounce(fn, ms).
+	// •	Only last call runs
+	// •	Earlier scheduled calls are cancelled
+
+// function debounce(fn, time){
+// 	let timerId
+
+// return function() {
+// 	clearTimeout(timerId)
+
+// 		timerId = setTimeout(() => {
+// 			fn()
+// 		}, time)
+	
+// }
+// }
+
+// const debounced = debounce(() => console.log("run"), 500)
+
+// debounced()
+// debounced()
+// debounced()
+// after 500ms → "run" once
+
+// Create createKeyCounter().
+
+// function createKeyCounter(){
+// 	const keys = new Map()
+// 	return function(key){
+// 				keys.set(key, (keys.get(key) ?? 0) + 1)
+// 			return keys.get(key)
+// 	}
+// }
+
+// const count = createKeyCounter()
+
+// console.log(count("a")) // 1
+// console.log(count("a")) // 2
+// console.log(count("b")) // 1
+// console.log(count("a")) // 3
+
+// Create cacheWithTTL(fn, ms).
+	// •	Cache result
+	// •	Expire after ms
+
+// function cacheWithTTL(fn, time) {
+//   const cache = new Map()
+
+//   return function (key) {
+//     if (cache.has(key)) {
+//       return cache.get(key)
+//     }
+
+//     const result = fn(key)
+//     cache.set(key, result)
+
+//     setTimeout(() => {
+//       cache.delete(key)
+//     }, time)
+
+//     return result
+//   }
+// }
+
+
+// const cached = cacheWithTTL(n => {
+//   console.log("compute", n)
+//   return n * 2
+// }, 1000)
+
+// cached(2) // compute
+// cached(2) // cached
+// // after 1s
+// cached(2) // compute again
