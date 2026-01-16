@@ -1300,6 +1300,158 @@
 // console.log(limit(15))  // true
 // console.log(limit(25))  // false
 
+// function createCounter(num, step){
+// 	let result = num - step
+// 	return function(){
+// 		result += step
+// 		return result
+// 	}
+// }
+
+// const counter = createCounter(10, 2)
+
+// console.log(counter()) // 10
+// console.log(counter()) // 12
+// console.log(counter()) // 14
+
+// Create limitCalls(fn, max).
+
+// function limitCalls(fn, limit){
+// 	let count = limit
+// 	return function(){
+// 		if(count > 0){
+// 			count--
+// 			return fn()
+// 		}
+// 	}
+// }
+
+// const limited = limitCalls(() => "run", 2)
+
+// console.log(limited()) // "run"
+// console.log(limited()) // "run"
+// console.log(limited()) // undefined
+// console.log(limited()) // undefined
+
+// Create oncePerKey(fn).
+
+// function oncePerKey(fn) {
+//   const seen = new Map()
+
+//   return function (key, ...args) {
+//     if (seen.has(key)) return
+
+//     seen.set(key, true)
+//     return fn(...args)
+//   }
+// }
+
+// const logOnce = oncePerKey((msg) => msg)
+
+// console.log(logOnce("a", "hello")) // "hello"
+// console.log(logOnce("a", "world")) // undefined
+// console.log(logOnce("b", "again")) // "again"
+// console.log(logOnce("b", "more"))  // undefined
+
+
+// function createToggle(boolean){
+// 	let light = boolean
+// 	return function(){
+// 		light = !light
+// 		return light
+// 	}
+// }
+
+// const toggle = createToggle(false)
+
+// console.log(toggle()) // true
+// console.log(toggle()) // false
+// console.log(toggle()) // true
+// console.log(toggle()) // false
+
+
+// function memo(fn) {
+//   const cache = new Map()
+
+//   return function (value) {
+//     if (cache.has(value)) {
+//       return cache.get(value)
+//     }
+
+//     const result = fn(value)
+//     cache.set(value, result)
+//     return result
+//   }
+// }
+
+// const slow = (n) => {
+//   console.log("compute", n)
+//   return n * 2
+// }
+
+// const fast = memo(slow)
+
+// console.log(fast(2)) // logs "compute 2", returns 4
+// console.log(fast(2)) // returns 4 (no log)
+// console.log(fast(3)) // logs "compute 3", returns 6
+// console.log(fast(3)) // returns 6 (cached)
+
+// Create delayOnce(fn, ms).
+
+// function delayOnce(fn, ms){
+
+// 	let called = false
+
+// 	return function(){
+// 		if(!called) {
+// 			called = true
+// 		setTimeout(() => {
+// 			fn()
+// 		}, ms)
+// 	}}
+// }
+
+// const delayed = delayOnce(() => {
+//   console.log("run")
+// }, 1000)
+
+// console.log("call 1")
+// delayed()
+
+// console.log("call 2")
+// delayed()
+
+// console.log("call 3")
+// delayed()
+
+// // after 1s → logs "run" once
+
+// Create createAverager().
+
+// function createAverager(){
+
+//   let sum = 0
+//   let count = 0
+
+
+// return function(number){
+// 	sum += number
+// 	count++
+// 	return sum / count
+// 	}
+// }
+
+// const avg = createAverager()
+
+// console.log(avg(10)) // 10
+// console.log(avg(20)) // 15
+// console.log(avg(30)) // 20
+// console.log(avg(40)) // 25
+
+
+
+
+
 
 
 
