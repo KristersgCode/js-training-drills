@@ -1448,10 +1448,124 @@
 // console.log(avg(30)) // 20
 // console.log(avg(40)) // 25
 
+// function createCounter(num, step){
+// 	let result = num - step 
+	
+// 	 function counter(){
+// 		 return result += step
+// 	}
+
+// 	counter.reset = function () {
+// 		result = num - step
+// 	}
+	
+// 	return counter
+
+// }
+
+// const counter = createCounter(10, 2)
+
+// console.log(counter()) // 10
+// console.log(counter()) // 12
+// counter.reset()
+// console.log(counter()) // 10
+
+// Create countCalls(fn).
+	// •	Returns a wrapped function
+	// •	Wrapped function has .count() method
+
+// function countCalls(fn){
+// 	let count = 0
+// 	function wrapped(...args){
+// 		count++
+// 		return fn(...args)
+// 	}
+
+// 	wrapped.count = function (){
+// 		return count
+// 	}
+
+// 	return wrapped
+// }
+
+// const wrapped = countCalls(() => "run")
+
+// wrapped()
+// wrapped()
+// console.log(wrapped.count()) // 2
+
+// Create once(fn).
+	// •	fn runs only once
+	// •	Later calls return the same result
+
+// function once(fn){
+// 	let didItCall = false
+// 	let result
+// 	return function(){
+// 		if(!didItCall){
+// 			didItCall = true
+// 			result = fn()
+// 		}
+// 		return result
+// 	}
+
+// }
+
+// const init = once(() => Math.random())
+
+// console.log(init())
+// console.log(init())
+// console.log(init()) // all same value
 
 
+// Create limitEvery(fn, n).
+	// •	fn runs only every nth call
 
+// function limitEvery(fn, startAt){
+// 	let count = 0
+// 	return function(){
+// 		count++
+// 		if(count === startAt){
+// 			count = 0
+// 			return fn()
+// 		}
+// 		return
+// 	}
+// }
 
+// const limited = limitEvery(() => "run", 3)
 
+// console.log(limited()) // undefined
+// console.log(limited()) // undefined
+// console.log(limited()) // "run"
+// console.log(limited()) // undefined
+// console.log(limited()) // undefined
+// console.log(limited()) // "run"
 
+// Create withHistory(fn).
+	// •	Wraps a function
+	// •	Exposes .history() (returns past results)
 
+// function withHistory(fn) {
+//   const history = []
+
+//   function wrapped(...args) {
+//     const result = fn(...args)
+//     history.push(result)
+//     return result
+//   }
+
+//   wrapped.history = function () {
+//     return history.slice() // protect internal state
+//   }
+
+//   return wrapped
+// }
+
+// const doubled = withHistory(n => n * 2)
+
+// console.log(doubled(2)) // 4
+// console.log(doubled(3)) // 6
+// console.log(doubled(4)) // 8
+
+// console.log(doubled.history()) // [4, 6, 8]
