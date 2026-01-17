@@ -1086,24 +1086,89 @@
 
 // Goal: Retry only once if it fails.
 
-async function retryOnce(fn) {
-  try {
-    return await fn()
-  } catch (e) {
-    return await fn()
-  }
-}
+// async function retryOnce(fn) {
+//   try {
+//     return await fn()
+//   } catch (e) {
+//     return await fn()
+//   }
+// }
 
-let count = 0
+// let count = 0
 
-async function unstable() {
-  count++
-  if (count === 1) throw new Error("fail")
-  return "ok"
-}
+// async function unstable() {
+//   count++
+//   if (count === 1) throw new Error("fail")
+//   return "ok"
+// }
 
-await retryOnce(unstable).then(console.log)
-// "ok"
-// Focus:✔️ retry logic✔️ error handling
+// await retryOnce(unstable).then(console.log)
+// // "ok"
+// // Focus:✔️ retry logic✔️ error handling
+
+// Goal: Log when async starts and ends.
+
+// async function delay(time){
+//   return new Promise((resolve) => {
+//   setTimeout(() => {
+//     resolve("resolve")
+//   }, time)
+// })
+// }
+
+// function withLoadingLog(fn) {
+//   return async function (...args) {
+//     console.log("loading...")
+//     try {
+//       return await fn(...args)
+//     } finally {
+//       console.log("done")
+//     }
+//   }
+// }
 
 
+// const wrapped = withLoadingLog(async () => {
+//   await delay(100)
+//   return 42
+// })
+
+// await wrapped().then(console.log)
+// // Expected console output
+
+// // loading...
+// done
+// Focus:✔️ wrapper functions✔️ finally
+
+// Goal: Convert rejection into { ok, value | error }.
+
+// async function safeAwait(promise) {
+//   try {
+//     const value = await promise
+//     return { ok: true, value }
+//   } catch (e) {
+//     return { ok: false, error: e }
+//   }
+// }
+
+// await safeAwait(Promise.resolve(1))
+// // { ok: true, value: 1 }
+
+// await safeAwait(Promise.reject("err"))
+// // { ok: false, error: "err" }
+// // Focus:✔️ normalizing async results
+
+// Goal: Delay all promises, then resolve together.
+
+// async function delayAll(promises, ms) {
+//   await new Promise(res => setTimeout(res, ms))
+//   return Promise.all(promises)
+// }
+
+// await delayAll(
+//   [Promise.resolve(1), Promise.resolve(2)],
+//   100
+// ).then(console.log)
+
+// [1, 2]
+// Focus:✔️ Promise.all + delay
