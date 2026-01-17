@@ -982,3 +982,128 @@
 	// •	First failure → retry once
 	// •	Second failure → throw
 	// •	Stop immediately on success
+
+// Goal: Map async values one by one (what you already almost did).
+
+// async function delay(time){
+//   return new Promise((resolve) => {
+//     setTimeout(() => {
+//         resolve("resolve")
+//     }, time)
+//   })
+// }
+
+// async function asyncMapSequential(items, asyncFn) {
+//   let arr = []
+
+//   for(const item of items){
+//       arr.push(await asyncFn(item))
+//   }
+//   return arr
+// }
+
+// const items = [1, 2, 3]
+
+// async function double(n) {
+//   await delay(50)
+//   return n * 2
+// }
+
+// await asyncMapSequential(items, double).then(console.log)
+// // [2, 4, 6]
+
+// Goal: Filter items using an async predicate.
+
+// async function delay(time){
+//   return new Promise((resolve) => {
+//     setTimeout(() => {
+//         resolve("resolve")
+//     }, time)
+//   })
+// }
+
+// async function asyncFilter(items, asyncPredicate) {
+//   let arr = []
+
+//   for(const item of items){
+//     let result
+//     result = await asyncPredicate(item)
+//     if(result){
+//       arr.push(item)
+//     }
+//   }
+
+//   return arr
+// }
+
+// const nums = [1, 2, 3, 4]
+
+// async function isEven(n) {
+//   await delay(30)
+//   return n % 2 === 0
+// }
+
+// await asyncFilter(nums, isEven).then(console.log)
+// // [2, 4]
+
+// Goal: Return the first promise that succeeds.
+
+// async function delay(time){
+//   return new Promise((resolve) => {
+//     setTimeout(() => {
+//         resolve("resolve")
+//     }, time)
+//   })
+// }
+
+// async function firstSuccess(fns) {
+//   // fns: array of () => Promise
+//   // 
+//   let err 
+//   for(const fn of fns){
+//     try{
+//         return await fn()
+//     }
+//     catch (e){
+//      err = e
+//     }
+//   }
+//   throw err
+// }
+
+// const fns = [
+//   async () => { throw new Error("fail") },
+//   async () => {
+//     await delay(50)
+//     return "ok"
+//   }
+// ]
+
+// await firstSuccess(fns).then(console.log)
+// // "ok"
+// // If all fail → throw last error.
+// // Focus:✔️ try/catch inside loops✔️ control flow
+
+// Goal: Retry only once if it fails.
+
+async function retryOnce(fn) {
+  try {
+    return await fn()
+  } catch (e) {
+    return await fn()
+  }
+}
+
+let count = 0
+
+async function unstable() {
+  count++
+  if (count === 1) throw new Error("fail")
+  return "ok"
+}
+
+await retryOnce(unstable).then(console.log)
+// "ok"
+// Focus:✔️ retry logic✔️ error handling
+
+
