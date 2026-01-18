@@ -1172,3 +1172,99 @@
 
 // [1, 2]
 // Focus:✔️ Promise.all + delay
+
+	// •	Apply an async function to each item
+	// •	Preserve original order
+	// •	Store results by index
+	// •	Execute sequentially (no parallelism)
+
+//   async function delay(time){
+//     return new Promise((resolve) => {
+//       setTimeout(() => {
+//         resolve("ok")
+//       }, time)
+//     })
+//   }
+
+
+// async function asyncMapIndexed(items, asyncFn) {
+//   const results = new Array(items.length)
+
+//   for(let i = 0; i < items.length; i++){
+//     const value = await asyncFn(items[i])
+//     results[i] = value
+//   }
+
+//   return results
+// }
+
+// const items = [1, 2, 3]
+
+// async function double(n) {
+//   await delay(50)
+//   return n * 2
+// }
+
+
+// await asyncMapIndexed(items, double).then(console.log)
+// // [2, 4, 6]
+
+// Start two promises without waiting
+// Skill trained:✔️ understanding what “in flight” means❌ no loops yet
+
+// const items = [1,2,3]
+
+//   async function delay(time){
+//     return new Promise((resolve) => {
+//       setTimeout(() => {
+//         resolve("ok")
+//       }, time)
+//     })
+//   }
+
+// async function double(n) {
+//   await delay(50)
+//   return n * 2
+// }
+
+// async function startTwo(items, asyncFn) {
+//   const p1 = asyncFn(items[0])
+//   const p2 = asyncFn(items[1])
+
+//   const r1 = await p1
+//   const r2 = await p2
+
+//   return [r1, r2]
+// }
+
+// await startTwo(items, double).then(console.log)
+// Key realization
+// Promises start when created, not when awaited.
+// Lock that in.
+
+// Track in-flight promises (array only)
+// Skill trained:✔️ storing promises✔️ waiting for any to finish
+
+// const active = []
+
+// async function asyncFn(n) {
+//   await new Promise(res => setTimeout(res, 300))
+//   return n * 2
+// }
+
+// active.push(asyncFn(1))
+// active.push(asyncFn(2))
+
+// await Promise.race(active).then(console.log)
+// Mental model
+// “Something finished — I may start another.”
+// You are not solving the problem yet.You’re learning the event.
+
+//  One refill cycle (the core idea)
+// This is the heart of asyncMapLimit.
+// Pseudo-flow (read slowly):
+
+// start tasks until limit reached
+// wait until one finishes
+// start exactly one new task
+// That’s it.No magic.
