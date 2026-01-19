@@ -1111,17 +1111,203 @@
 
 // console.log(result)
 
-const matrix = [
-  [1, 2],
-  [3, 4],
-  [5]
-]
-// Task: flatten and sumExpected:
+// const matrix = [
+//   [1, 2],
+//   [3, 4],
+//   [5]
+// ]
+// // Task: flatten and sumExpected:
 
-// 15
+// // 15
 
-const result = matrix.reduce((sum, inner) => {
-  return sum + inner.reduce((innerSum, n) => innerSum + n, 0)
-}, 0)
+// const result = matrix.reduce((sum, inner) => {
+//   return sum + inner.reduce((innerSum, n) => innerSum + n, 0)
+// }, 0)
 
-console.log(result) // 15
+// console.log(result) // 15
+
+// const users = [
+//   { id: 1, role: "admin", active: true },
+//   { id: 2, role: "user", active: false },
+//   { id: 3, role: "admin", active: false },
+//   { id: 4, role: "user", active: true },
+// ]
+
+// // {
+// //   admin: { total: 2, active: 1 },
+// //   user: { total: 2, active: 1 }
+// // }
+
+// const result = users.reduce((acc, user) => {
+// 	  if (!acc[user.role]) {
+//     acc[user.role] = { total: 0, active: 0 }
+//   }
+
+//   acc[user.role].total += 1
+
+//   if(user.active){
+// 	acc[user.role].active += 1
+//   }
+
+// 	return acc 
+// },{})
+
+// Drill 2 — Deduplicate by key (keep latest)
+
+// const events = [
+//   { id: 1, ts: 100 },
+//   { id: 2, ts: 90 },
+//   { id: 1, ts: 200 },
+//   { id: 2, ts: 80 },
+// ]
+// // Rule
+// 	// •	Same id → keep object with highest ts
+
+// // [
+// //   { id: 1, ts: 200 },
+// //   { id: 2, ts: 90 }
+// // ]
+
+// const result = Object.values(
+//   events.reduce((acc, event) => {
+//     if (!acc[event.id] || event.ts > acc[event.id].ts) {
+//       acc[event.id] = event
+//     }
+//     return acc
+//   }, {})
+// )
+
+// console.log(result)
+
+// Drill 3 — Nested grouping
+
+// const sales = [
+//   { country: "LV", city: "Riga", amount: 10 },
+//   { country: "LV", city: "Riga", amount: 5 },
+//   { country: "LV", city: "Liepaja", amount: 7 },
+//   { country: "EE", city: "Tallinn", amount: 20 },
+// ]
+// Goal
+
+// {
+//   LV: {
+//     Riga: 15,
+//     Liepaja: 7
+//   },
+//   EE: {
+//     Tallinn: 20
+//   }
+// }
+
+// const result = sales.reduce((acc, sale) => {
+// 	acc[sale.country] = {
+// 		acc[sale.city]: sale.amount}
+// 		return acc
+// 	}
+// }, {})
+
+// const users = [
+//   { country: "LV", city: "Riga" },
+//   { country: "LV", city: "Riga" },
+//   { country: "EE", city: "Tallinn" },
+// ]
+
+// // {
+// // //   LV: { Riga: 2 },
+// // // //   EE: { Tallinn: 1 }
+// // // // // }
+
+// const result = users.reduce((acc, user) => {
+// 	if(!acc[user.country]){
+// 		acc[user.country] = {}
+// 	}
+// 	acc[user.country][user.city] = acc[user.country][user.city] = (acc[user.country][user.city] ?? 0) + 1
+// 	return acc
+// }, {})
+
+// console.log(result)
+
+// const users = [
+//   { role: "admin", active: true },
+//   { role: "admin", active: false },
+//   { role: "user", active: true },
+// ]
+
+// // {
+// //   admin: { true: 1, false: 1 },
+// //   user: { true: 1 }
+// // }
+
+// const result = users.reduce((acc, user) => {
+//   if (!acc[user.role]) {
+//     acc[user.role] = {}
+//   }
+
+//   const key = user.active // true or false
+
+//   acc[user.role][key] = (acc[user.role][key] ?? 0) + 1
+
+//   return acc
+// }, {})
+
+// const items = [
+//   { category: "food", name: "apple" },
+//   { category: "food", name: "bread" },
+//   { category: "tech", name: "phone" },
+// ]
+
+// const result = items.reduce((acc, item) => {
+// 	acc[item.category] = acc[item.category] ?? []
+// 	acc[item.category].push(item.name)
+// 	return acc
+// }, {})
+
+// {
+//   food: ["apple", "bread"],
+//   tech: ["phone"]
+// }
+
+// const sales = [
+//   { year: 2024, month: "Jan", amount: 10 },
+//   { year: 2024, month: "Jan", amount: 5 },
+//   { year: 2025, month: "Feb", amount: 7 },
+// ]
+
+// // {
+// //   2024: { Jan: 15 },
+// //   2025: { Feb: 7 }
+// // }
+
+// const result = sales.reduce((acc, sale) => {
+// 	if(!acc[sale.year]){
+// 		acc[sale.year] = {}
+// 	}
+
+// 	 acc[sale.year][sale.month] =
+//     (acc[sale.year][sale.month] ?? 0) + sale.amount
+// 	return acc
+
+// },{})
+
+// const logs = [
+//   { user: "u1", action: "click" },
+//   { user: "u1", action: "click" },
+//   { user: "u2", action: "view" },
+// ]
+
+// const result = logs.reduce((acc, log) => {
+// 	if(!acc[log.user]){
+// 		acc[log.user] = {}
+// 	}
+
+// 	acc[log.user][log.action] =
+//     (acc[log.user][log.action] ?? 0) + 1
+// 	return acc
+// },{})
+
+// console.log(result)
+
+// {
+//   u1: { click: 2 },
+//   u2: { view: 1 }
+// }
