@@ -1311,3 +1311,131 @@
 //   u1: { click: 2 },
 //   u2: { view: 1 }
 // }
+
+// export type LoginState =
+//   | "idle"
+//   | "loading"
+//   | "authenticated"
+//   | "error"
+
+// export type LoginEvent =
+//   | { type: "LOGIN" }
+//   | { type: "SUCCESS" }
+//   | { type: "ERROR" }
+//   | { type: "LOGOUT" }
+
+// function reducer(state, event) {
+//   switch (event.type) {
+//      case "LOGIN": {
+//       if (state === "idle") {
+//         return "loading"
+//       }
+//       return state
+//     }
+
+// 	case "SUCCESS": {
+// 		if (state === "loading") {
+// 			return "authenticated"
+// 		}
+// 		return state
+// 	}
+
+// 	case "ERROR": {
+// 		if(state === "loading"){
+// 			return "error"
+// 		}
+// 		return state
+// 	}
+
+// 	case "LOGOUT": {
+// 		if(state === "authenticated"){
+// 			return "idle"
+// 	}
+// 		return state
+// 	}
+
+//     default:
+//       return state
+//   }
+// }
+
+// let state = "idle"
+
+// state = reducer(state, { type: "LOGIN" })
+// console.log(state) // "loading"
+
+// state = reducer(state, { type: "SUCCESS" })
+// console.log(state) // "authenticated"
+
+export const initialCartState = {
+  status: "open",
+  items: []
+}
+
+export type CartItem = {
+  id: string
+  qty: number
+}
+
+export type CartState = {
+  status: "open" | "checkout" | "locked"
+  items: CartItem[]
+}
+
+export type CartEvent =
+  | { type: "ADD_ITEM"; id: string }
+  | { type: "REMOVE_ITEM"; id: string }
+  | { type: "CHECKOUT" }
+  | { type: "PAYMENT_SUCCESS" }
+  | { type: "PAYMENT_FAIL" }
+
+// Task
+// Allow item changes only when status === "open".
+// Expected execution
+
+let state = initialCartState
+console.log(state)
+
+function reducer(state, event) {
+  switch (event.type) {
+    case "ADD_ITEM": {
+      if (state.status !== "open") {
+        return state
+      }
+
+      const exists = state.items.some(item => item.id === event.id)
+
+      const nextItems = exists
+        ? state.items.map(item =>
+            item.id === event.id
+              ? { ...item, qty: item.qty + 1 }
+              : item
+          )
+        : [...state.items, { id: event.id, qty: 1 }]
+
+      return {
+        status: state.status,
+        items: nextItems
+      }
+    }
+
+    default:
+      return state
+  }
+}
+
+
+state = reducer(state, { type: "ADD_ITEM", id: "a" })
+state = reducer(state, { type: "ADD_ITEM", id: "a" })
+console.log(state)
+state = reducer(state, { type: "CHECKOUT" })
+state = reducer(state, { type: "ADD_ITEM", id: "b" }) // ignored
+// Final output
+
+// {
+//   status: "checkout",
+//   items: [{ id: "a", qty: 2 }]
+// }
+
+
+
