@@ -1417,3 +1417,95 @@
 //   a: 1,
 //   c: 3
 // }
+
+const tasks = [
+  { id: 1, status: "open" },
+  { id: 2, status: "done" },
+  { id: 3, status: "open" },
+]
+
+// {
+//   open: [1, 3],
+//   done: [2]
+// }
+
+
+// function groupTaskIdsByStatus(tasks) {
+//   const result = {}
+
+// for(const task of tasks){
+// 	if (!result[task.status]) {
+//       	result[task.status] = []
+//     }
+// 	result[task.status].push(task.id)
+// }
+
+// return result
+// }
+
+// console.log(groupTaskIdsByStatus(tasks))
+
+// const base = [
+//   { id: 1, name: "Anna" },
+//   { id: 2, name: "Mark" }
+// ]
+
+// const extra = [
+//   { id: 1, age: 28 },
+//   { id: 2, age: 34 }
+// ]
+
+// function mergeExtra(base, extra){
+// 	const lookup = new Map()
+// 	let result = []
+
+// 	for(const item of extra){
+// 		if(!lookup.has(item.id)){
+// 			lookup.set(item.id, item.age)
+// 		}
+// 	}
+
+// 	for(const item of base){
+// 			let data = lookup.get(item.id)
+// 			result.push({...item, age: data})
+// 	}
+// 	return result
+// }
+
+// console.log(mergeExtra(base,extra))
+
+// [
+//   { id: 1, name: "Anna", age: 28 },
+//   { id: 2, name: "Mark", age: 34 }
+// ]
+
+// const bookings = [
+//   { date: "2024-01-01", room: "A" },
+//   { date: "2024-01-01", room: "A" },
+//   { date: "2024-01-01", room: "B" }
+// ]
+
+// [
+//   { date: "2024-01-01", room: "A" },
+//   { date: "2024-01-01", room: "B" }
+// ]
+
+
+//create a map
+// if room dosnt exist add to the set
+
+// function deduplicate(items){
+
+// 	let lookup = new Map()
+
+// 	for(const item of items){
+// 		const key = (item.date + "|" + item.room)
+// 		if(!lookup.has(key)){
+// 			lookup.set(key, item)
+// 		}
+// 	}
+// 	return [...lookup.values()]
+// }
+
+// console.log(deduplicate(bookings))
+
