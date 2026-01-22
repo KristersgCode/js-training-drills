@@ -1418,11 +1418,11 @@
 //   c: 3
 // }
 
-const tasks = [
-  { id: 1, status: "open" },
-  { id: 2, status: "done" },
-  { id: 3, status: "open" },
-]
+// const tasks = [
+//   { id: 1, status: "open" },
+//   { id: 2, status: "done" },
+//   { id: 3, status: "open" },
+// ]
 
 // {
 //   open: [1, 3],
@@ -1508,4 +1508,112 @@ const tasks = [
 // }
 
 // console.log(deduplicate(bookings))
+
+const users = [
+  { id: "u1", name: "Anna" },
+  { id: "u2", name: "Mark" }
+]
+
+const comments = [
+  { userId: "u1", text: "Hi" },
+  { userId: "u3", text: "Hello" }
+]
+// Expected
+
+// [
+//   { user: "Anna", text: "Hi" },
+//   { user: "Unknown", text: "Hello" }
+// ]
+
+// function userBase(users, comments){
+// 	let lookup = new Map()
+// 	let result = []
+	
+// 	for(const user of users){
+// 		if(!lookup.has(user.id)){
+// 			lookup.set(user.id, user)
+// 		}
+// 	}
+	
+// 	for(const comment of comments){
+// 		let data = lookup.get(comment.userId)
+// 		if(data){
+// 			result.push({user: data.name, text: comment.text})
+// 		}
+// 		else {
+// 			result.push({user: "Unknown", text: comment.text})
+// 		}
+// 	}
+
+// 	return  result
+// }
+
+// console.log(userBase(users,comments))
+
+// const ranges = [
+//   { from: 1, to: 3 },
+//   { from: 9, to: 13 }
+// ]
+
+// // [1, 2, 3, 5, 6]
+
+// let arr = []
+
+// for(const range of ranges){
+// 	for (let i = range.from; i <= range.to; i++) {
+// 		arr.push(i)
+// }
+// }
+// console.log(arr)
+
+// const events = [
+//   { name: "A", priority: 2, time: 3 },
+//   { name: "B", priority: 1, time: 2 },
+//   { name: "C", priority: 2, time: 1 }
+// ]
+
+// // Rules
+// // 	•	sort by priority ascending
+// // 	•	if same priority → sort by time ascending
+// // Expected
+
+// // [
+// //   { name: "B", priority: 1, time: 2 },
+// //   { name: "C", priority: 2, time: 1 },
+// //   { name: "A", priority: 2, time: 3 }
+// // ]
+
+// console.log(events.sort((a, b) =>
+//   a.priority - b.priority || a.time - b.time
+// ))
+
+
+const roles = [
+  { role: "admin", permissions: ["read", "write"] },
+  { role: "user", permissions: ["read"] }
+]
+
+// {
+//   admin: { read: true, write: true },
+//   user: { read: true }
+// }
+
+function buildPermissionMap(roles) {
+  const result = {}
+
+  for (const role of roles) {
+    const perms = {}
+
+    for (const perm of role.permissions) {
+      perms[perm] = true
+    }
+
+    result[role.role] = perms
+  }
+
+  return result
+}
+
+console.log(buildPermissionMap(roles))
+
 
