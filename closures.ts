@@ -1645,3 +1645,117 @@
 // cached(2) // cached
 // // after 1s
 // cached(2) // compute again
+
+// function createCounter(start, step){
+// 	let current = start
+	
+// 	function next() {
+// 		current += step
+// 		return current
+// 	}
+	
+// 	function reset(){
+// 		return current = start
+// 	}
+	
+// 	return {next, reset}
+// }
+
+// const c = createCounter(10, 3)
+
+// console.log(c.next()) // 13
+// console.log(c.next()) // 16
+// console.log(c.reset())
+// console.log(c.next()) // 13
+
+// Create once(fn)
+
+// function once(fn){
+
+// let called = false
+// let value
+// 	return function () {
+// 	if (!called) {
+// 		value = fn()
+// 		called = true
+// 	}
+// 	return value
+// 	}
+// }
+
+// const init = once(() => console.log("INIT"))
+
+// console.log(init()) // prints
+// console.log(init()) // nothing
+// console.log(init()) // nothing
+// Think: what does closure remember?
+
+// Create memo(fn)
+
+// const slowDouble = (n) => {
+//   console.log("calc")
+//   return n * 2
+// }
+
+// function memo(fn){
+// 	let cache = new Map()
+// 	let value
+
+// 	return function(n){
+// 		if(!cache.has(n)){
+// 			value = fn(n)
+// 			cache.set(n, value)
+// 			return value
+// 		}
+// 			value = cache.get(n)
+// 			return value
+// 	}
+
+// }
+
+// const fast = memo(slowDouble)
+
+// console.log(fast(2)) // calc, 4
+// console.log(fast(2)) // 4 (no calc)
+// console.log(fast(3)) // calc, 6
+// // No JSON stringify tricks. Use a Map.
+
+// Create idGenerator(prefix)
+
+// function idGenerator(prefix){
+// 	let prefixCount = 0
+// 	return function(){
+// 		prefixCount++
+// 		 return `${prefix}-${prefixCount}` 
+// 	}
+// }
+
+// const userId = idGenerator("user")
+// const orderId = idGenerator("order")
+
+// console.log(userId()) // user-1
+// console.log(userId()) // user-2
+// console.log(orderId()) // order-1
+// // Each generator must have its own memory.
+
+// Create rateLimit(fn, limit)
+// limit = how many times fn can be called.
+
+// function rateLimit(fn, limit){
+
+// 	let remainingCalls = limit
+// 	return function(){
+// 		if(remainingCalls > 0){
+// 			remainingCalls--
+// 			return fn()
+// 		}
+// 	}
+
+// }
+
+// const sayHi = rateLimit(() => console.log("hi"), 2)
+
+// console.log(sayHi()) // hi
+// console.log(sayHi()) // hi
+// console.log(sayHi()) // nothing
+// No timers. Pure closure memory.

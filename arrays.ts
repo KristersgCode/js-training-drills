@@ -1598,23 +1598,22 @@ const roles = [
 //   user: { read: true }
 // }
 
-function buildPermissionMap(roles) {
-  const result = {}
+// function buildPermissionMap(roles) {
+//   const result = {}
 
-  for (const role of roles) {
-    const perms = {}
+//   for (const role of roles) {
+//     const perms = {}
 
-    for (const perm of role.permissions) {
-      perms[perm] = true
-    }
+//     for (const perm of role.permissions) {
+//       perms[perm] = true
+//     }
 
-    result[role.role] = perms
-  }
+//     result[role.role] = perms
+//   }
 
-  return result
-}
+//   return result
+// }
 
-
-console.log(buildPermissionMap(roles))
+// console.log(buildPermissionMap(roles))
 
 
