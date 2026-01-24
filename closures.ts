@@ -1759,3 +1759,115 @@
 // console.log(sayHi()) // hi
 // console.log(sayHi()) // nothing
 // No timers. Pure closure memory.
+
+// Create createQueue()
+
+// function createQueue() {
+// 	let queue = []
+
+// 	function add(fn){
+// 		queue.push(fn)
+// 	}
+
+// 	function run(){
+// 		for(const fn of queue){
+// 			fn()
+// 		}
+// 		queue = []
+// 	}
+
+// 	return {add, run}
+// }
+
+// const q = createQueue()
+
+// q.add(() => console.log("A"))
+// q.add(() => console.log("B"))
+// q.add(() => console.log("C"))
+
+// q.run()
+// A
+// B
+// After run, queue is empty.
+// You must store functions in closure, not in object property
+
+// Create createToggle(initial)
+
+// function createToggle(initial){
+
+// 	let historyArr = []
+// 	let state = initial
+
+// 	function toggle(){
+// 		const toggled = state = !state
+// 		historyArr.push(toggled)
+// 		return toggled
+// 	}
+
+// 	function history(){
+// 		return historyArr
+// 	}
+
+// 	return {toggle, history}
+
+// }
+
+// const t = createToggle(false)
+
+// console.log(t.toggle()) // true
+// console.log(t.toggle()) // false
+// console.log(t.history()) // [true, false]
+// // Closure must remember history.
+
+// function createAccumulator(limit) {
+// 	let result = 0
+
+// 	function add(number) {
+// 		if (result + number <= limit) {
+// 			result += number
+// 		}
+// 		return result
+// 	}
+
+// 	return { add }
+// }
+
+// const acc = createAccumulator(10)
+
+// console.log(acc.add(3))  // 3
+// console.log(acc.add(4))  // 7
+// console.log(acc.add(5))  // 7  (ignored, exceeds limit)
+// console.log(acc.add(5))  // 7  (ignored, exceeds limit)
+// // The function must remember current sum privately.
+
+// Create spy(fn)
+
+function spy(fn){
+	let bigArr = []
+
+	function wrapped(...args){
+		bigArr.push(args)
+		return fn(...args)
+	}
+
+	wrapped.calls = function(){
+		return bigArr
+	}
+
+	return wrapped
+	
+}
+
+const add = (a,b) => a + b
+const wrapped = spy(add)
+
+console.log(wrapped(1,2))
+wrapped(3,4)
+
+console.log(wrapped.calls())
+// [
+//   [1,2],
+//   [3,4]
+// ]
+// Closure remembers call history.
+
