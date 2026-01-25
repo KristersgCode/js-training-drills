@@ -1268,3 +1268,76 @@
 // wait until one finishes
 // start exactly one new task
 // That’s it.No magic.
+
+// function wait(ms: number) {
+//   return new Promise<void>(function (res) {
+//     setTimeout(res, ms)
+//   })
+// }
+
+
+// async function run() {
+//   await wait(300)
+//   console.log("A")
+
+//   await wait(300)
+//   console.log("B")
+
+//   await wait(300)
+//   console.log("C")
+// }
+
+// run()
+
+// That:
+// waits 300ms
+// logs "A"
+// waits 300ms
+// logs "B"
+// waits 300ms
+// logs "C"
+
+// const wait = (ms: number) =>
+//   new Promise(res => setTimeout(res, ms))
+
+// async function run(){
+//  await Promise.all([wait(300), wait(300), wait(300)])
+//  console.log("Done")
+// }
+
+// run()
+// That waits for 3×300ms in parallel, then logs "Done".
+
+// const arr = [1,2,3]
+// // Log numbers with 200ms delay one by one (sequential).
+
+// const wait = (ms: number) =>
+//   new Promise(res => setTimeout(res, ms))
+
+// async function run(numbers: number[]) {
+//   for (const n of numbers) {
+//     await wait(200)
+//     console.log(n)
+//   }
+// }
+// run(arr).then(console.log)
+
+// Map + Promise.all
+// Using same array, log numbers after 200ms in parallel.
+// Must use map + Promise.all.
+
+
+const arr = [1,2,3]
+
+const wait = (ms: number) =>
+  new Promise(res => setTimeout(res, ms))
+
+async function result(numbers){
+  await Promise.all(numbers.map(async (number) => {
+      await wait(200)
+      console.log(number)
+  }))
+}
+
+result(arr)
+
