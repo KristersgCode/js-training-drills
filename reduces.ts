@@ -1367,75 +1367,159 @@
 // state = reducer(state, { type: "SUCCESS" })
 // console.log(state) // "authenticated"
 
-export const initialCartState = {
-  status: "open",
-  items: []
-}
+// export const initialCartState = {
+//   status: "open",
+//   items: []
+// }
 
-export type CartItem = {
-  id: string
-  qty: number
-}
+// export type CartItem = {
+//   id: string
+//   qty: number
+// }
 
-export type CartState = {
-  status: "open" | "checkout" | "locked"
-  items: CartItem[]
-}
+// export type CartState = {
+//   status: "open" | "checkout" | "locked"
+//   items: CartItem[]
+// }
 
-export type CartEvent =
-  | { type: "ADD_ITEM"; id: string }
-  | { type: "REMOVE_ITEM"; id: string }
-  | { type: "CHECKOUT" }
-  | { type: "PAYMENT_SUCCESS" }
-  | { type: "PAYMENT_FAIL" }
+// export type CartEvent =
+//   | { type: "ADD_ITEM"; id: string }
+//   | { type: "REMOVE_ITEM"; id: string }
+//   | { type: "CHECKOUT" }
+//   | { type: "PAYMENT_SUCCESS" }
+//   | { type: "PAYMENT_FAIL" }
 
-// Task
-// Allow item changes only when status === "open".
-// Expected execution
+// // Task
+// // Allow item changes only when status === "open".
+// // Expected execution
 
-let state = initialCartState
-console.log(state)
+// let state = initialCartState
+// console.log(state)
 
-function reducer(state, event) {
-  switch (event.type) {
-    case "ADD_ITEM": {
-      if (state.status !== "open") {
-        return state
-      }
+// function reducer(state, event) {
+//   switch (event.type) {
+//     case "ADD_ITEM": {
+//       if (state.status !== "open") {
+//         return state
+//       }
 
-      const exists = state.items.some(item => item.id === event.id)
+//       const exists = state.items.some(item => item.id === event.id)
 
-      const nextItems = exists
-        ? state.items.map(item =>
-            item.id === event.id
-              ? { ...item, qty: item.qty + 1 }
-              : item
-          )
-        : [...state.items, { id: event.id, qty: 1 }]
+//       const nextItems = exists
+//         ? state.items.map(item =>
+//             item.id === event.id
+//               ? { ...item, qty: item.qty + 1 }
+//               : item
+//           )
+//         : [...state.items, { id: event.id, qty: 1 }]
 
-      return {
-        status: state.status,
-        items: nextItems
-      }
-    }
+//       return {
+//         status: state.status,
+//         items: nextItems
+//       }
+//     }
 
-    default:
-      return state
-  }
-}
-
-
-state = reducer(state, { type: "ADD_ITEM", id: "a" })
-state = reducer(state, { type: "ADD_ITEM", id: "a" })
-console.log(state)
-state = reducer(state, { type: "CHECKOUT" })
-state = reducer(state, { type: "ADD_ITEM", id: "b" }) // ignored
-// Final output
-
-// {
-//   status: "checkout",
-//   items: [{ id: "a", qty: 2 }]
+//     default:
+//       return state
+//   }
 // }
 
 
+// state = reducer(state, { type: "ADD_ITEM", id: "a" })
+// state = reducer(state, { type: "ADD_ITEM", id: "a" })
+// console.log(state)
+// state = reducer(state, { type: "CHECKOUT" })
+// state = reducer(state, { type: "ADD_ITEM", id: "b" }) // ignored
+// // Final output
 
+// // {
+// //   status: "checkout",
+// //   items: [{ id: "a", qty: 2 }]
+// // }
+
+// const users = [
+//   { id: 1, role: "admin" },
+//   { id: 2, role: "user" },
+//   { id: 3, role: "admin" },
+//   { id: 4, role: "user" },
+// ]
+
+// // {
+// //   admin: [{id:1, role:"admin"}, {id:3, role:"admin"}],
+// //   user:  [{id:2, role:"user"},  {id:4, role:"user"}]
+// // }
+
+// const result = users.reduce((acc, user) => {
+// 	acc[user.role] = acc[user.role] ?? []
+// 	acc[user.role].push(user)
+// 	return acc
+// },{})
+
+// console.log(result)
+
+// Count occurrences
+
+// const letters = ["a","b","a","c","b","a"]
+
+// const result = letters.reduce((acc, letter) => {
+// 	acc[letter] = (acc[letter] ?? 0) +1
+// 	return acc
+// },{})
+
+// console.log(result)
+// // { a: 3, b: 2, c: 1 }
+
+// const arr = [1, [2,3], [4, [5,6]], 7]
+
+// const flatten = (input) =>
+//   input.reduce((acc, element) => {
+//     if (Array.isArray(element)) {
+//       return element.reduce((innerAcc, innerEl) => {
+//         return flatten([innerEl]).reduce((a, v) => {
+//           a.push(v)
+//           return a
+//         }, innerAcc)
+//       }, acc)
+//     } else {
+//       acc.push(element)
+//       return acc
+//     }
+//   }, [])
+
+// const result = flatten(arr)
+
+// console.log(result)
+// // [1,2,3,4,5,6,7]
+
+//  Unique by property
+
+// const items = [
+//   { id: 1, name: "A" },
+//   { id: 2, name: "B" },
+//   { id: 1, name: "A again" },
+// ]
+// // Keep first occurrence by id.
+
+// const result = items.reduce((acc, item) => {
+// 	if(!acc.seen.has(item.id)){
+// 		acc.seen.set(item.id, item)
+// 		acc.result.push(item)
+// 	} 
+// 	return acc
+// },{
+//   seen: new Map(),
+//   result: []
+// })
+
+// console.log(result.result)
+
+// const users = [
+//   { id: 10, name: "John" },
+//   { id: 20, name: "Jane" },
+// ]
+// →
+
+// {
+//   10: { id:10, name:"John" },
+//   20: { id:20, name:"Jane" }
+// }
