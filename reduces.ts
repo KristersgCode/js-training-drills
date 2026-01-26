@@ -1517,9 +1517,71 @@
 //   { id: 10, name: "John" },
 //   { id: 20, name: "Jane" },
 // ]
-// →
+
+// const result = users.reduce((acc, user) => {
+// acc[user.id] = user
+//   return acc
+// },{})
+
+// console.log(result)
 
 // {
 //   10: { id:10, name:"John" },
 //   20: { id:20, name:"Jane" }
+// }
+
+
+// Partition (advanced thinking)
+
+// const nums = [1,2,3,4,5,6]
+
+// const result = nums.reduce((acc, num) => {
+// 	if(num % 2 === 0){
+// 		acc.even.push(num)
+// 	}
+// 	else {
+// 		acc.odd.push(num)
+// 	}
+// 	return acc
+// },{even: [], odd: []})
+
+// console.log(result)
+// // {
+// //   even: [2,4,6],
+// //   odd: [1,3,5]
+// // }
+
+//  Running totals (very important reduce brain)
+
+// const nums = [10,20,30,40]
+
+// const result = nums.reduce((acc, num) => {
+// 	acc.push((acc[acc.length - 1] ?? 0) + num)
+// 	return acc
+// }, [])
+
+// console.log(result)
+
+// [10,30,60,100]
+// You are producing a new array from reduce.
+
+// Group and count (two dimensions)
+
+const logs = [
+  { level: "error", service: "auth" },
+  { level: "info", service: "auth" },
+  { level: "error", service: "payments" },
+  { level: "error", service: "auth" },
+]
+
+const result = logs.reduce((acc, log) => {
+  acc[log.level] = acc[log.level] ?? {}
+  acc[log.level][log.service] = (acc[log.level][log.service] ?? 0) + 1
+  return acc
+}, {})
+
+console.log(result)
+// {
+//   error: { auth: 2, payments: 1 },
+//   info:  { auth: 1 }
 // }
