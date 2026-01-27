@@ -1806,30 +1806,30 @@
 
 // Create spy(fn)
 
-function spy(fn) {
-  let bigArr = [];
+// function spy(fn) {
+//   let bigArr = [];
 
-  function wrapped(...args) {
-    bigArr.push(args);
-    return fn(...args);
-  }
+//   function wrapped(...args) {
+//     bigArr.push(args);
+//     return fn(...args);
+//   }
 
-  wrapped.calls = function () {
-    return bigArr;
-  };
+//   wrapped.calls = function () {
+//     return bigArr;
+//   };
 
-  return wrapped;
-}
+//   return wrapped;
+// }
 
-const add = (a, b) => a + b;
-const wrapped = spy(add);
+// const add = (a, b) => a + b;
+// const wrapped = spy(add);
 
-console.log(wrapped(1, 2));
-wrapped(3, 4);
+// console.log(wrapped(1, 2));
+// wrapped(3, 4);
 
-console.log(wrapped.calls());
-// [
-//   [1,2],
-//   [3,4]
-// ]
-// Closure remembers call history.
+// console.log(wrapped.calls());
+// // [
+// //   [1,2],
+// //   [3,4]
+// // ]
+// // Closure remembers call history.

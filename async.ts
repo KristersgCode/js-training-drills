@@ -1301,17 +1301,17 @@
 // Using same array, log numbers after 200ms in parallel.
 // Must use map + Promise.all.
 
-const arr = [1, 2, 3];
+// const arr = [1, 2, 3];
 
-const wait = (ms: number) => new Promise((res) => setTimeout(res, ms));
+// const wait = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
-async function result(numbers) {
-  await Promise.all(
-    numbers.map(async (number) => {
-      await wait(200);
-      console.log(number);
-    }),
-  );
-}
+// async function result(numbers) {
+//   await Promise.all(
+//     numbers.map(async (number) => {
+//       await wait(200);
+//       console.log(number);
+//     }),
+//   );
+// }
 
-result(arr);
+// result(arr);

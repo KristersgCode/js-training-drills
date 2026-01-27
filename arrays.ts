@@ -1670,8 +1670,36 @@
 // { name: "Fix bug", priority: 2 }
 // ]
 
-const tasks = [
-  { name: "Fix bug", priority: 2 },
-  { name: "Add feature", priority: 1 },
-  { name: "Clean code", priority: 2 },
-];
+// const tasks = [
+//   { name: "Fix bug", priority: 2 },
+//   { name: "Add feature", priority: 1 },
+//   { name: "Clean code", priority: 2 },
+// ];
+
+// const sorted = tasks.sort(
+//   (a, b) => a.priority - b.priority || a.name.localeCompare(b.name),
+// );
+
+// console.log(sorted);
+
+// ======================================================
+// GOAL: Unique tags across posts
+// EXPECTED SHAPE: ["js", "react", "node"]
+
+// const posts = [
+//   { title: "A", tags: ["js", "react"] },
+//   { title: "B", tags: ["js", "node"] },
+//   { title: "C", tags: ["react"] },
+// ];
+
+// const uniqueMap = new Map();
+
+// for (const post of posts) {
+//   for (const tag of post.tags) {
+//     if (!uniqueMap.has(tag)) {
+//       uniqueMap.set(tag, true);
+//     }
+//   }
+// }
+
+// console.log([...uniqueMap.keys()]);
