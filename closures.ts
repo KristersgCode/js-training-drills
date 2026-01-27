@@ -14,11 +14,9 @@
 
 // const counter = createCounter(10);
 
-
 // counter.inc(); // 11
 // counter.inc(); // 12
 // counter.get(); // 12
-
 
 // const a = createCounter(0);
 // const b = createCounter(100);
@@ -36,8 +34,6 @@
 //     return {toggle}
 // }
 
-
-
 // const toggle = createToggle();
 
 // console.log(toggle.toggle()); // true
@@ -53,7 +49,6 @@
 //     return null;
 //   };
 // }
- 
 
 // const onlyTwice = limitCalls(2, () => "hi");
 
@@ -64,10 +59,10 @@
 
 // function withPrefix(prefix){
 //   return function(message){
-//       return `${prefix} ${message}` 
+//       return `${prefix} ${message}`
 //   }
 // }
-  
+
 // const logInfo = withPrefix("[INFO]");
 
 // logInfo("Server started");
@@ -120,7 +115,6 @@
 //   };
 // }
 
-
 // const light = createTrafficLight();
 
 // // No arrays returned
@@ -145,8 +139,6 @@
 //   console.log("Initialized");
 // });
 
-
-
 // // Must remember if it already ran
 // // No global flags
 
@@ -167,7 +159,6 @@
 //   return { set, get };
 // }
 
-
 // const store = createStore();
 
 // // Internal data must not be directly accessible
@@ -179,7 +170,7 @@
 
 // function createSubscribe(){
 //   return function unsub(){
-    
+
 //   }
 // }
 
@@ -252,7 +243,7 @@
 //   return function(arr){
 //    return arr.filter(fn)
 //   }
-// } 
+// }
 
 // const onlyAdults = createFilteredTransformer(u => u.age >= 18);
 
@@ -352,14 +343,12 @@
 //   }
 // }
 
-
 // const loadUser = createUserLoader(fetchUser)
 
 // const a = loadUser(1)
 // const b = loadUser(1)
 
 // console.log(a === b) // true
-
 
 // function saveForm(){
 //   return new Promise((resolve) => {setTimeout(() => resolve("saved"), 1000)})
@@ -389,11 +378,9 @@
 // guard("save", saveForm)
 // guard("save", saveForm)
 
-
 // function sendEmail() {
 //   console.log("email sent")
 // }
-
 
 // function createCooldown(ms) {
 //   const cooldown = new Map()
@@ -427,7 +414,7 @@
 // const fileA = "file"
 
 // function createUploadManager(fn){
-  
+
 //   const keys = new Map()
 
 //   return function upload(file){
@@ -443,7 +430,6 @@
 //     return promise
 //   }
 // }
-
 
 // const upload = createUploadManager(uploadFn)
 
@@ -535,7 +521,6 @@
 //   return { subscribe, emit }
 // }
 
-
 // function func(data) {
 //   console.log("shoot event:", data)
 // }
@@ -558,7 +543,7 @@
 
 // function createChatRoom(){
 //     const chat = new Map()
-    
+
 //     function join(user, fn){
 //         if(!chat.has(user)){
 //             chat.set(user, new Set())
@@ -576,11 +561,9 @@
 //         }
 //         return unsubscribe
 
-        
 //     }
 //     function message(msg){
 //         // console.log(chat)
-      
 
 //         for(const [_, value] of chat)
 //         {
@@ -613,7 +596,7 @@
 
 // function createInputSystem(){
 //     const inputs = new Map()
-    
+
 //     function on(event, fnc){
 //         if(!inputs.has(event)){
 //             inputs.set(event, new Set())
@@ -621,10 +604,10 @@
 
 //         let listeners = inputs.get(event)
 //         listeners.add(fnc)
-        
+
 //         function unsubscribe(){
 //             listeners.delete(fnc)
-            
+
 //             if(listeners.size === 0)
 //                 {
 //                     inputs.delete(event)
@@ -637,7 +620,7 @@
 //     function trigger(event){
 //          if (!inputs.has(event)) {
 //             return
-//             } 
+//             }
 //         const listeners = inputs.get(event)
 //         for(const fn of listeners){
 //            fn(event)
@@ -703,7 +686,6 @@
 // stop()
 // watch.update("AAPL", 181)
 
-
 // function createResizeObserver(){
 //     const shapes = new Map()
 
@@ -739,8 +721,6 @@
 
 // }
 
-
-
 // const resize = createResizeObserver()
 
 // function fn(data){
@@ -753,11 +733,11 @@
 // resize.resize({ w: 200, h: 200 })
 
 // function createCounter(initialValue){
-    
+
 //     let count = initialValue
 
 //     function inc(){
-//        return count++        
+//        return count++
 //     }
 
 //     function dec(){
@@ -771,7 +751,6 @@
 
 //     return {inc, dec, get}
 // }
-
 
 // const initialValue = 3
 
@@ -789,8 +768,8 @@
 // Goal: Closures for configuration binding.
 // Task:Create createLogger(prefix) that returns a log(message) function.
 // Rules:
-	// •	prefix is captured via closure
-	// •	Logger must work even if called later or passed around
+// •	prefix is captured via closure
+// •	Logger must work even if called later or passed around
 // Example:
 
 // function createLogger(prefix){
@@ -886,7 +865,6 @@
 //   return n * n
 // })
 
-
 // function memoize(fn) {
 //   const cache = new Map()
 
@@ -900,7 +878,6 @@
 //     return result
 //   }
 // }
-
 
 // slowSquare(4) // computing → 16
 // slowSquare(4) // 16 (no log)
@@ -974,7 +951,6 @@
 // ⚠️ Must correctly cache false.
 // Input / Output:
 
-
 // const isEven = memoize(n => {
 //     return n % 2 === 0
 // })
@@ -994,7 +970,6 @@
 //     }
 // }
 
-
 // isEven(3) // computes → false
 // isEven(3) // cached → false
 
@@ -1005,25 +980,23 @@
 //     count++
 //     return count
 //   }
-  
+
 //   function dec(){
 //     count--
 //     return count
 //   }
-  
+
 //   function peek(){
 //     console.log(count)
 //     return count
 //   }
-  
+
 //   function reset(){
 //     count = 0
 //     return count
 //   }
 
 //   return {inc, dec, peek, reset}
-
-  
 
 // }
 
@@ -1038,12 +1011,11 @@
 // counter.reset()
 // counter.peek() // 0
 
-
 // Wrap a function so it can only run once.
 // Requirements:
-	// •	First call → runs original function
-	// •	Subsequent calls → return cached result
-	// •	Original function must never run again
+// •	First call → runs original function
+// •	Subsequent calls → return cached result
+// •	Original function must never run again
 
 // function once(fn) {
 //   let didItRun = false
@@ -1058,7 +1030,6 @@
 //     return result
 //   }
 // }
-
 
 // const init = once(() => {
 //   console.log("initialized")
@@ -1101,7 +1072,7 @@
 
 // function limit(fn, number){
 //   let limitCount = 0
-//   let result 
+//   let result
 //   return function(){
 //     if(limitCount < number){
 //       result = fn()
@@ -1125,11 +1096,11 @@
 
 // Model a simple multi-step process.
 // Requirements:
-	// •	Steps: "idle" → "loading" → "success"
-	// •	Expose:
-	// ◦	next()
-	// ◦	status()
-	// •	Calling next() at "success" keeps it "success"
+// •	Steps: "idle" → "loading" → "success"
+// •	Expose:
+// ◦	next()
+// ◦	status()
+// •	Calling next() at "success" keeps it "success"
 
 //   function createFlow(){
 //     let state = "idle"
@@ -1149,7 +1120,7 @@
 //     }
 
 //     return { status, next}
-    
+
 //   }
 
 // const flow = createFlow()
@@ -1165,9 +1136,9 @@
 // -----------------------------------------------------------
 // Goal:Generate unique incremental IDs.
 // Requirements:
-	// •	IDs start at 1
-	// •	Each call increments
-	// •	No global counter
+// •	IDs start at 1
+// •	Each call increments
+// •	No global counter
 // Expected behavior:
 
 // function createIdGenerator(){
@@ -1184,19 +1155,18 @@
 // console.log(gen()) // 2
 // console.log(gen()) // 3
 
-
 // Goal:Track inputs and outputs of a function.
-	// •	Wrap a function
-	// •	Store { input, output } history
-	// •	Expose:
-	// ◦	wrapped function
-	// ◦	getHistory()
+// •	Wrap a function
+// •	Store { input, output } history
+// •	Expose:
+// ◦	wrapped function
+// ◦	getHistory()
 
 // function withHistory(fnc) {
 //   let history = []
-  
+
 //   function fn(input) {
-//     let output 
+//     let output
 //     output = fnc(input)
 //     history.push({input, output})
 //     return output
@@ -1231,9 +1201,9 @@
 // console.log(toggle()) // true
 
 // Goal:Wrap a function and track how many times it has been called.
-	// •	Wrapped function behaves like the original
-	// •	Call count persists via closure
-	// •	Expose getCount() to read the count
+// •	Wrapped function behaves like the original
+// •	Call count persists via closure
+// •	Expose getCount() to read the count
 
 //   function createCallCounter(fnc) {
 //   let callCount = 0
@@ -1280,9 +1250,9 @@
 // console.log(runOnce("b", "hi"))    // "hi"
 
 // Goal:Create a function that validates whether a number is within a range.
-	// •	Inclusive range
-	// •	Return true if valid, otherwise false
-	// •	No global state
+// •	Inclusive range
+// •	Return true if valid, otherwise false
+// •	No global state
 
 // function createRangeLimiter(n1, n2){
 //   return function (number){
@@ -1353,7 +1323,6 @@
 // console.log(logOnce("b", "again")) // "again"
 // console.log(logOnce("b", "more"))  // undefined
 
-
 // function createToggle(boolean){
 // 	let light = boolean
 // 	return function(){
@@ -1368,7 +1337,6 @@
 // console.log(toggle()) // false
 // console.log(toggle()) // true
 // console.log(toggle()) // false
-
 
 // function memo(fn) {
 //   const cache = new Map()
@@ -1433,7 +1401,6 @@
 //   let sum = 0
 //   let count = 0
 
-
 // return function(number){
 // 	sum += number
 // 	count++
@@ -1449,8 +1416,8 @@
 // console.log(avg(40)) // 25
 
 // function createCounter(num, step){
-// 	let result = num - step 
-	
+// 	let result = num - step
+
 // 	 function counter(){
 // 		 return result += step
 // 	}
@@ -1458,7 +1425,7 @@
 // 	counter.reset = function () {
 // 		result = num - step
 // 	}
-	
+
 // 	return counter
 
 // }
@@ -1471,8 +1438,8 @@
 // console.log(counter()) // 10
 
 // Create countCalls(fn).
-	// •	Returns a wrapped function
-	// •	Wrapped function has .count() method
+// •	Returns a wrapped function
+// •	Wrapped function has .count() method
 
 // function countCalls(fn){
 // 	let count = 0
@@ -1495,8 +1462,8 @@
 // console.log(wrapped.count()) // 2
 
 // Create once(fn).
-	// •	fn runs only once
-	// •	Later calls return the same result
+// •	fn runs only once
+// •	Later calls return the same result
 
 // function once(fn){
 // 	let didItCall = false
@@ -1517,9 +1484,8 @@
 // console.log(init())
 // console.log(init()) // all same value
 
-
 // Create limitEvery(fn, n).
-	// •	fn runs only every nth call
+// •	fn runs only every nth call
 
 // function limitEvery(fn, startAt){
 // 	let count = 0
@@ -1543,8 +1509,8 @@
 // console.log(limited()) // "run"
 
 // Create withHistory(fn).
-	// •	Wraps a function
-	// •	Exposes .history() (returns past results)
+// •	Wraps a function
+// •	Exposes .history() (returns past results)
 
 // function withHistory(fn) {
 //   const history = []
@@ -1570,10 +1536,9 @@
 
 // console.log(doubled.history()) // [4, 6, 8]
 
-
 // Task:Create debounce(fn, ms).
-	// •	Only last call runs
-	// •	Earlier scheduled calls are cancelled
+// •	Only last call runs
+// •	Earlier scheduled calls are cancelled
 
 // function debounce(fn, time){
 // 	let timerId
@@ -1584,7 +1549,7 @@
 // 		timerId = setTimeout(() => {
 // 			fn()
 // 		}, time)
-	
+
 // }
 // }
 
@@ -1613,8 +1578,8 @@
 // console.log(count("a")) // 3
 
 // Create cacheWithTTL(fn, ms).
-	// •	Cache result
-	// •	Expire after ms
+// •	Cache result
+// •	Expire after ms
 
 // function cacheWithTTL(fn, time) {
 //   const cache = new Map()
@@ -1635,7 +1600,6 @@
 //   }
 // }
 
-
 // const cached = cacheWithTTL(n => {
 //   console.log("compute", n)
 //   return n * 2
@@ -1648,16 +1612,16 @@
 
 // function createCounter(start, step){
 // 	let current = start
-	
+
 // 	function next() {
 // 		current += step
 // 		return current
 // 	}
-	
+
 // 	function reset(){
 // 		return current = start
 // 	}
-	
+
 // 	return {next, reset}
 // }
 
@@ -1726,7 +1690,7 @@
 // 	let prefixCount = 0
 // 	return function(){
 // 		prefixCount++
-// 		 return `${prefix}-${prefixCount}` 
+// 		 return `${prefix}-${prefixCount}`
 // 	}
 // }
 
@@ -1842,32 +1806,30 @@
 
 // Create spy(fn)
 
-function spy(fn){
-	let bigArr = []
+function spy(fn) {
+  let bigArr = [];
 
-	function wrapped(...args){
-		bigArr.push(args)
-		return fn(...args)
-	}
+  function wrapped(...args) {
+    bigArr.push(args);
+    return fn(...args);
+  }
 
-	wrapped.calls = function(){
-		return bigArr
-	}
+  wrapped.calls = function () {
+    return bigArr;
+  };
 
-	return wrapped
-	
+  return wrapped;
 }
 
-const add = (a,b) => a + b
-const wrapped = spy(add)
+const add = (a, b) => a + b;
+const wrapped = spy(add);
 
-console.log(wrapped(1,2))
-wrapped(3,4)
+console.log(wrapped(1, 2));
+wrapped(3, 4);
 
-console.log(wrapped.calls())
+console.log(wrapped.calls());
 // [
 //   [1,2],
 //   [3,4]
 // ]
 // Closure remembers call history.
-

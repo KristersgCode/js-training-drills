@@ -4,11 +4,9 @@
 //   [6]
 // ];
 
-
 // // 21
 
 // const result = nums.flat().reduce((a, number) => a + number, 0);
-
 
 // const nums = [
 //   [1, 4, 5],
@@ -27,7 +25,6 @@
 // // ➜ { name: "Kristers", age: 27, country: "Latvia" }
 
 // const result = Object.fromEntries(data)
-
 
 // const users = [
 //   { name: "A", country: "LV" },
@@ -91,11 +88,10 @@
 // };
 // // ➜ [1,2,3,5,10]
 
-// const flatten = Object.values(obj).flat() 
+// const flatten = Object.values(obj).flat()
 // let s = new Set(flatten);
 
 // const result = [...s]
-
 
 // const arr = [1, [2, [3, [4]]], 5];
 // // ➜ [1,2,3,4,5]
@@ -108,7 +104,6 @@
 // };
 // // ➜ [1,2,3,4,5,6]
 // console.log(result)
-
 
 // function countDown(count) {
 //   if (count > 0) {
@@ -138,8 +133,7 @@
 //    sayHi(n - 1)
 // }
 
-// sayHi(3) 
-
+// sayHi(3)
 
 // function fact(n){
 //    if(n === 0) return 1
@@ -215,7 +209,6 @@
 
 // // access function
 // console.log(flatten(arr)); // [1, 2, 3, 4, 5, 6]
-
 
 // const tree = {
 //   title: "root",
@@ -373,7 +366,6 @@
 
 //   console.log(res)
 
-
 // const users = [
 //   { id: 1, name: "Alice" },
 //   { id: 2, name: "Bob" }
@@ -418,7 +410,6 @@
 
 // // },{})
 
-
 // const result = Object.entries(scores).map(person => ({
 //   name: person[0],
 //   score: person[1]
@@ -459,7 +450,6 @@
 // }, 0);
 
 // console.log(result)
-
 
 // const nums = [1, 2, 2, 3, 1];
 // // ➜ [1,2,3]
@@ -525,7 +515,7 @@
 //     if(!uniq.has(event.id)){
 //         uniq.set(event.id, true)
 //         result.push(event.id)
-//     }   
+//     }
 // }
 
 // console.log(result)
@@ -538,7 +528,6 @@
 // ];
 
 // // ➜ [1, 2, 3, 4, 5, 6]
-
 
 // const result = matrix.reduce((acc, number) => {
 //    return acc.concat(number)
@@ -592,7 +581,6 @@
 // //   { userId: 2, role: "user" },
 // //   { userId: 2, role: "editor" }
 // // ]
-
 
 // const result = users.flatMap((user) =>
 //   user.roles.map((role) => {
@@ -704,7 +692,6 @@
 // //   { id: 2, name: "Jane", email: "b@b.com", role: "admin", label: "ADMIN" }
 // // ]
 
-
 // const users = []
 
 // for (const user of task) {
@@ -763,8 +750,8 @@
 // console.log(filtered)
 
 // Return false if:
-	// •	any item is missing id
-	// •	OR id is not a number
+// •	any item is missing id
+// •	OR id is not a number
 
 // const ids = [
 //   { id: 1 },
@@ -781,11 +768,10 @@
 //  }
 // }
 
-
 // console.log(isValid)
 
-	// •	keep original fields
-	// •	add disabled: true if locked === true
+// •	keep original fields
+// •	add disabled: true if locked === true
 
 // const checkboxes = [
 //   { id: 1, checked: false, locked: false },
@@ -804,8 +790,8 @@
 
 // console.log(result)
 
-	// •	if empty → remove item entirely
-	// •	capitalize valid names
+// •	if empty → remove item entirely
+// •	capitalize valid names
 
 // const arr = ["  john  ", " ", "anna"]
 
@@ -857,7 +843,6 @@
 // // Output
 
 // // ["test@gmail.com", "hello@company.io"]
-
 
 // const res = emails.filter((email) => email.includes("@"))
 
@@ -980,7 +965,7 @@
 // // Output
 
 // // ["darkMode", "newCheckout"]
-// const result = Object.entries(flags).filter(([_, value]) => 
+// const result = Object.entries(flags).filter(([_, value]) =>
 // 		value
 // ).map(([key, _]) => key)
 
@@ -1005,7 +990,6 @@
 // }
 
 // console.log(items)
-
 
 // const items = ["low", "medium", "high"]
 // const index = 1
@@ -1049,8 +1033,6 @@
 // items.splice(targetIndex, 0, removed)
 
 // console.log(items)
-
-
 
 // ["a", "c", "d", "b"]
 
@@ -1097,12 +1079,10 @@
 
 // const result = prods.map((prod) => prod.name)
 
-
 // console.log(result)
 
 // expected result:
 // ["Laptop"]
-
 
 // Return true if any duplicate value exists, otherwise false.
 
@@ -1172,7 +1152,7 @@
 // let falses = []
 
 // for(const flag of flags){
-	
+
 // 	if(flag){
 // 		trues.push(flag)
 // 	}
@@ -1210,7 +1190,6 @@
 //   { key: "a", value: 1 },
 //   { key: "b", value: 2 }
 // ]
-
 
 // const result = Object.fromEntries(
 //   items.map(item => [item.key, item.value])
@@ -1254,7 +1233,6 @@
 // const result = Object.fromEntries(
 // 		Object.entries(roles).map(([key, value]) => [value, key]))
 
-
 // console.log(result)
 
 // expected result:
@@ -1282,7 +1260,6 @@
 //   banana: 2,
 //   orange: 6
 // }
-
 
 // Convert object into an array of { name, score }, sorted descending by score.
 
@@ -1336,7 +1313,6 @@
 // const filtered = Object.fromEntries(arr.filter(([key]) => !blocked.includes(key)))
 
 // console.log(filtered)
-
 
 // expected result:
 // {
@@ -1429,7 +1405,6 @@
 //   done: [2]
 // }
 
-
 // function groupTaskIdsByStatus(tasks) {
 //   const result = {}
 
@@ -1490,7 +1465,6 @@
 //   { date: "2024-01-01", room: "B" }
 // ]
 
-
 //create a map
 // if room dosnt exist add to the set
 
@@ -1528,13 +1502,13 @@
 // function userBase(users, comments){
 // 	let lookup = new Map()
 // 	let result = []
-	
+
 // 	for(const user of users){
 // 		if(!lookup.has(user.id)){
 // 			lookup.set(user.id, user)
 // 		}
 // 	}
-	
+
 // 	for(const comment of comments){
 // 		let data = lookup.get(comment.userId)
 // 		if(data){
@@ -1616,7 +1590,7 @@
 // console.log(buildPermissionMap(roles))
 
 // ======================================================
-// GOAL: Unique active users, sorted by last login 
+// GOAL: Unique active users, sorted by last login
 // Return array of unique names of active users,
 // sorted by lastLogin descending.
 // EXPECTED RESULT: ["Ann", "Cara"]
@@ -1657,9 +1631,9 @@
 // ======================================================
 // GOAL: Build lookup table
 // EXPECTED RESULT: {
-  // a1: "fruit",
-  // b2: "veg",
-  // c3: "fruit"
+// a1: "fruit",
+// b2: "veg",
+// c3: "fruit"
 // }
 
 // const products = [
@@ -1673,4 +1647,31 @@
 // })
 
 // console.log(Object.fromEntries(entries))
+
 // ======================================================
+// GOAL: Return names of users who have 2 or more roles
+// EXPECTED RESULT: ["Ann", "Cara"]
+
+// const users = [
+//   { name: "Ann", roles: ["admin", "editor"] },
+//   { name: "Bob", roles: ["viewer"] },
+//   { name: "Cara", roles: ["editor", "viewer"] }
+// ]
+
+// const result = users.filter((user) => user.roles.length >= 2).map((u) => u.name)
+
+// console.log(result)
+// ======================================================
+
+// GOAL: Sort by priority ascending.If same → by name alphabetically.
+// EXPECTED RESULT: [
+// { name: "Add feature", priority: 1 },
+// { name: "Clean code", priority: 2 },
+// { name: "Fix bug", priority: 2 }
+// ]
+
+const tasks = [
+  { name: "Fix bug", priority: 2 },
+  { name: "Add feature", priority: 1 },
+  { name: "Clean code", priority: 2 },
+];

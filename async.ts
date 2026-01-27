@@ -30,7 +30,6 @@
 //   setTimeout(() => cb(10), 200);
 // }
 
-
 // function getNumberAsync() {
 //   return new Promise(resolve => {
 //     getNumber(num => resolve(num));
@@ -38,8 +37,6 @@
 // }
 
 // getNumberAsync().then(x => console.log(x * 3));
-
-
 
 // function wait300(){
 //   return new Promise(resolve => {
@@ -74,7 +71,6 @@
 // }
 
 // test()
-
 
 // function wait(ms){
 //   return new Promise((resolve, reject) => {
@@ -134,7 +130,6 @@
 
 // getError()
 
-
 // function waitAndReturn(ms, value) {
 //   // after ms, resolve with the provided value
 //   return new Promise((resolve) => {
@@ -143,7 +138,6 @@
 //     }, ms)
 //   })
 // }
-
 
 // async function demo() {
 //   const a = await waitAndReturn(300, "hello");
@@ -290,7 +284,6 @@
 // // Red: 2
 // // Blue: 1
 
-
 // // Fetch users and settings and log:
 // // dark theme has 3 users
 
@@ -362,12 +355,12 @@
 
 // Promise.resolve(5)
 //   .then(x => {
-//     if (x > 0) throw("bad");   
+//     if (x > 0) throw("bad");
 //     return x;
 //   })
 //   .catch(err => console.log("caught:", err));
 
-  // Make a function:
+// Make a function:
 
 // function validateName(name) {
 //   return new Promise((resolve, reject) => {
@@ -382,13 +375,13 @@
 // validateName("A").catch(err => console.error(err.message));
 
 // Write a chain that:
-	// 1	Starts with Promise.resolve(10)
-	// 2	In the 2nd .then, rejects with "err"
-	// 3	.catch receives "err"
-	// 4	Next .then prints "recovered"
+// 1	Starts with Promise.resolve(10)
+// 2	In the 2nd .then, rejects with "err"
+// 3	.catch receives "err"
+// 4	Next .then prints "recovered"
 
-  // Promise.resolve(10).then(() => Promise.reject(new Error("err"))).catch((err) => console.log(err.message)).then(()=> console.log("recovered"))
-  
+// Promise.resolve(10).then(() => Promise.reject(new Error("err"))).catch((err) => console.log(err.message)).then(()=> console.log("recovered"))
+
 //   Create a function that resolves after N milliseconds with a given value.
 // Input
 
@@ -420,8 +413,6 @@
 //   () => delay(100, 3),
 // ]
 
-
-
 // async function run(){
 //   const results = []
 
@@ -432,7 +423,6 @@
 // }
 
 // run().then(console.log)
-
 
 // // [1, 2, 3]
 
@@ -467,7 +457,6 @@
 // asyncMap([1, 2, 3], async (n) => n * 2).then(console.log)
 
 // [2, 4, 6]
-
 
 // Drill:Filter values using an async predicate.
 // Input
@@ -532,7 +521,6 @@
 // asyncFind([1, 2, 3, 4], async (n) => n > 2).then(console.log)
 // // Expected
 
-
 // Drill:Return true if any async predicate resolves to true.
 
 // async function asyncSome(arr, asyncFn) {
@@ -549,7 +537,7 @@
 // true
 
 // async function asyncMap(arr, asyncFn){
-//   let output = []    
+//   let output = []
 
 //       for(const number of arr){
 //         const result = await asyncFn(number)
@@ -611,14 +599,13 @@
 //   return
 // }
 
-
 // await asyncFind([5, 6, 7], async (n) => n > 5).then(console.log)
 
 // 6
-	// •	Sequential
-	// •	Stop immediately after match
+// •	Sequential
+// •	Stop immediately after match
 
-  // Goal: Return true only if ALL predicates pass.
+// Goal: Return true only if ALL predicates pass.
 
 // async function asyncEvery(arr, asyncFn){
 //   for(const num of arr){
@@ -674,7 +661,7 @@
 // Goal: Reject promise if it takes longer than ms.
 
 //  function fetchData(){
-//   return new Promise((resolve, reject) => 
+//   return new Promise((resolve, reject) =>
 //     setTimeout(() => resolve("time"), 2000))
 // }
 
@@ -694,86 +681,83 @@
 //   }
 // }
 
-
-
 // await asyncTimeout(fetchData(), 1000)
 // Rules
-	// •	Must race promise vs timeout
-	// •	Clean up timeout after resolve/reject
+// •	Must race promise vs timeout
+// •	Clean up timeout after resolve/reject
 // ------------------------------------------------------------------
-  
+
 // •	Goal: Like asyncSome, but return the index of the first match.
 
-    // async function asyncSomeWithIndex(letters, asyncFn){
-    //   let count = -1
-    //   for(const value of letters){
-    //     const result = await asyncFn(value)
-    //     count++
-    //     if(result){
-    //         return count
-    //       }
-    //     }
-    //   return -1
-    // }
+// async function asyncSomeWithIndex(letters, asyncFn){
+//   let count = -1
+//   for(const value of letters){
+//     const result = await asyncFn(value)
+//     count++
+//     if(result){
+//         return count
+//       }
+//     }
+//   return -1
+// }
 
-		// await asyncSomeWithIndex(["a", "b", "c"], async (v) => v === "b").then(console.log)
+// await asyncSomeWithIndex(["a", "b", "c"], async (v) => v === "b").then(console.log)
 
-		// 1
-	// •	Sequential
-	// •	Stop immediately
-	// •	Return -1 if none match
+// 1
+// •	Sequential
+// •	Stop immediately
+// •	Return -1 if none match
 
-  	// Goal: Return the resolved value from the async function, not the original item.
+// Goal: Return the resolved value from the async function, not the original item.
 
-    // async function asyncFindValue(numbers, asyncFn){
-    //   for(const number of numbers){
-    //       const result = await asyncFn(number)
-    //       if(result){
-    //         return result
-    //       }
-    //     }
-    //     return 
-    // }
-		
-		// await asyncFindValue([1, 2, 3],async (n) => n === 2 ? "found" : null).then(console.log)
-		
-		// "found"
-		// Stop on first truthy resolved value
-		// Return undefined if nothing matches
+// async function asyncFindValue(numbers, asyncFn){
+//   for(const number of numbers){
+//       const result = await asyncFn(number)
+//       if(result){
+//         return result
+//       }
+//     }
+//     return
+// }
 
-		// Goal: Like asyncEvery, but return why it failed.
-		
-    // async function asyncEveryWithReason(numbers, asyncFn){
+// await asyncFindValue([1, 2, 3],async (n) => n === 2 ? "found" : null).then(console.log)
 
-    //   //loop on every number
-    //   // if function fails return it and quit
-    //   // when all the loops end return true
+// "found"
+// Stop on first truthy resolved value
+// Return undefined if nothing matches
 
-    //   for(const number of numbers){
-    //     const result = await asyncFn(number)
-    //     if(result !== true){
-    //       return result
-    //     }
-    //   }
-    //   return true
+// Goal: Like asyncEvery, but return why it failed.
 
-    // }
+// async function asyncEveryWithReason(numbers, asyncFn){
 
-		// await asyncEveryWithReason([2, 4, 5], async (n) => n % 2 === 0 ? true : "odd number").then(console.log)
-		
-		// "odd number"
-		// Rules
-		// Stop on first failure
-		// Return true only if all pass
+//   //loop on every number
+//   // if function fails return it and quit
+//   // when all the loops end return true
 
-    //-------------------------------------------------------
+//   for(const number of numbers){
+//     const result = await asyncFn(number)
+//     if(result !== true){
+//       return result
+//     }
+//   }
+//   return true
 
-    // Goal: Retry with a delay between attempts.
+// }
+
+// await asyncEveryWithReason([2, 4, 5], async (n) => n % 2 === 0 ? true : "odd number").then(console.log)
+
+// "odd number"
+// Rules
+// Stop on first failure
+// Return true only if all pass
+
+//-------------------------------------------------------
+
+// Goal: Retry with a delay between attempts.
 
 //   function delay(ms) {
 //   return new Promise(resolve => setTimeout(resolve, ms))
 // }
-
 
 // async function asyncRetryWithDelay(fn, attempts, delayMs) {
 //   let lastError
@@ -793,14 +777,12 @@
 //   throw lastError
 // }
 
-
-
 // function fetchData(){
 //   return new Promise((resolve) => resolve("done"))
 // }
 
 // await asyncRetryWithDelay(fetchData, 3, 500).then(console.log)
- 
+
 // 	// Retry on rejection only
 // 	// Wait delay ms between attempts
 // 	// Stop immediately on success
@@ -818,7 +800,6 @@
 //       }
 //     })
 // }
-
 
 // async function asyncTryOnce(fn){
 //   try {
@@ -861,7 +842,7 @@
 // }
 
 // await asyncTryDefault(fetchData, "fallback")
- 
+
 // Goal: Convert async success/failure into boolean.
 
 // const num = 1
@@ -893,7 +874,6 @@
 
 // Goal: Log error but still throw it.
 
-
 // const num = 1
 
 // function fetchData(){
@@ -918,11 +898,11 @@
 // }
 
 // await asyncTryLog(fetchData)
-	// •	Catch error
-	// •	console.log it
-	// •	Re-throw the same error
+// •	Catch error
+// •	console.log it
+// •	Re-throw the same error
 
-  // Goal: Ignore errors completely.
+// Goal: Ignore errors completely.
 
 //   const num = 1
 
@@ -947,12 +927,11 @@
 // }
 
 // await asyncTrySilent(fetchData)
-	// •	Try once
-	// •	Ignore rejection
-	// •	Always resolve with undefined
+// •	Try once
+// •	Ignore rejection
+// •	Always resolve with undefined
 
-
-  // Goal: Try at most 2 times.
+// Goal: Try at most 2 times.
 
 // const num = 12
 
@@ -979,9 +958,9 @@
 // }
 
 // await asyncTryTwice(fetchData).then(console.log)
-	// •	First failure → retry once
-	// •	Second failure → throw
-	// •	Stop immediately on success
+// •	First failure → retry once
+// •	Second failure → throw
+// •	Stop immediately on success
 
 // Goal: Map async values one by one (what you already almost did).
 
@@ -1058,8 +1037,8 @@
 
 // async function firstSuccess(fns) {
 //   // fns: array of () => Promise
-//   // 
-//   let err 
+//   //
+//   let err
 //   for(const fn of fns){
 //     try{
 //         return await fn()
@@ -1127,7 +1106,6 @@
 //   }
 // }
 
-
 // const wrapped = withLoadingLog(async () => {
 //   await delay(100)
 //   return 42
@@ -1173,10 +1151,10 @@
 // [1, 2]
 // Focus:✔️ Promise.all + delay
 
-	// •	Apply an async function to each item
-	// •	Preserve original order
-	// •	Store results by index
-	// •	Execute sequentially (no parallelism)
+// •	Apply an async function to each item
+// •	Preserve original order
+// •	Store results by index
+// •	Execute sequentially (no parallelism)
 
 //   async function delay(time){
 //     return new Promise((resolve) => {
@@ -1185,7 +1163,6 @@
 //       }, time)
 //     })
 //   }
-
 
 // async function asyncMapIndexed(items, asyncFn) {
 //   const results = new Array(items.length)
@@ -1204,7 +1181,6 @@
 //   await delay(50)
 //   return n * 2
 // }
-
 
 // await asyncMapIndexed(items, double).then(console.log)
 // // [2, 4, 6]
@@ -1275,7 +1251,6 @@
 //   })
 // }
 
-
 // async function run() {
 //   await wait(300)
 //   console.log("A")
@@ -1326,18 +1301,17 @@
 // Using same array, log numbers after 200ms in parallel.
 // Must use map + Promise.all.
 
+const arr = [1, 2, 3];
 
-const arr = [1,2,3]
+const wait = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
-const wait = (ms: number) =>
-  new Promise(res => setTimeout(res, ms))
-
-async function result(numbers){
-  await Promise.all(numbers.map(async (number) => {
-      await wait(200)
-      console.log(number)
-  }))
+async function result(numbers) {
+  await Promise.all(
+    numbers.map(async (number) => {
+      await wait(200);
+      console.log(number);
+    }),
+  );
 }
 
-result(arr)
-
+result(arr);

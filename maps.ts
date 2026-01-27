@@ -76,10 +76,9 @@
 
 // console.log(ordered)
 
-
-	// •	"LOGIN" → set user online
-	// •	"LOGOUT" → set user offline
-    // Final Map should contain only users who are online.
+// •	"LOGIN" → set user online
+// •	"LOGOUT" → set user offline
+// Final Map should contain only users who are online.
 
 // const actions = [
 //   { type: "LOGIN", userId: "u1" },
@@ -107,7 +106,7 @@
 
 // console.log(mapped)
 
-// From a Map of products, produce a sorted array of product names 
+// From a Map of products, produce a sorted array of product names
 // (sorted by price ascending).
 
 // const products = new Map([
@@ -117,7 +116,6 @@
 // ])
 
 // // ["Mouse", "Keyboard", "Monitor"]
-
 
 // const result = [...products.values()].sort((a,b) => a.price - b.price).map((prod) => {
 //     return prod.name
@@ -161,22 +159,20 @@
 const cities = [
   { country: "LV", city: "Riga", pop: 600000 },
   { country: "LV", city: "Liepaja", pop: 70000 },
-  { country: "NO", city: "Oslo", pop: 700000 }
-]   
+  { country: "NO", city: "Oslo", pop: 700000 },
+];
 
-const mapp = new Map()
+const mapp = new Map();
 
-   for (const { country, city, pop } of cities) {
-  let inner = mapp.get(country)
+for (const { country, city, pop } of cities) {
+  let inner = mapp.get(country);
 
-  if(!inner){
-     inner = new Map()
-     mapp.set(country, inner)
+  if (!inner) {
+    inner = new Map();
+    mapp.set(country, inner);
   }
-   inner.set(city, pop)
+  inner.set(city, pop);
 }
-
-
 
 // Map {
 //   "LV" => Map {

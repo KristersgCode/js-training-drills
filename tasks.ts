@@ -15,7 +15,6 @@
 
 // console.log("filtered", filtered)
 
-
 // const result = filtered.reduce((acc, [key, value]) => {
 //   acc[key] = value;
 //   console.log(acc[key])
@@ -23,7 +22,6 @@
 // }, {});
 
 // console.log(result)
-
 
 // const flags = {
 //   isAdmin: true,
@@ -33,10 +31,9 @@
 
 // //["isAdmin", "isVerified"]
 
-// const filtered = Object.entries(flags).filter(([_, value]) => 
+// const filtered = Object.entries(flags).filter(([_, value]) =>
 //      value
 // ).map(([key]) => key)
-
 
 // console.log("map", filtered)
 
@@ -53,7 +50,6 @@
 // const obj = Object.fromEntries(removeEmpty);
 
 // console.log("removed", removeEmpty)
-
 
 // const users = [
 //   { id: 10, name: "A" },
@@ -123,7 +119,6 @@
 // state: value
 // }))
 // console.log(obj)
-
 
 // const apiResponse = [
 //   { itemID: 1, state: "good" },
@@ -205,7 +200,7 @@
 // // ["Apple", "Bread", "Phone", "Laptop"]
 
 // const flat = catalogs.flatMap(item => item.items);
-  
+
 //   console.log(flat)
 
 // const catalogs = [
@@ -243,17 +238,15 @@
 
 // const reduced = logs.reduce((acc , log) => {
 //    acc[log.user] = acc[log.user] ?? {};
-//    acc[log.user][log.action] = (acc[log.user][log.action] ?? 0) + 1;   
+//    acc[log.user][log.action] = (acc[log.user][log.action] ?? 0) + 1;
 //   return acc
 // } , {})
-
 
 // const reduced = logs.reduce((acc , log) => {
 //    acc["A"] = acc["A"] ?? {};
-//    acc["A"]["login"] = (acc["A"]["login"] ?? 0) + 1;   
+//    acc["A"]["login"] = (acc["A"]["login"] ?? 0) + 1;
 //   return acc
 // } , {})
-
 
 // console.log(reduced)
 
@@ -378,7 +371,6 @@
 //   "Mark is 30"
 // ]
 
-
 // const mapped = users.map(user => `${user.name} is ${user.age}`);
 
 // console.log(mapped)
@@ -388,7 +380,6 @@
 //   { name: "Mark", age: 30 },
 //   { name: "Anna", age: 25 },
 // ];
-
 
 // const sorted = [...users].sort((a, b) => a.age - b.age);
 
@@ -400,14 +391,12 @@
 //   };
 // }
 
-
 // function greet(name) {
 //   return "Hello " + name;
 // }
 
 // const greeter = makeGreeter(greet);
-// console.log(greeter("Kristers")); 
-
+// console.log(greeter("Kristers"));
 
 // function makeMultiplier(multiplier) {
 //   return function(value) {
@@ -418,7 +407,6 @@
 // const triple = makeMultiplier(3);
 // console.log(triple(5)); // expect 15
 
-
 // function createApi(baseUrl) {
 //   return function(endpoint) {
 //     return baseUrl + endpoint;
@@ -427,8 +415,6 @@
 
 // const api = createApi("https://api.example.com");
 // console.log(api("/users"));  // https://api.example.com/users
-
-
 
 // function createLogger(prefix) {
 //   return function(message) {
@@ -440,7 +426,6 @@
 // error("Something broke");
 
 // console.log(error("Something broke"))
-
 
 // function createPower(power){
 //      return function(value){
@@ -512,13 +497,12 @@
 // console.log(adults)
 
 // const items = [
-//   { price: 5 }, 
+//   { price: 5 },
 //   { price: 10 },
 //   { price: 3 }
 // ];
 
 // // 18
-
 
 // const reduced = items.reduce((acc, item) => {
 //    return acc + item.price;
@@ -659,6 +643,5 @@
 //   acc.likes += day.likes;
 //   return acc;
 // }, { views: 0, likes: 0 });
-
 
 // console.log(totals)

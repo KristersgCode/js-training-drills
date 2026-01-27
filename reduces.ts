@@ -12,7 +12,7 @@
 // const result = orders.reduce((sum, order) => {
 //     if(order.total > 10 && order.currency === "EUR"){
 //         console.log(order)
-//         return sum + order.total 
+//         return sum + order.total
 //     }
 //     return sum
 // }, 0)
@@ -57,7 +57,6 @@
 //                 }
 //                 return acc
 //     },{})
-    
 
 //     console.log(result)
 
@@ -76,7 +75,6 @@
 
 //     console.log(result)
 
-
 // const words = ["Apple", "banana", "APPLE", "pear", "Banana"];
 
 // // {
@@ -93,7 +91,6 @@
 
 // console.log(result)
 
-
 // const logs = [
 //   { day: "mon", level: "error" },
 //   { day: "mon", level: "info" },
@@ -101,9 +98,9 @@
 //   { day: "tue", level: "info" },
 //   { day: "tue", level: "warn" }
 // ];
-	// •	Group by day
-	// •	Count per level
-	// •	Add { total } per day
+// •	Group by day
+// •	Count per level
+// •	Add { total } per day
 
 //     {
 //   mon: {
@@ -132,7 +129,6 @@
 
 //   return acc;
 // }, {});
-
 
 //     console.log(result)
 
@@ -177,7 +173,7 @@
 //         if(action.type === "LOGIN"){
 //             acc.isLoggedIn = true
 //         }
-        
+
 //         if(action.type === "LOGOUT")
 //             {
 //                 acc.isLoggedIn = false
@@ -187,7 +183,7 @@
 //         {
 //             acc.items.push(action.item)
 //         }
-        
+
 //         return acc
 // },{isLoggedIn: false, items: []})
 
@@ -246,7 +242,6 @@
 // 	return acc
 // },{})
 
-
 // Description:Find the maximum number.
 
 // const scores = [42, 87, 55, 99, 64]
@@ -262,7 +257,6 @@
 
 // // [1, 2, 3, 4, 5]
 
-
 // const result = values.reduce((acc, number)=>{
 // 	if(!acc.includes(number)){
 // 		acc.push(number)
@@ -271,7 +265,6 @@
 // }, [])
 
 // console.log(result)
-
 
 // Create an object where keys are id and values are the objects.
 
@@ -290,7 +283,6 @@
 // 	return acc
 // }, {})
 
-
 // Calculate total cost (price * qty).
 
 // const cart = [
@@ -302,10 +294,9 @@
 
 // const result = cart.reduce((acc, item) => {
 // 	let total = 0
-// 	total = item.price * item.qty 
+// 	total = item.price * item.qty
 // 	return acc + total
 // }, 0)
-
 
 // const nums = [1, 2, 3, 4, 5, 6]
 
@@ -432,7 +423,6 @@
 // // Output
 
 // "loggedIn"
-
 
 // const actions = [
 //   { type: "ADD", item: "apple" },
@@ -573,14 +563,13 @@
 //   return acc
 // }, { data: {}, conflicts: [] })
 
-
 // {
 //   data: { a: 1, b: 3, c: 5 },
 //   conflicts: ["b", "c"]
 // }
 // Rules:
-	// •	conflict = key seen before with different value
-	// •	reduce must return { data, conflicts }
+// •	conflict = key seen before with different value
+// •	reduce must return { data, conflicts }
 
 // 	const users = [
 //   { role: "admin", active: true },
@@ -656,7 +645,7 @@
 //   count: 3
 // }
 // Focus:
-	// •	accumulator with multiple fields
+// •	accumulator with multiple fields
 
 // const result = scores.reduce((acc, number) => {
 // 	acc.sum += number
@@ -758,8 +747,6 @@
 //   toggles: 0
 // })
 
-
-
 // const actions = [
 //   { type: "ADD", permission: "write" },
 //   { type: "ADD", permission: "read" },
@@ -787,7 +774,6 @@
 // 		{
 // 	 	 permissions: ["read"]
 // 		})
-
 
 // {
 //   value: 10
@@ -849,13 +835,13 @@
 // 	if(action.type === "SET"){
 // 		acc.history.push(acc.value)
 // 		acc.value = action.value
-// 	}	
+// 	}
 // 	return acc
 // }, {value:0, history: []})
 
 // console.log(result)
-	// •	Each SET pushes previous value to history
-	// •	UNDO restores last value
+// •	Each SET pushes previous value to history
+// •	UNDO restores last value
 // Expected final state
 
 // {
@@ -866,7 +852,7 @@
 // -----------------------------------------------------------------------------
 
 // idle → loading → success
-        //    ↘ error
+//    ↘ error
 // Initial state
 
 // const events = [
@@ -925,7 +911,6 @@
 // 	return {...acc, status: "loggedOut" }
 // }
 
-
 // return acc
 // }, {status: "loggedOut"})
 
@@ -982,7 +967,6 @@
 // //   minor: ["Anna", "Chris"],
 // //   adult: ["Bob", "Dana"]
 // // }
-
 
 // const result = users.reduce((acc, user) => {
 // 	if(user.age < 18){
@@ -1061,12 +1045,11 @@
 //   { type: "LOGIN" }
 // ]
 // Rules:
-	// •	LOGIN → authenticated
-	// •	LOGOUT → guest
+// •	LOGIN → authenticated
+// •	LOGOUT → guest
 // Expected final state:
 
 // { status: "authenticated" }
-
 
 // const result = actions.reduce((acc, action) => {
 // 	if(action.type === "LOGIN" && acc.status !== "authenticated"){
@@ -1149,7 +1132,7 @@
 // 	acc[user.role].active += 1
 //   }
 
-// 	return acc 
+// 	return acc
 // },{})
 
 // Drill 2 — Deduplicate by key (keep latest)
@@ -1424,7 +1407,6 @@
 //   }
 // }
 
-
 // state = reducer(state, { type: "ADD_ITEM", id: "a" })
 // state = reducer(state, { type: "ADD_ITEM", id: "a" })
 // console.log(state)
@@ -1504,7 +1486,7 @@
 // 	if(!acc.seen.has(item.id)){
 // 		acc.seen.set(item.id, item)
 // 		acc.result.push(item)
-// 	} 
+// 	}
 // 	return acc
 // },{
 //   seen: new Map(),
@@ -1529,7 +1511,6 @@
 //   10: { id:10, name:"John" },
 //   20: { id:20, name:"Jane" }
 // }
-
 
 // Partition (advanced thinking)
 
@@ -1567,11 +1548,11 @@
 
 // ======================================================
 // GOAL: Group and count (two dimensions)
-// EXPECTED SHAPE: 
-	// {
-	//   error: { auth: 2, payments: 1 },
-	//   info:  { auth: 1 }
-	// }
+// EXPECTED SHAPE:
+// {
+//   error: { auth: 2, payments: 1 },
+//   info:  { auth: 1 }
+// }
 
 // const logs = [
 //   { level: "error", service: "auth" },
