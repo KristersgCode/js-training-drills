@@ -1509,15 +1509,15 @@
 
 // console.log(deduplicate(bookings))
 
-const users = [
-  { id: "u1", name: "Anna" },
-  { id: "u2", name: "Mark" }
-]
+// const users = [
+//   { id: "u1", name: "Anna" },
+//   { id: "u2", name: "Mark" }
+// ]
 
-const comments = [
-  { userId: "u1", text: "Hi" },
-  { userId: "u3", text: "Hello" }
-]
+// const comments = [
+//   { userId: "u1", text: "Hi" },
+//   { userId: "u3", text: "Hello" }
+// ]
 // Expected
 
 // [
@@ -1587,11 +1587,10 @@ const comments = [
 //   a.priority - b.priority || a.time - b.time
 // ))
 
-
-const roles = [
-  { role: "admin", permissions: ["read", "write"] },
-  { role: "user", permissions: ["read"] }
-]
+// const roles = [
+//   { role: "admin", permissions: ["read", "write"] },
+//   { role: "user", permissions: ["read"] }
+// ]
 
 // {
 //   admin: { read: true, write: true },
@@ -1616,4 +1615,62 @@ const roles = [
 
 // console.log(buildPermissionMap(roles))
 
+// ======================================================
+// GOAL: Unique active users, sorted by last login 
+// Return array of unique names of active users,
+// sorted by lastLogin descending.
+// EXPECTED RESULT: ["Ann", "Cara"]
 
+// const users = [
+//   { id: 1, name: "Ann", active: true, lastLogin: 5 },
+//   { id: 2, name: "Bob", active: false, lastLogin: 2 },
+//   { id: 3, name: "Ann", active: true, lastLogin: 10 },
+//   { id: 4, name: "Cara", active: true, lastLogin: 1 }
+// ]
+
+// const result = [
+//   ...new Map(
+//     [...users]
+//       .filter(u => u.active)
+//       .sort((a, b) => b.lastLogin - a.lastLogin)
+//       .map(u => [u.name, u])   // key = name, value = user
+//   ).keys()
+// ]
+
+// console.log(result)
+
+// ======================================================
+// GOAL: Flatten only expensive items
+// Return flat array of item names where price ≥ 15
+// EXPECTED RESULT: ["B", "C"]
+
+// const orders = [
+//   { id: 1, items: [{ name: "A", price: 5 }, { name: "B", price: 20 }] },
+//   { id: 2, items: [{ name: "C", price: 15 }] },
+//   { id: 3, items: [{ name: "D", price: 3 }] }
+// ]
+
+// const result = orders.flatMap((order) => order.items).filter((o) => o.price >= 15).map((name) => name.name)
+
+// console.log(result)
+
+// ======================================================
+// GOAL: Build lookup table
+// EXPECTED RESULT: {
+  // a1: "fruit",
+  // b2: "veg",
+  // c3: "fruit"
+// }
+
+// const products = [
+//   { sku: "a1", category: "fruit" },
+//   { sku: "b2", category: "veg" },
+//   { sku: "c3", category: "fruit" }
+// ]
+
+// const entries = products.map((entry) => {
+//   return [entry.sku, entry.category]
+// })
+
+// console.log(Object.fromEntries(entries))
+// ======================================================

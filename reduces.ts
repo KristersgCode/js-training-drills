@@ -1565,23 +1565,27 @@
 // [10,30,60,100]
 // You are producing a new array from reduce.
 
-// Group and count (two dimensions)
+// ======================================================
+// GOAL: Group and count (two dimensions)
+// EXPECTED SHAPE: 
+	// {
+	//   error: { auth: 2, payments: 1 },
+	//   info:  { auth: 1 }
+	// }
 
-const logs = [
-  { level: "error", service: "auth" },
-  { level: "info", service: "auth" },
-  { level: "error", service: "payments" },
-  { level: "error", service: "auth" },
-]
+// const logs = [
+//   { level: "error", service: "auth" },
+//   { level: "info", service: "auth" },
+//   { level: "error", service: "payments" },
+//   { level: "error", service: "auth" },
+// ]
 
-const result = logs.reduce((acc, log) => {
-  acc[log.level] = acc[log.level] ?? {}
-  acc[log.level][log.service] = (acc[log.level][log.service] ?? 0) + 1
-  return acc
-}, {})
+// const result = logs.reduce((acc, log) => {
+//   acc[log.level] = acc[log.level] ?? {}
+//   acc[log.level][log.service] = (acc[log.level][log.service] ?? 0) + 1
+//   return acc
+// }, {})
 
-console.log(result)
-// {
-//   error: { auth: 2, payments: 1 },
-//   info:  { auth: 1 }
-// }
+// console.log(result)
+
+// ======================================================
