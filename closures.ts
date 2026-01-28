@@ -1833,3 +1833,104 @@
 // //   [3,4]
 // // ]
 // // Closure remembers call history.
+
+// ======================================================
+// GOAL: Remember last value
+
+// function createRemember() {
+//   let lastValue;
+
+//   return function (currentValue) {
+//     const previousValue = lastValue;
+//     lastValue = currentValue;
+//     return previousValue;
+//   };
+// }
+
+// const remember = createRemember();
+
+// console.log(remember(5)); // undefined
+// console.log(remember(10)); // 5
+// console.log(remember(3)); // 10
+// console.log(remember(8)); // 3
+
+// ======================================================
+// GOAL: Call counter per function
+//Each wrapped function has its own counter.
+
+// function withCount(fn) {
+//   let count = 0;
+
+//   function countedFn(...args) {
+//     count++;
+//     return fn(...args);
+//   }
+
+//   countedFn.getCount = function () {
+//     return count;
+//   };
+
+//   return countedFn;
+// }
+
+// const add = (a, b) => a + b;
+// const countedFn = withCount(add);
+
+// console.log(countedFn(1, 2)); // 3
+// console.log(countedFn(3, 4)); // 7
+// console.log(countedFn.getCount()); // 2
+
+// ======================================================
+// GOAL: Once every N calls
+
+// function onceEveryN(step, log) {
+//   let currentStep = step;
+//   return function limitedLog(...args) {
+//     currentStep--;
+//     if (currentStep === 0) {
+//       currentStep = step;
+//       log(...args);
+//     }
+//   };
+// }
+
+// const limitedLog = onceEveryN(3, console.log);
+
+// limitedLog("A"); // nothing
+// limitedLog("B"); // nothing
+// limitedLog("C"); // logs C
+// limitedLog("D"); // nothing
+// limitedLog("E"); // nothing
+// limitedLog("F"); // logs F
+
+// ======================================================
+// // GOAL: Argument history
+
+// function spy(fn) {
+//     let historyArr = [];
+
+//     function s(...args) {
+//         historyArr.push([...args]);
+//     return fn(...args);
+//   }
+
+//   s.history = function () {
+//       return historyArr.map((args) => [...args]);
+//     };
+
+//     return s;
+// }
+
+// const multiply = (a, b) => a * b;
+// const s = spy(multiply);
+
+// console.log(s(2, 3)); // 6
+// console.log(s(4, 5)); // 20
+
+// console.log(s.history());
+// // [
+//     //   [2,3],
+//     //   [4,5]
+//     // ]
+
+// ======================================================
