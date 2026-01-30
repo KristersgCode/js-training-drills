@@ -1315,3 +1315,94 @@
 // }
 
 // result(arr);
+
+// ======================================================
+// GOAL: Sequential execution with delay
+//Log each number
+// Wait 200ms between logs
+// Must be strictly sequential
+// Return "done" at the end
+// 1 (0ms)
+// 2 (200ms)
+// 3 (400ms)
+// done (600ms)
+
+// const wait = (ms) => new Promise((res) => setTimeout(res, ms));
+
+// const numbers = [1, 2, 3, 4];
+
+// async function run(numbers: number[]) {
+//   for (let i = 0; i < numbers.length; i++) {
+//     if (i !== 0) {
+//       await wait(200);
+//     }
+
+//     console.log(numbers[i]);
+//   }
+
+//   return "done";
+// }
+
+// run(numbers).then(console.log);
+
+// ======================================================
+// GOAL: Parallel but ordered result
+// •	All waits must start at the same time
+// •	Result must be returned in the same order as tasks
+// •	Return: [300,100,200]
+
+// async function wait(ms) {
+//   return new Promise((res) => setTimeout(res, ms));
+// }
+
+// const tasks = [300, 100, 200];
+
+// async function run() {
+//   return Promise.all(
+//     tasks.map(async (task) => {
+//       await wait(task);
+//       return task;
+//     }),
+//   );
+// }
+
+// run().then(console.log);
+
+// ======================================================
+// GOAL: Limit concurrency
+// •	Never more than 2 running
+// •	When one finishes, next starts
+// •	Return when all done
+
+const tasks = [300, 300, 300, 300, 300, 300];
+
+async function wait(ms) {
+  return new Promise((res) => setTimeout(res, ms));
+}
+
+const tasks = [300, 300, 300, 300, 300, 300];
+
+const wait = (ms) => new Promise((res) => setTimeout(res, ms));
+
+async function run() {
+  let nextTaskIndex = 0;
+  let active = [];
+
+  while (nextTaskIndex < tasks.length || active.length > 0) {
+    if (active.length < 2 && nextTaskIndex < tasks.length) {
+      const taskId = nextTaskIndex;
+
+      const promise = wait(tasks[taskId]).then(() => taskId);
+
+      active.push({ taskId, promise });
+      nextTaskIndex++;
+    } else {
+      const finishedTaskId = await Promise.race(active.map((t) => t.promise));
+      active = active.filter((t) => t.taskId !== finishedTaskId);
+    }
+  }
+
+  return "done";
+}
+
+run().then(console.log);

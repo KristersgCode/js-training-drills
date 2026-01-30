@@ -1904,7 +1904,7 @@
 // limitedLog("F"); // logs F
 
 // ======================================================
-// // GOAL: Argument history
+//  GOAL: Argument history
 
 // function spy(fn) {
 //     let historyArr = [];
