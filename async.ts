@@ -1444,24 +1444,73 @@
                     // •	Stop after times
                     // •	Throw last error
                     
-                    async function wait(){
-                      return new Promise((resolve) => {setTimeout(() => {
-                        resolve("resolve")
-                      },200)})
-                    }
-                    
-                    
-                    async function retry(fn, times) {
-  for (let attempt = 0; attempt < times; attempt++) {
-    try {
-      return await fn();
-    } catch (e) {
-      if (attempt === times - 1) {
-        throw e;
-      }
-    }
-  }
+                    //                     async function wait(){
+                      //                       return new Promise((resolve) => {setTimeout(() => {
+                        //                         resolve("resolve")
+                        //                       },200)})
+                        //                     }
+                        
+                        //                     async function retry(fn, times) {
+                          //   for (let attempt = 0; attempt < times; attempt++) {
+                            //     try {
+                              //       return await fn();
+                              //     } catch (e) {
+                                //       if (attempt === times - 1) {
+                                  //         throw e;
+                                  //       }
+                                  //     }
+                                  //   }
+                                  // }
+                                  
+                                  // retry(wait, 3).then(console.log)
+                                  // ======================================================
+                                  // GOAL: Sequential API calls that depend on previous result
+                                  // For each id:
+                                  // log start id
+                                  // wait 150ms
+                                  // log end id
+                                  // Must be strictly sequential
+                                  // Return "done"
+                                  
+                                  // const wait = (ms) =>
+                                  //   new Promise(res => setTimeout(res, ms));
+                                  
+                                  // async function run(ids){
+                                    //       for(const id of ids){
+                                      //         console.log("start" + " " + id)
+                                      //         await wait(200)
+                                      //         console.log("end" + " " + id)
+                                      //       }
+                                      
+                                      //       return "done"
+                                      // }
+                                      
+                                      // run([10,20,30]).then(console.log)
+                                      
+                                      // ======================================================
+                                      // GOAL: Parallel fetch but collect results in finish order
+                                      	// •	Start all at once
+	// •	Return results in the order they finished, not original order
+  // [100, 200, 300]
+const tasks = [300, 100, 200];
+
+async function timeout(ms){
+  return new Promise((resolve) => {setTimeout(() => {
+                    resolve("Resolve")
+                  },ms)})
 }
 
-retry(wait, 3).then(console.log)
-// ======================================================
+async function run(tasks, timeout){
+       let results = [] 
+    const promises = tasks.map(async task => {
+    await timeout(task)
+    results.push(task)
+})
+
+       await Promise.all(promises)
+return results
+
+}
+
+run(tasks, timeout).then(console.log)
+
