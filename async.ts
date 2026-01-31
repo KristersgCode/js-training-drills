@@ -1374,35 +1374,94 @@
 // •	When one finishes, next starts
 // •	Return when all done
 
-const tasks = [300, 300, 300, 300, 300, 300];
+// const tasks = [300, 300, 300, 300, 300, 300];
 
-async function wait(ms) {
-  return new Promise((res) => setTimeout(res, ms));
-}
+// async function wait(ms) {
+  //   return new Promise((res) => setTimeout(res, ms));
+  // }
+  
+  // const tasks = [300, 300, 300, 300, 300, 300];
+  
+  // const wait = (ms) => new Promise((res) => setTimeout(res, ms));
+  
+  // async function run() {
+    //   let nextTaskIndex = 0;
+//   let active = [];
 
-const tasks = [300, 300, 300, 300, 300, 300];
+//   while (nextTaskIndex < tasks.length || active.length > 0) {
+  //     if (active.length < 2 && nextTaskIndex < tasks.length) {
+    //       const taskId = nextTaskIndex;
+    
+    //       const promise = wait(tasks[taskId]).then(() => taskId);
 
-const wait = (ms) => new Promise((res) => setTimeout(res, ms));
+    //       active.push({ taskId, promise });
+    //       nextTaskIndex++;
+    //     } else {
+      //       const finishedTaskId = await Promise.race(active.map((t) => t.promise));
+      //       active = active.filter((t) => t.taskId !== finishedTaskId);
+      //     }
+      //   }
+      
+      //   return "done";
+      // }
+      
+      // run().then(console.log);
+      
+      // ======================================================
+      // GOAL: Timeout guard
+      // •	If promise resolves in time → return result
+      // •	If not → throw "Timeout"
+      
+      // async function wait(ms){
+        //   return new Promise((resolve) => {setTimeout(() => {
+          //     resolve("resolve")
+          //   },ms)})
+          // }
+          
+          // async function withTimeout(promise, ms){
+            //   function timeout(ms){
+              //      return new Promise((_, reject) => {setTimeout(() => {
+                //     reject("Timeout")
+                //   },ms)})
+                //   }
 
-async function run() {
-  let nextTaskIndex = 0;
-  let active = [];
+                //     return Promise.race([promise, timeout(ms)]);
+                
+                // }
+                
+                // withTimeout(wait(300), 200)
+                //   .then((res) => {
+                  //     console.log("Success:", res);
+                  //   })
+                  //   .catch((err) => {
+                    //     console.log("Error:", err);
+                    //   });
 
-  while (nextTaskIndex < tasks.length || active.length > 0) {
-    if (active.length < 2 && nextTaskIndex < tasks.length) {
-      const taskId = nextTaskIndex;
-
-      const promise = wait(tasks[taskId]).then(() => taskId);
-
-      active.push({ taskId, promise });
-      nextTaskIndex++;
-    } else {
-      const finishedTaskId = await Promise.race(active.map((t) => t.promise));
-      active = active.filter((t) => t.taskId !== finishedTaskId);
+                    // ======================================================
+                    // GOAL: Retry logic
+                    // •	Try fn
+                    // •	If fails, retry
+                    // •	Stop after times
+                    // •	Throw last error
+                    
+                    async function wait(){
+                      return new Promise((resolve) => {setTimeout(() => {
+                        resolve("resolve")
+                      },200)})
+                    }
+                    
+                    
+                    async function retry(fn, times) {
+  for (let attempt = 0; attempt < times; attempt++) {
+    try {
+      return await fn();
+    } catch (e) {
+      if (attempt === times - 1) {
+        throw e;
+      }
     }
   }
-
-  return "done";
 }
 
-run().then(console.log);
+retry(wait, 3).then(console.log)
+// ======================================================
