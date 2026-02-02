@@ -1568,3 +1568,92 @@
 // }, {})
 
 // console.log(result)
+
+// ======================================================
+// GOAL: Group + Transform + Sort (one reduce)
+// EXPECTED SHAPE:
+// [
+//   { user: "B", total: 120 },
+//   { user: "A", total: 50 },
+//   { user: "C", total: 50 },
+// ]
+
+// const orders = [
+//   { id: 1, user: "A", total: 30 },
+//   { id: 2, user: "B", total: 80 },
+//   { id: 3, user: "A", total: 20 },
+//   { id: 4, user: "C", total: 50 },
+//   { id: 5, user: "B", total: 40 },
+// ];
+
+// const result = orders.reduce((acc, oder) => {
+//   acc[oder.user] = (acc[oder.user] ?? 0) + oder.total;
+//   return acc;
+// }, {});
+
+// const final = Object.entries(result)
+//   .map(([user, total]) => {
+//     return {
+//       user,
+//       total,
+//     };
+//   })
+//   .sort((a, b) => b.total - a.total);
+
+// console.log(final);
+
+// ======================================================
+// GOAL: Index by key + merge fields
+// EXPECTED SHAPE:
+// {
+//   1: { id: 1, name: "John", totalScore: 25 },
+//   2: { id: 2, name: "Kate", totalScore: 7 }
+// }
+
+// const users = [
+//   { id: 1, name: "John" },
+//   { id: 2, name: "Kate" },
+// ];
+
+// const scores = [
+//   { userId: 1, score: 10 },
+//   { userId: 1, score: 15 },
+//   { userId: 2, score: 7 },
+// ];
+
+// const usersWithTotals = users.reduce((acc, user) => {
+//   acc[user.id] = { ...user, totalScore: 0 };
+//   return acc;
+// }, {});
+
+// const final = scores.reduce((acc, score) => {
+//   usersWithTotals[score.userId].totalScore += score.score;
+//   return acc;
+// }, usersWithTotals);
+
+// console.log(final);
+
+// ======================================================
+// GOAL: Flatten + filter + transform in one pass
+// EXPECTED SHAPE: [20, 10]
+// •	Sum prices per group
+// •	Ignore zeros
+// •	Return array of sums
+
+// const data = [
+//   { items: [{ price: 10 }, { price: 0 }] },
+//   { items: [{ price: 5 }, { price: 15 }] },
+// ];
+
+// const result = data.reduce((acc, item) => {
+//   const items = item.items.reduce((acc, price) => {
+//     if (price.price) {
+//       acc += price.price;
+//     }
+//     return acc;
+//   }, 0);
+//   acc.push(items);
+//   return acc;
+// }, []);
+
+// console.log(result);

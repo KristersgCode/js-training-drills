@@ -1376,141 +1376,33 @@
 
 // const tasks = [300, 300, 300, 300, 300, 300];
 
-// async function wait(ms) {
-  //   return new Promise((res) => setTimeout(res, ms));
-  // }
-  
-  // const tasks = [300, 300, 300, 300, 300, 300];
-  
-  // const wait = (ms) => new Promise((res) => setTimeout(res, ms));
-  
-  // async function run() {
-    //   let nextTaskIndex = 0;
-//   let active = [];
+// // async function wait(ms) {
+// //   return new Promise((res) => setTimeout(res, ms));
+//   // }
 
-//   while (nextTaskIndex < tasks.length || active.length > 0) {
-  //     if (active.length < 2 && nextTaskIndex < tasks.length) {
-    //       const taskId = nextTaskIndex;
-    
-    //       const promise = wait(tasks[taskId]).then(() => taskId);
+// // const tasks = [300, 300, 300, 300, 300, 300];
 
-    //       active.push({ taskId, promise });
-    //       nextTaskIndex++;
-    //     } else {
-      //       const finishedTaskId = await Promise.race(active.map((t) => t.promise));
-      //       active = active.filter((t) => t.taskId !== finishedTaskId);
-      //     }
-      //   }
-      
-      //   return "done";
-      // }
-      
-      // run().then(console.log);
-      
-      // ======================================================
-      // GOAL: Timeout guard
-      // •	If promise resolves in time → return result
-      // •	If not → throw "Timeout"
-      
-      // async function wait(ms){
-        //   return new Promise((resolve) => {setTimeout(() => {
-          //     resolve("resolve")
-          //   },ms)})
-          // }
-          
-          // async function withTimeout(promise, ms){
-            //   function timeout(ms){
-              //      return new Promise((_, reject) => {setTimeout(() => {
-                //     reject("Timeout")
-                //   },ms)})
-                //   }
+// // const wait = (ms) => new Promise((res) => setTimeout(res, ms));
 
-                //     return Promise.race([promise, timeout(ms)]);
-                
-                // }
-                
-                // withTimeout(wait(300), 200)
-                //   .then((res) => {
-                  //     console.log("Success:", res);
-                  //   })
-                  //   .catch((err) => {
-                    //     console.log("Error:", err);
-                    //   });
+// // async function run() {
+// //   let nextTaskIndex = 0;
+// //   let active = [];
 
-                    // ======================================================
-                    // GOAL: Retry logic
-                    // •	Try fn
-                    // •	If fails, retry
-                    // •	Stop after times
-                    // •	Throw last error
-                    
-                    //                     async function wait(){
-                      //                       return new Promise((resolve) => {setTimeout(() => {
-                        //                         resolve("resolve")
-                        //                       },200)})
-                        //                     }
-                        
-                        //                     async function retry(fn, times) {
-                          //   for (let attempt = 0; attempt < times; attempt++) {
-                            //     try {
-                              //       return await fn();
-                              //     } catch (e) {
-                                //       if (attempt === times - 1) {
-                                  //         throw e;
-                                  //       }
-                                  //     }
-                                  //   }
-                                  // }
-                                  
-                                  // retry(wait, 3).then(console.log)
-                                  // ======================================================
-                                  // GOAL: Sequential API calls that depend on previous result
-                                  // For each id:
-                                  // log start id
-                                  // wait 150ms
-                                  // log end id
-                                  // Must be strictly sequential
-                                  // Return "done"
-                                  
-                                  // const wait = (ms) =>
-                                  //   new Promise(res => setTimeout(res, ms));
-                                  
-                                  // async function run(ids){
-                                    //       for(const id of ids){
-                                      //         console.log("start" + " " + id)
-                                      //         await wait(200)
-                                      //         console.log("end" + " " + id)
-                                      //       }
-                                      
-                                      //       return "done"
-                                      // }
-                                      
-                                      // run([10,20,30]).then(console.log)
-                                      
-                                      // ======================================================
-                                      // GOAL: Parallel fetch but collect results in finish order
-                                      	// •	Start all at once
-	// •	Return results in the order they finished, not original order
-  // [100, 200, 300]
-const tasks = [300, 100, 200];
+// //   while (nextTaskIndex < tasks.length || active.length > 0) {
+// //     if (active.length < 2 && nextTaskIndex < tasks.length) {
+// //       const taskId = nextTaskIndex;
 
-async function timeout(ms){
-  return new Promise((resolve) => {setTimeout(() => {
-                    resolve("Resolve")
-                  },ms)})
-}
+// //       const promise = wait(tasks[taskId]).then(() => taskId);
 
-async function run(tasks, timeout){
-       let results = [] 
-    const promises = tasks.map(async task => {
-    await timeout(task)
-    results.push(task)
-})
+//       active.push({ taskId, promise });
+//       nextTaskIndex++;
+//     } else {
+//       const finishedTaskId = await Promise.race(active.map((t) => t.promise));
+//       active = active.filter((t) => t.taskId !== finishedTaskId);
+//     }
+//   }
 
-       await Promise.all(promises)
-return results
+//   return "done";
+// }
 
-}
-
-run(tasks, timeout).then(console.log)
-
+// run().then(console.log);
