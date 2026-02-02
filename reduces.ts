@@ -1655,5 +1655,3 @@
 //   acc.push(items);
 //   return acc;
 // }, []);
-
-// console.log(result);
