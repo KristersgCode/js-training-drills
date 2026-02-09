@@ -1641,17 +1641,43 @@
 // •	Return array of sums
 
 // const data = [
-//   { items: [{ price: 10 }, { price: 0 }] },
-//   { items: [{ price: 5 }, { price: 15 }] },
-// ];
+    //   { items: [{ price: 10 }, { price: 0 }] },
+    //   { items: [{ price: 5 }, { price: 15 }] },
+    // ];
+    
+    // const result = data.reduce((acc, item) => {
+        //   const items = item.items.reduce((acc, price) => {
+            //     if (price.price) {
+                //       acc += price.price;
+                //     }
+                //     return acc;
+                //   }, 0);
+                //   acc.push(items);
+                //   return acc;
+                // }, []);
+                
+                // ======================================================
+                // GOAL: Flatten + filter + transform in one pass
+                // Expected output: {
+//   A: { total: 100, count: 2 },
+//   B: { total: 130, count: 2 },
+//   C: { total: 20, count: 1 }
+// }
 
-// const result = data.reduce((acc, item) => {
-//   const items = item.items.reduce((acc, price) => {
-//     if (price.price) {
-//       acc += price.price;
-//     }
-//     return acc;
-//   }, 0);
-//   acc.push(items);
-//   return acc;
-// }, []);
+                const purchases = [
+  { user: "A", amount: 30 },
+  { user: "B", amount: 50 },
+  { user: "A", amount: 70 },
+  { user: "C", amount: 20 },
+  { user: "B", amount: 80 },
+];
+
+const result = purchases.reduce((acc, purchase) => {
+     if (!acc[purchase.user]) {
+        acc[purchase.user] = {total: 0, count: 0}}
+        acc[purchase.user].total += purchase.amount
+        acc[purchase.user].count += 1
+    return acc
+},{total: 0, count: 0})
+
+console.log(result)
