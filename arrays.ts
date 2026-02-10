@@ -1705,6 +1705,89 @@
 // console.log([...uniqueMap.keys()]);
 
 // ======================================================
+// GOAL: Group users by role
+// EXPECTED SHAPE:
+// {
+//   admin: [...],
+//   editor: [...],
+//   viewer: [...]
+// }
+
+//  const users = [
+//   { id: 1, name: "A", role: "admin" },
+//   { id: 2, name: "B", role: "editor" },
+//   { id: 3, name: "C", role: "admin" },
+//   { id: 4, name: "D", role: "viewer" },
+// ]
+
+// let userMap = new Map()
+
+// for(const user of users){
+//     if(!userMap.has(user.role)){
+//      userMap.set(user.role, [])
+//     }
+//     userMap.get(user.role).push(user)
+// }
+
+// const grouped = Object.fromEntries(userMap)
+// console.log(grouped)
+
+// ======================================================
+// GOAL: Unique tags (preserve order)
+// EXPECTED SHAPE: ["js", "ts", "react", "node"]
+
+// const posts = [
+//   { id: 1, tags: ["js", "ts"] },
+//   { id: 2, tags: ["ts", "react"] },
+//   { id: 3, tags: ["js", "node"] },
+// ]
+
+// const seen = new Set()
+
+// for (const post of posts) {
+//   for (const tag of post.tags) {
+//     if (!seen.has(tag)) {
+//       seen.add(tag)
+//     }
+//   }
+// }
+
+// console.log([...seen])
+
+// ======================================================
+// GOAL: Expand orders into flat line items
+// EXPECTED SHAPE: [
+//   { orderId: 1, product: "A", qty: 2 },
+//   { orderId: 2, product: "B", qty: 1 },
+//   { orderId: 2, product: "C", qty: 3 },
+// ]
+
+const orders = [
+  { orderId: 1, items: [{ product: "A", qty: 2 }] },
+  {
+    orderId: 2,
+    items: [
+      { product: "B", qty: 1 },
+      { product: "C", qty: 3 },
+    ],
+  },
+];
+
+const result = [];
+
+for (const order of orders) {
+  for (const item of order.items) {
+    result.push({
+      orderId: order.orderId,
+      product: item.product,
+      qty: item.qty,
+    });
+  }
+}
+
+console.log(result);
+
+// ======================================================
 // GOAL: Flatten + filter + transform in one pass
 // EXPECTED SHAPE:
 // {
