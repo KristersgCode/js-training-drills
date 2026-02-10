@@ -1703,3 +1703,34 @@
 // }
 
 // console.log([...uniqueMap.keys()]);
+
+// ======================================================
+// GOAL: Flatten + filter + transform in one pass
+// EXPECTED SHAPE:
+// {
+//   gmail.com: ["john", "mike"],
+//   yahoo.com: ["kate", "bob"],
+//   outlook.com: ["anna"]
+// }
+
+// const emails = [
+//   "john@gmail.com",
+//   "kate@yahoo.com",
+//   "mike@gmail.com",
+//   "anna@outlook.com",
+//   "bob@yahoo.com",
+// ];
+
+// const resultMap = new Map();
+
+// for (const email of emails) {
+//   const [name, domain] = email.split("@");
+
+//   if (!resultMap.has(domain)) {
+//     resultMap.set(domain, []);
+//   }
+
+//   resultMap.get(domain).push(name);
+// }
+
+// console.log(Object.fromEntries(resultMap));
