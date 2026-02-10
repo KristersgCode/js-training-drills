@@ -1762,33 +1762,33 @@
 //   { orderId: 2, product: "C", qty: 3 },
 // ]
 
-const orders = [
-  { orderId: 1, items: [{ product: "A", qty: 2 }] },
-  {
-    orderId: 2,
-    items: [
-      { product: "B", qty: 1 },
-      { product: "C", qty: 3 },
-    ],
-  },
-];
+// const orders = [
+//   { orderId: 1, items: [{ product: "A", qty: 2 }] },
+//   {
+//     orderId: 2,
+//     items: [
+//       { product: "B", qty: 1 },
+//       { product: "C", qty: 3 },
+//     ],
+//   },
+// ];
 
-const result = [];
+// const result = [];
 
-for (const order of orders) {
-  for (const item of order.items) {
-    result.push({
-      orderId: order.orderId,
-      product: item.product,
-      qty: item.qty,
-    });
-  }
-}
+// for (const order of orders) {
+//   for (const item of order.items) {
+//     result.push({
+//       orderId: order.orderId,
+//       product: item.product,
+//       qty: item.qty,
+//     });
+//   }
+// }
 
-console.log(result);
+// console.log(result);
 
 // ======================================================
-// GOAL: Flatten + filter + transform in one pass
+// GOAL: Group emails by domain
 // EXPECTED SHAPE:
 // {
 //   gmail.com: ["john", "mike"],
@@ -1817,3 +1817,50 @@ console.log(result);
 // }
 
 // console.log(Object.fromEntries(resultMap));
+
+// ======================================================
+// GOAL: Keep last occurrence by id
+// EXPECTED SHAPE:
+
+// [
+// { id: 1, name: "Johnny" },
+// { id: 2, name: "Kate" },
+// { id: 3, name: "Mike" },
+// ]
+
+// const users = [
+//   { id: 1, name: "John" },
+//   { id: 2, name: "Kate" },
+//   { id: 1, name: "Johnny" },
+//   { id: 3, name: "Mike" },
+// ];
+
+// const occurances = new Map();
+
+// for (const user of users) {
+//   occurances.set(user.id, user);
+// }
+
+// console.log(Array.from(occurances.values()));
+
+// ======================================================
+// GOAL: Index words by first letter
+// EXPECTED SHAPE:
+// {
+// a: ["apple", "avocado", "apricot"],
+// b: ["banana", "blueberry"],
+// }
+
+const words = ["apple", "banana", "avocado", "blueberry", "apricot"];
+
+const dict = new Map();
+
+for (const word of words) {
+  if (!dict.has(word[0])) {
+    dict.set(word[0], []);
+  }
+
+  dict.get(word[0]).push(word);
+}
+
+console.log(Object.fromEntries(dict));
