@@ -1934,3 +1934,100 @@
 //     // ]
 
 // ======================================================
+//  GOAL: Call limiter with memory
+
+// function limitCalls(fn, limit) {
+//   let callsLeft = limit;
+//   let previousResult;
+//   return function (...args) {
+//     if (callsLeft > 0) {
+//       callsLeft--;
+//       previousResult = fn(...args);
+//       return previousResult;
+//     } else {
+//       return previousResult;
+//     }
+//   };
+// }
+
+// const add = (a, b) => a + b;
+// const limitedAdd = limitCalls(add, 2);
+
+// console.log(limitedAdd(1, 2)); // 3
+// console.log(limitedAdd(2, 3)); // 5
+// console.log(limitedAdd(10, 10)); // 5
+// console.log(limitedAdd(7, 7)); // 5
+
+// ======================================================
+//  GOAL: Memo by first argument only
+
+// let calls = 0;
+
+// const slow = (id, value) => {
+//   calls++;
+//   return id + value;
+// };
+
+// function memoByKey(fn) {
+//   const cache = new Map();
+
+//   return function (...args) {
+//     const key = args[0];
+//     if (!cache.has(key)) {
+//       const result = fn(...args);
+//       cache.set(key, result);
+//       return result;
+//     }
+//     return cache.get(key);
+//   };
+// }
+
+// const memo = memoByKey(slow);
+
+// console.log(memo(1, 10)); // 11
+// console.log(memo(1, 999)); // 11 (cached by first arg)
+// console.log(memo(2, 5)); // 7
+// console.log(memo(2, 100)); // 7 (cached by first arg)
+// console.log("calls:", calls); // 2
+
+// ======================================================
+//  GOAL: Private event emitter
+
+function createEmitter() {
+  const listeners = new Map();
+
+  function on(event, fn) {
+    if (!listeners.has(event)) {
+      listeners.set(event, []);
+    }
+    listeners.get(event).push(fn);
+  }
+
+  function emit(event, data) {
+    if (!listeners.has(event)) {
+      return;
+    }
+
+    const fns = listeners.get(event);
+    for (const fn of fns) {
+      fn(data);
+    }
+  }
+
+  return { on, emit };
+}
+
+const emitter = createEmitter();
+
+emitter.on("log", (msg) => console.log(msg));
+// Listener added for: log
+
+emitter.on("log", (msg) => console.log("Again:", msg));
+// Listener added for: log
+
+emitter.emit("log", "hello");
+// hello
+// Again: hello
+
+emitter.emit("unknown", "test");
+// (nothing happens)
