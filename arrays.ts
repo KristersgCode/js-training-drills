@@ -1851,16 +1851,16 @@
 // b: ["banana", "blueberry"],
 // }
 
-const words = ["apple", "banana", "avocado", "blueberry", "apricot"];
+// const words = ["apple", "banana", "avocado", "blueberry", "apricot"];
 
-const dict = new Map();
+// const dict = new Map();
 
-for (const word of words) {
-  if (!dict.has(word[0])) {
-    dict.set(word[0], []);
-  }
+// for (const word of words) {
+//   if (!dict.has(word[0])) {
+//     dict.set(word[0], []);
+//   }
 
-  dict.get(word[0]).push(word);
-}
+//   dict.get(word[0]).push(word);
+// }
 
-console.log(Object.fromEntries(dict));
+// console.log(Object.fromEntries(dict));
