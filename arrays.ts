@@ -1864,3 +1864,108 @@
 // }
 
 // console.log(Object.fromEntries(dict));
+
+// ======================================================
+// GOAL: Group Active Users By Role
+// EXPECTED SHAPE:
+// {
+//   admin: [
+//     { id: 1, name: "Alice" },
+//     { id: 3, name: "Kate" }
+//   ],
+//   editor: [
+//     { id: 4, name: "John" }
+//   ],
+//   viewer: [
+//     { id: 5, name: "Mike" }
+//   ]
+// }
+
+// const users = [
+//   { id: 1, name: "Alice", role: "admin", active: true },
+//   { id: 2, name: "Bob", role: "editor", active: false },
+//   { id: 3, name: "Kate", role: "admin", active: true },
+//   { id: 4, name: "John", role: "editor", active: true },
+//   { id: 5, name: "Mike", role: "viewer", active: true },
+// ];
+
+// const result = new Map();
+
+// for (const user of users) {
+//   if (!user.active) {
+//     continue;
+//   }
+
+//   if (!result.has(user.role)) {
+//     result.set(user.role, []);
+//   }
+
+//   result.get(user.role).push({ id: user.id, name: user.name });
+// }
+
+// console.log(Object.fromEntries(result));
+
+// ======================================================
+// GOAL: Unique Expensive Buyers
+// EXPECTED SHAPE: Return an array of unique userIds
+// who have at least one order with total > 100.
+// [2,1] order does not matter
+
+// const orders = [
+//   { userId: 1, total: 40 },
+//   { userId: 2, total: 200 },
+//   { userId: 1, total: 150 },
+//   { userId: 3, total: 80 },
+//   { userId: 2, total: 300 },
+// ];
+
+// const result = new Set();
+
+// for (const order of orders) {
+//   if (order.total < 100) continue;
+//   result.add(order.userId);
+// }
+
+// console.log([...result]);
+
+// ======================================================
+// GOAL: Join Two Arrays
+// Expected shape:
+// [
+//   { id: 1, name: "Alice", orders: [40, 150] },
+//   { id: 2, name: "Bob", orders: [200] },
+//   { id: 3, name: "Kate", orders: [80] }
+// ]
+
+const users = [
+  { id: 1, name: "Alice" },
+  { id: 2, name: "Bob" },
+  { id: 3, name: "Kate" },
+  { id: 4, name: "Bruno" },
+];
+
+const orders = [
+  { userId: 1, total: 40 },
+  { userId: 2, total: 200 },
+  { userId: 1, total: 150 },
+  { userId: 3, total: 80 },
+  { userId: 4, total: 0 },
+];
+
+const results = new Map();
+const resultArr = [];
+
+for (const order of orders) {
+  if (!results.has(order.userId)) {
+    results.set(order.userId, []);
+  }
+
+  results.get(order.userId).push(order.total);
+}
+
+for (const user of users) {
+  const totals = results.get(user.id) ?? [];
+  resultArr.push({ ...user, orders: totals });
+}
+
+console.log(resultArr);
