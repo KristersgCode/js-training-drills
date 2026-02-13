@@ -1937,35 +1937,147 @@
 //   { id: 3, name: "Kate", orders: [80] }
 // ]
 
-const users = [
-  { id: 1, name: "Alice" },
-  { id: 2, name: "Bob" },
-  { id: 3, name: "Kate" },
-  { id: 4, name: "Bruno" },
-];
+// const users = [
+//   { id: 1, name: "Alice" },
+//   { id: 2, name: "Bob" },
+//   { id: 3, name: "Kate" },
+//   { id: 4, name: "Bruno" },
+// ];
 
-const orders = [
-  { userId: 1, total: 40 },
-  { userId: 2, total: 200 },
-  { userId: 1, total: 150 },
-  { userId: 3, total: 80 },
-  { userId: 4, total: 0 },
-];
+// const orders = [
+//   { userId: 1, total: 40 },
+//   { userId: 2, total: 200 },
+//   { userId: 1, total: 150 },
+//   { userId: 3, total: 80 },
+//   { userId: 4, total: 0 },
+// ];
 
-const results = new Map();
-const resultArr = [];
+// const results = new Map();
+// const resultArr = [];
 
-for (const order of orders) {
-  if (!results.has(order.userId)) {
-    results.set(order.userId, []);
-  }
+// for (const order of orders) {
+//   if (!results.has(order.userId)) {
+//     results.set(order.userId, []);
+//   }
 
-  results.get(order.userId).push(order.total);
+//   results.get(order.userId).push(order.total);
+// }
+
+// for (const user of users) {
+//   const totals = results.get(user.id) ?? [];
+//   resultArr.push({ ...user, orders: totals });
+// }
+
+// console.log(resultArr);
+
+// ======================================================
+// GOAL: Sliding Window (like GPS smoothing)
+// Expected result:
+// [10,15,13] → avg
+// [15,13,200] → avg
+// [13,200,205] → avg
+
+// const headings = [10, 15, 13, 200, 205, 210, 20];
+
+// const result = [];
+
+// for (let i = 0; i < headings.length - 2; i++) {
+//   result.push((headings[i] + headings[i + 1] + headings[i + 2]) / 3);
+// }
+
+// console.log(result);
+
+// ======================================================
+// GOAL: Window Sum (Fixed Window) of size 3
+// Expected result: [7, 10, 9, 15] sum of each window
+
+// const nums = [2, 4, 1, 5, 3, 7];
+
+// const result = [];
+
+// for (let i = 0; i < nums.length - 2; i++) {
+//   result.push(nums[i] + nums[i + 1] + nums[i + 2]);
+// }
+
+// console.log(result);
+
+// ======================================================
+// GOAL: Count Windows With Condition
+// Expected result: [3, 5, 5, 8, 8]
+
+// const nums = [1, 3, 2, 5, 4, 8, 6];
+
+// const maxNumbers = [];
+
+// for (let i = 0; i < nums.length - 3; i++) {
+//   maxNumbers.push(Math.max(nums[i], nums[i + 1], nums[i + 2]));
+// }
+
+// console.log(maxNumbers);
+
+// ======================================================
+// GOAL: Count Windows With Condition of size 3
+// Expected result: 0
+// Count how many windows have all temps ≥ 20.
+
+// const temps = [20, 22, 19, 25, 30, 18, 21];
+
+// let count = 0;
+
+// for (let i = 0; i < temps.length - 2; i++) {
+//   if (temps[i] >= 20 && temps[i + 1] >= 20 && temps[i + 2] >= 20) {
+//     count++;
+//   }
+// }
+
+// console.log(count);
+
+// ======================================================
+// const users = [
+//   { id: 1, name: "Alice" },
+//   { id: 2, name: "Bob" },
+//   { id: 3, name: "Kate" },
+// ];
+
+// const result = {};
+
+// for (const user of users) {
+//   result[user.id] = user;
+// }
+
+// console.log(result);
+
+// ======================================================
+// GOAL: Diff Objects
+// Expected result:
+// {
+// added: [4],
+// removed: [1]
+// }
+
+const oldFeatures = [{ id: 1 }, { id: 2 }, { id: 3 }];
+
+const newFeatures = [{ id: 2 }, { id: 3 }, { id: 4 }];
+
+const oldFeat = new Set();
+const newFeat = new Set();
+const added = [];
+const removed = [];
+
+for (const f of oldFeatures) {
+  oldFeat.add(f.id);
 }
 
-for (const user of users) {
-  const totals = results.get(user.id) ?? [];
-  resultArr.push({ ...user, orders: totals });
+for (const f of newFeatures) {
+  newFeat.add(f.id);
 }
 
-console.log(resultArr);
+for (const id of newFeat) {
+  if (!oldFeat.has(id)) added.push(id);
+}
+
+for (const id of oldFeat) {
+  if (!newFeat.has(id)) removed.push(id);
+}
+
+console.log({ added, removed });
