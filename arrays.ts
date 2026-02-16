@@ -2055,29 +2055,102 @@
 // removed: [1]
 // }
 
-const oldFeatures = [{ id: 1 }, { id: 2 }, { id: 3 }];
+// const oldFeatures = [{ id: 1 }, { id: 2 }, { id: 3 }];
 
-const newFeatures = [{ id: 2 }, { id: 3 }, { id: 4 }];
+// const newFeatures = [{ id: 2 }, { id: 3 }, { id: 4 }];
 
-const oldFeat = new Set();
-const newFeat = new Set();
-const added = [];
-const removed = [];
+// const oldFeat = new Set();
+// const newFeat = new Set();
+// const added = [];
+// const removed = [];
 
-for (const f of oldFeatures) {
-  oldFeat.add(f.id);
+// for (const f of oldFeatures) {
+//   oldFeat.add(f.id);
+// }
+
+// for (const f of newFeatures) {
+//   newFeat.add(f.id);
+// }
+
+// for (const id of newFeat) {
+//   if (!oldFeat.has(id)) added.push(id);
+// }
+
+// for (const id of oldFeat) {
+//   if (!newFeat.has(id)) removed.push(id);
+// }
+
+// console.log({ added, removed });
+
+// ======================================================
+// GOAL: Group Expensive Orders by User
+// Expected result:
+// {
+// u1: { count: 1, totals: [200] },
+// u2: { count: 2, totals: [150, 300] },
+// }
+// Only orders > 100
+
+// const orders = [
+//   { id: 1, user: "u1", total: 50 },
+//   { id: 2, user: "u1", total: 200 },
+//   { id: 3, user: "u2", total: 150 },
+//   { id: 4, user: "u1", total: 90 },
+//   { id: 5, user: "u2", total: 300 },
+//   { id: 6, user: "u3", total: 10 },
+// ];
+
+// const result = new Map();
+
+// for (const order of orders) {
+//   if (order.total <= 100) {
+//     continue;
+//   }
+
+//   const key = order.user;
+//   let bucket = result.get(key);
+
+//   if (!bucket) {
+//     bucket = { count: 0, totals: [] };
+//     result.set(key, bucket);
+//   }
+
+//   bucket.count += 1;
+//   bucket.totals.push(order.total);
+// }
+
+// console.log(Object.fromEntries(result));
+
+// ======================================================
+// GOAL: Unique Products Per User
+// Expected result:
+// {
+// u1: ["p1", "p2"],
+// u2: ["p2", "p3"]
+// }
+
+const purchases = [
+  { user: "u1", product: "p1" },
+  { user: "u1", product: "p2" },
+  { user: "u1", product: "p1" },
+  { user: "u2", product: "p2" },
+  { user: "u2", product: "p3" },
+];
+
+const result = new Map();
+
+for (const purchase of purchases) {
+  if (!result.has(purchase.user)) {
+    result.set(purchase.user, new Set());
+  }
+  result.get(purchase.user).add(purchase.product);
 }
 
-for (const f of newFeatures) {
-  newFeat.add(f.id);
+console.log(result);
+const products = {};
+
+for (const [key, value] of result) {
+  products[key] = Array.from(value).sort();
 }
 
-for (const id of newFeat) {
-  if (!oldFeat.has(id)) added.push(id);
-}
-
-for (const id of oldFeat) {
-  if (!newFeat.has(id)) removed.push(id);
-}
-
-console.log({ added, removed });
+console.log(products);
