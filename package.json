@@ -4,12 +4,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node --experimental-strip-types tasks.ts",
-    "start-ar": "node --experimental-strip-types arrays.ts",
-    "start-as": "node --experimental-strip-types async.ts",
-    "start-clos": "node --experimental-strip-types closures.ts",
-    "start-red": "node --experimental-strip-types reduces.ts",
-    "start-map": "node --experimental-strip-types maps.ts"
+    "start": "node js-fundamental-drills/tasks.js",
+    "start-ar": "node js-fundamental-drills/arrays.js",
+    "start-as": "node js-fundamental-drills/async.js",
+    "start-clos": "node js-fundamental-drills/closures.js",
+    "start-red": "node js-fundamental-drills/reduces.js",
+    "start-map": "node js-fundamental-drills/maps.js"
   },
   "dependencies": {
     "ts-node": "^10.9.2",
