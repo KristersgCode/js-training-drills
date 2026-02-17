@@ -29,7 +29,7 @@ Each drill is solved, commented, and I move on to the next one.
   Small JavaScript exercises focused on transformations and language fundamentals.
 
 - **`node-drills/`**  
-  Small Node.js programs simulating real backend scenarios  
+  Small Node.js drills simulating real production problems in small, isolated programs
   (timeouts, retries, caching, orchestration).
 
 ---
