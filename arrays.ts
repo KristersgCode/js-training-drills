@@ -2129,28 +2129,79 @@
 // u2: ["p2", "p3"]
 // }
 
-const purchases = [
-  { user: "u1", product: "p1" },
-  { user: "u1", product: "p2" },
-  { user: "u1", product: "p1" },
-  { user: "u2", product: "p2" },
-  { user: "u2", product: "p3" },
-];
+// const purchases = [
+//   { user: "u1", product: "p1" },
+//   { user: "u1", product: "p2" },
+//   { user: "u1", product: "p1" },
+//   { user: "u2", product: "p2" },
+//   { user: "u2", product: "p3" },
+// ];
 
-const result = new Map();
+// const result = new Map();
 
-for (const purchase of purchases) {
-  if (!result.has(purchase.user)) {
-    result.set(purchase.user, new Set());
-  }
-  result.get(purchase.user).add(purchase.product);
-}
+// for (const purchase of purchases) {
+//   if (!result.has(purchase.user)) {
+//     result.set(purchase.user, new Set());
+//   }
+//   result.get(purchase.user).add(purchase.product);
+// }
 
-console.log(result);
-const products = {};
+// console.log(result);
+// const products = {};
 
-for (const [key, value] of result) {
-  products[key] = Array.from(value).sort();
-}
+// for (const [key, value] of result) {
+//   products[key] = Array.from(value).sort();
+// }
 
-console.log(products);
+// console.log(products);
+
+// ======================================================
+// GOAL: Group + Count + Sort
+// Expected result:
+// Sorted by count desc.
+// {
+//   u1: [
+//     { action: "open", count: 2 },
+//     { action: "click", count: 1 }
+//   ],
+//   u2: [
+//     { action: "open", count: 1 },
+//     { action: "click", count: 1 }
+//   ]
+// }
+
+// const logs = [
+//   { user: "u1", action: "open" },
+//   { user: "u2", action: "click" },
+//   { user: "u1", action: "click" },
+//   { user: "u1", action: "open" },
+//   { user: "u2", action: "open" },
+// ];
+
+// const userMap = new Map();
+
+// for (const log of logs) {
+//   if (!userMap.has(log.user)) {
+//     userMap.set(log.user, new Map());
+//   }
+//   const actionMap = userMap.get(log.user);
+
+//   if (!actionMap.has(log.action)) {
+//     actionMap.set(log.action, 0);
+//   }
+//   actionMap.set(log.action, actionMap.get(log.action) + 1);
+// }
+
+// const result = {};
+
+// for (const [user, actionMap] of userMap) {
+//   const arr = [];
+//   for (const [action, count] of actionMap) {
+//     arr.push({ action, count });
+//   }
+
+//   arr.sort((a, b) => b.count - a.count);
+//   result[user] = arr;
+// }
+
+// console.log("result", result);

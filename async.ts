@@ -1377,86 +1377,84 @@
 // const tasks = [300, 300, 300, 300, 300, 300];
 
 // // async function wait(ms) {
-    // //   return new Promise((res) => setTimeout(res, ms));
-    //   // }
-    
-    // // const tasks = [300, 300, 300, 300, 300, 300];
-    
-    // // const wait = (ms) => new Promise((res) => setTimeout(res, ms));
-    
-    // // async function run() {
-        // //   let nextTaskIndex = 0;
-        // //   let active = [];
-        
-        // //   while (nextTaskIndex < tasks.length || active.length > 0) {
-            // //     if (active.length < 2 && nextTaskIndex < tasks.length) {
-                // //       const taskId = nextTaskIndex;
-                
-                // //       const promise = wait(tasks[taskId]).then(() => taskId);
-                
-                //       active.push({ taskId, promise });
-                //       nextTaskIndex++;
-                //     } else {
-                    //       const finishedTaskId = await Promise.race(active.map((t) => t.promise));
-                    //       active = active.filter((t) => t.taskId !== finishedTaskId);
-                    //     }
-                    //   }
-                    
-                    //   return "done";
-                    // }
-                    
-                    // run().then(console.log);
-                    
-                    
-                    // ======================================================
-                    // GOAL: Concurrency limiter
-                    
-                    // async function runWithLimit(tasks, limit) {
-                        //   const results = new Array(tasks.length);
-                        //   const pool = [];
-                        
-                        //   for (let i = 0; i < tasks.length; i++) {
-                            //     const p = tasks[i]().then(res => {
-                                //       results[i] = res;
-                                
-                                //       // remove THIS promise from the pool when it finishes
-                                //       pool.splice(pool.indexOf(p), 1);
-                                //     });
-                                
-                                //     pool.push(p);
-                                
-                                //     if (pool.length >= limit) {
-                                    //       await Promise.race(pool);
-                                    //     }
-                                    //   }
-                                    
-                                    //   // wait for remaining tasks
-                                    //   await Promise.all(pool);
-                                    
-                                    //   return results;
-                                    // }
-                                    
-                                    
-                                    //                     const wait = (id, ms) =>
-                                    //   new Promise(resolve =>
-                                    //     setTimeout(() => {
-                                        //       console.log("done", id);
-                                        //       resolve(id);
-                                        //     }, ms)
-                                        //   );
-                                        
-                                        // const tasks = [
-                                            //   () => wait(1, 300),
-                                            //   () => wait(2, 200),
-                                            //   () => wait(3, 400),
-                                            //   () => wait(4, 100),
-                                            //   () => wait(5, 250),
-                                            // ];
-                                            
-                                            // runWithLimit(tasks, 2).then(console.log);
-                                            
-                                            // ======================================================
-                                            // GOAL: Concurrency limiter
+// //   return new Promise((res) => setTimeout(res, ms));
+//   // }
+
+// // const tasks = [300, 300, 300, 300, 300, 300];
+
+// // const wait = (ms) => new Promise((res) => setTimeout(res, ms));
+
+// // async function run() {
+// //   let nextTaskIndex = 0;
+// //   let active = [];
+
+// //   while (nextTaskIndex < tasks.length || active.length > 0) {
+// //     if (active.length < 2 && nextTaskIndex < tasks.length) {
+// //       const taskId = nextTaskIndex;
+
+// //       const promise = wait(tasks[taskId]).then(() => taskId);
+
+//       active.push({ taskId, promise });
+//       nextTaskIndex++;
+//     } else {
+//       const finishedTaskId = await Promise.race(active.map((t) => t.promise));
+//       active = active.filter((t) => t.taskId !== finishedTaskId);
+//     }
+//   }
+
+//   return "done";
+// }
+
+// run().then(console.log);
+
+// ======================================================
+// GOAL: Concurrency limiter
+
+// async function runWithLimit(tasks, limit) {
+//   const results = new Array(tasks.length);
+//   const pool = [];
+
+//   for (let i = 0; i < tasks.length; i++) {
+//     const p = tasks[i]().then(res => {
+//       results[i] = res;
+
+//       // remove THIS promise from the pool when it finishes
+//       pool.splice(pool.indexOf(p), 1);
+//     });
+
+//     pool.push(p);
+
+//     if (pool.length >= limit) {
+//       await Promise.race(pool);
+//     }
+//   }
+
+//   // wait for remaining tasks
+//   await Promise.all(pool);
+
+//   return results;
+// }
+
+//                     const wait = (id, ms) =>
+//   new Promise(resolve =>
+//     setTimeout(() => {
+//       console.log("done", id);
+//       resolve(id);
+//     }, ms)
+//   );
+
+// const tasks = [
+//   () => wait(1, 300),
+//   () => wait(2, 200),
+//   () => wait(3, 400),
+//   () => wait(4, 100),
+//   () => wait(5, 250),
+// ];
+
+// runWithLimit(tasks, 2).then(console.log);
+
+// ======================================================
+// GOAL: Concurrency limiter
 
 // const arr = [];
 
@@ -1465,7 +1463,3 @@
 
 // console.log(arr);
 // console.log(arr.length);
-
-
-
-

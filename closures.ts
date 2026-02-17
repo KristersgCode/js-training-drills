@@ -1993,41 +1993,41 @@
 // ======================================================
 //  GOAL: Private event emitter
 
-function createEmitter() {
-  const listeners = new Map();
+// function createEmitter() {
+//   const listeners = new Map();
 
-  function on(event, fn) {
-    if (!listeners.has(event)) {
-      listeners.set(event, []);
-    }
-    listeners.get(event).push(fn);
-  }
+//   function on(event, fn) {
+//     if (!listeners.has(event)) {
+//       listeners.set(event, []);
+//     }
+//     listeners.get(event).push(fn);
+//   }
 
-  function emit(event, data) {
-    if (!listeners.has(event)) {
-      return;
-    }
+//   function emit(event, data) {
+//     if (!listeners.has(event)) {
+//       return;
+//     }
 
-    const fns = listeners.get(event);
-    for (const fn of fns) {
-      fn(data);
-    }
-  }
+//     const fns = listeners.get(event);
+//     for (const fn of fns) {
+//       fn(data);
+//     }
+//   }
 
-  return { on, emit };
-}
+//   return { on, emit };
+// }
 
-const emitter = createEmitter();
+// const emitter = createEmitter();
 
-emitter.on("log", (msg) => console.log(msg));
-// Listener added for: log
+// emitter.on("log", (msg) => console.log(msg));
+// // Listener added for: log
 
-emitter.on("log", (msg) => console.log("Again:", msg));
-// Listener added for: log
+// emitter.on("log", (msg) => console.log("Again:", msg));
+// // Listener added for: log
 
-emitter.emit("log", "hello");
-// hello
-// Again: hello
+// emitter.emit("log", "hello");
+// // hello
+// // Again: hello
 
-emitter.emit("unknown", "test");
-// (nothing happens)
+// emitter.emit("unknown", "test");
+// // (nothing happens)

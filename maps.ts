@@ -156,23 +156,23 @@
 // •	key = country
 // •	value = another Map of { city => population }
 
-const cities = [
-  { country: "LV", city: "Riga", pop: 600000 },
-  { country: "LV", city: "Liepaja", pop: 70000 },
-  { country: "NO", city: "Oslo", pop: 700000 },
-];
+// const cities = [
+//   { country: "LV", city: "Riga", pop: 600000 },
+//   { country: "LV", city: "Liepaja", pop: 70000 },
+//   { country: "NO", city: "Oslo", pop: 700000 },
+// ];
 
-const mapp = new Map();
+// const mapp = new Map();
 
-for (const { country, city, pop } of cities) {
-  let inner = mapp.get(country);
+// for (const { country, city, pop } of cities) {
+//   let inner = mapp.get(country);
 
-  if (!inner) {
-    inner = new Map();
-    mapp.set(country, inner);
-  }
-  inner.set(city, pop);
-}
+//   if (!inner) {
+//     inner = new Map();
+//     mapp.set(country, inner);
+//   }
+//   inner.set(city, pop);
+// }
 
 // Map {
 //   "LV" => Map {
