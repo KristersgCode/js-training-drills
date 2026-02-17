@@ -1,3 +1,5 @@
+export {};
+
 const TTL = 5000; // 5 seconds
 const cache = new Map();
 

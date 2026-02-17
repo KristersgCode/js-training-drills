@@ -1,10 +1,10 @@
 type Profile = { id: number };
-type Notification = { id: number };
+type UserNotification = { id: number };
 type Settings = { id: number };
 
 type Dashboard = {
   profile?: Profile;
-  notifications?: Notification[];
+  notifications?: UserNotification[];
   settings?: Settings;
 };
 
@@ -17,7 +17,7 @@ function fetchProfile(id: string): Promise<Profile> {
   );
 }
 
-function fetchNotifications(id: string): Promise<Notification[]> {
+function fetchNotifications(id: string): Promise<UserNotification[]> {
   return new Promise((resolve) =>
     setTimeout(() => resolve([{ id: 1 }]), Math.random() * 1500),
   );

@@ -1,3 +1,5 @@
+export {};
+
 const fakeDB: Record<number, number> = {
   1: 300,
   2: 120,

@@ -1,3 +1,5 @@
+export {};
+
 async function uploadPhoto(userId: string): Promise<{ ok: boolean }> {
   let token = "";
   let fileId = "";
