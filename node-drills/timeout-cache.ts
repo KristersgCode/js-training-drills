@@ -70,7 +70,7 @@ function getFromCache(key: string): Dashboard | null {
 async function loadDashboard(userId: string): Promise<Dashboard> {
   const cacheKey = `dashboard:${userId}`;
 
-  // 1️⃣ check cache
+  // check cache
   const cached = getFromCache(cacheKey);
   if (cached) {
     console.log("cache hit");
@@ -79,7 +79,7 @@ async function loadDashboard(userId: string): Promise<Dashboard> {
 
   console.log("cache miss → fetching");
 
-  // 2️⃣ start all API calls in parallel
+  // start all API calls in parallel
   const profilePromise = fetchWithTimeout(() => fetchProfile(userId), 1000);
   const notificationsPromise = fetchWithTimeout(
     () => fetchNotifications(userId),
@@ -87,21 +87,21 @@ async function loadDashboard(userId: string): Promise<Dashboard> {
   );
   const settingsPromise = fetchWithTimeout(() => fetchSettings(userId), 1000);
 
-  // 3️⃣ wait for results
+  // wait for results
   const [profile, notifications, settings] = await Promise.all([
     profilePromise,
     notificationsPromise,
     settingsPromise,
   ]);
 
-  // 4️⃣ build result
+  // build result
   const dashboard: Dashboard = {};
 
   if (profile) dashboard.profile = profile;
   if (notifications) dashboard.notifications = notifications;
   if (settings) dashboard.settings = settings;
 
-  // 5️⃣ save cache only if something succeeded
+  // save cache only if something succeeded
   if (Object.keys(dashboard).length > 0) {
     saveToCache(cacheKey, dashboard);
   }
