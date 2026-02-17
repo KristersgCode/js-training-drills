@@ -4,7 +4,6 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node js-fundamental-drills/tasks.js",
     "start-ar": "node js-fundamental-drills/arrays.js",
     "start-as": "node js-fundamental-drills/async.js",
     "start-clos": "node js-fundamental-drills/closures.js",
