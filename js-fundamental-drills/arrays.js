@@ -2205,3 +2205,70 @@
 // }
 
 // console.log("result", result);
+
+// ======================================================
+// GOAL: Deduplicate with Latest Timestamp
+// Expected result:
+// [
+//   { id: 1, value: "C", ts: 20 },
+//   { id: 2, value: "B", ts: 5 }
+//  ]
+// Keep only latest ts per id:
+
+// const updates = [
+//   { id: 1, value: "A", ts: 10 },
+//   { id: 2, value: "B", ts: 5 },
+//   { id: 1, value: "C", ts: 20 },
+// ];
+
+// const latestUpdateById = new Map();
+
+// for (const update of updates) {
+//   const existing = latestUpdateById.get(update.id);
+
+//   if (!existing || update.ts > existing.ts) {
+//     latestUpdateById.set(update.id, update);
+//   }
+// }
+
+// console.log(Array.from(latestUpdateById.values()));
+
+// ======================================================
+// GOAL: Join Two Arrays
+// Expected result:
+// [
+//   { id: 1, name: "John", scores: [10, 20] },
+//   { id: 2, name: "Anna", scores: [5] }
+// ]
+
+// const users = [
+//   { id: 1, name: "John" },
+//   { id: 2, name: "Anna" }
+// ];
+
+// const scores = [
+//   { userId: 1, score: 10 },
+//   { userId: 1, score: 20 },
+//   { userId: 2, score: 5 }
+// ];
+
+// const scoresByUserId = new Map()
+
+// for(const score of scores){
+//     if(!scoresByUserId.has(score.userId)){
+//     scoresByUserId.set(score.userId, [])
+// }
+// scoresByUserId.get(score.userId).push(score.score)
+// }
+
+// const userScores = users.map((u) => {
+//     if(scoresByUserId.has(u.id)){
+//         return {
+//             id: u.id,
+//             name: u.name,
+//             scores: scoresByUserId.get(u.id) ?? []
+//         }
+//     }
+// })
+
+// console.log(userScores)
